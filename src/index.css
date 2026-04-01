@@ -3,92 +3,71 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --bg: 210 38% 96%;
+  --bg-soft: 210 36% 94%;
+  --panel: 210 40% 98%;
+  --panel-strong: 210 32% 92%;
+  --text: 222 47% 12%;
+  --muted: 215 20% 45%;
+  --accent: 214 90% 56%;
+  --accent-strong: 218 89% 45%;
+  --border: 214 32% 82%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.dark {
+  --bg: 222 32% 8%;
+  --bg-soft: 222 28% 10%;
+  --panel: 222 24% 12%;
+  --panel-strong: 220 24% 16%;
+  --text: 210 32% 96%;
+  --muted: 215 16% 68%;
+  --accent: 212 92% 62%;
+  --accent-strong: 215 90% 52%;
+  --border: 220 20% 22%;
 }
-a:hover {
-  color: #535bf2;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  @apply bg-base text-text;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 10%, rgba(14, 165, 233, 0.12), transparent 55%),
+    linear-gradient(140deg, rgba(15, 23, 42, 0.08), transparent 55%);
+  background-attachment: fixed;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-code {
-  background-color: #1a1a1a;
-  padding: 2px 4px;
-  margin: 0 4px;
-  border-radius: 4px;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.card {
-  padding: 2em;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 999px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-  code {
-    background-color: #f9f9f9;
-  }
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
 }

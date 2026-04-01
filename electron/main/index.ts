@@ -1,9 +1,29 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'node:os'
+import { promises as fs } from 'node:fs'
 import { update } from './update'
+import {
+  mergePdf,
+  splitPdf,
+  rotatePdf,
+  watermarkPdf,
+  updateMetadata,
+  unlockPdf,
+} from './tools/pdf'
+import {
+  convertImages,
+  resizeImages,
+  compressImages,
+  imagesToPdf,
+  stripExif,
+} from './tools/image'
+import { mergeTextFiles } from './tools/text'
+import { bulkRename } from './tools/file'
+import { checksumFiles } from './tools/security'
+import { ensureDir } from './utils/fs'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -32,7 +52,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 if (os.release().startsWith('6.1')) app.disableHardwareAcceleration()
 
 // Set application name for Windows 10+ notifications
-if (process.platform === 'win32') app.setAppUserModelId(app.getName())
+if (process.platform === 'win32') app.setAppUserModelId('com.docflow.pro')
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -45,16 +65,17 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Main window',
+    title: 'DocFlow Pro',
     icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    width: 1280,
+    height: 820,
+    minWidth: 1100,
+    minHeight: 720,
     webPreferences: {
       preload,
-      // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
-      // nodeIntegration: true,
-
-      // Consider using contextBridge.exposeInMainWorld
-      // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
-      // contextIsolation: false,
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: false,
     },
   })
 
@@ -121,3 +142,62 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
+
+ipcMain.handle('app:get-default-output-dir', async () => {
+  const outputDir = path.join(app.getPath('documents'), 'DocFlow Pro', 'Output')
+  await ensureDir(outputDir)
+  return outputDir
+})
+
+ipcMain.handle('app:select-output-dir', async () => {
+  if (!win) return null
+  const result = await dialog.showOpenDialog(win, {
+    properties: ['openDirectory', 'createDirectory'],
+  })
+  if (result.canceled || !result.filePaths.length) return null
+  return result.filePaths[0]
+})
+
+ipcMain.handle('app:select-file', async (_, payload: { title?: string; filters?: { name: string; extensions: string[] }[] }) => {
+  if (!win) return null
+  const result = await dialog.showOpenDialog(win, {
+    properties: ['openFile'],
+    title: payload?.title,
+    filters: payload?.filters,
+  })
+  if (result.canceled || !result.filePaths.length) return null
+  return result.filePaths[0]
+})
+
+ipcMain.handle('app:reveal-path', async (_, targetPath: string) => {
+  if (!targetPath) return
+  try {
+    const stats = await fs.stat(targetPath)
+    if (stats.isDirectory()) {
+      await shell.openPath(targetPath)
+      return
+    }
+  } catch (error) {
+    // Fall back to reveal below.
+  }
+  shell.showItemInFolder(targetPath)
+})
+
+ipcMain.handle('pdf:merge', async (_, payload) => mergePdf(payload))
+ipcMain.handle('pdf:split', async (_, payload) => splitPdf(payload))
+ipcMain.handle('pdf:rotate', async (_, payload) => rotatePdf(payload))
+ipcMain.handle('pdf:watermark', async (_, payload) => watermarkPdf(payload))
+ipcMain.handle('pdf:metadata', async (_, payload) => updateMetadata(payload))
+ipcMain.handle('pdf:unlock', async (_, payload) => unlockPdf(payload))
+
+ipcMain.handle('image:convert', async (_, payload) => convertImages(payload))
+ipcMain.handle('image:resize', async (_, payload) => resizeImages(payload))
+ipcMain.handle('image:compress', async (_, payload) => compressImages(payload))
+ipcMain.handle('image:to-pdf', async (_, payload) => imagesToPdf(payload))
+ipcMain.handle('image:strip-exif', async (_, payload) => stripExif(payload))
+
+ipcMain.handle('text:merge', async (_, payload) => mergeTextFiles(payload))
+
+ipcMain.handle('file:bulk-rename', async (_, payload) => bulkRename(payload))
+
+ipcMain.handle('security:checksum', async (_, payload) => checksumFiles(payload))

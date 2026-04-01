@@ -23,6 +23,91 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   // ...
 })
 
+contextBridge.exposeInMainWorld('api', {
+  getDefaultOutputDir: () => ipcRenderer.invoke('app:get-default-output-dir'),
+  selectOutputDir: () => ipcRenderer.invoke('app:select-output-dir'),
+  selectFile: (payload: { title?: string; filters?: { name: string; extensions: string[] }[] }) =>
+    ipcRenderer.invoke('app:select-file', payload),
+  revealInFolder: (targetPath: string) => ipcRenderer.invoke('app:reveal-path', targetPath),
+  mergePdf: (payload: { inputPaths: string[]; outputDir: string; outputName: string }) =>
+    ipcRenderer.invoke('pdf:merge', payload),
+  splitPdf: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    mode: 'ranges' | 'extract' | 'remove'
+    ranges?: string
+  }) => ipcRenderer.invoke('pdf:split', payload),
+  rotatePdf: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    rotation: number
+    ranges?: string | null
+  }) => ipcRenderer.invoke('pdf:rotate', payload),
+  watermarkPdf: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    type: 'text' | 'image'
+    text?: string
+    imagePath?: string
+    opacity: number
+    rotation: number
+    size: number
+    position: string
+  }) => ipcRenderer.invoke('pdf:watermark', payload),
+  metadataPdf: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    metadata: {
+      title?: string | null
+      author?: string | null
+      subject?: string | null
+      keywords?: string | null
+      creator?: string | null
+    }
+  }) => ipcRenderer.invoke('pdf:metadata', payload),
+  unlockPdf: (payload: { inputPaths: string[]; outputDir: string; password: string }) =>
+    ipcRenderer.invoke('pdf:unlock', payload),
+  convertImages: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    format: 'jpg' | 'png' | 'webp'
+    quality: number
+    keepTimestamps: boolean
+  }) => ipcRenderer.invoke('image:convert', payload),
+  resizeImages: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    mode: 'percent' | 'width' | 'height' | 'fit'
+    percent: number
+    width: number
+    height: number
+    sharpen: boolean
+  }) => ipcRenderer.invoke('image:resize', payload),
+  compressImages: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    quality: number
+    format: 'auto' | 'jpg' | 'png' | 'webp'
+  }) => ipcRenderer.invoke('image:compress', payload),
+  imagesToPdf: (payload: { inputPaths: string[]; outputDir: string; outputName: string }) =>
+    ipcRenderer.invoke('image:to-pdf', payload),
+  stripExif: (payload: { inputPaths: string[]; outputDir: string }) =>
+    ipcRenderer.invoke('image:strip-exif', payload),
+  mergeTextFiles: (payload: {
+    inputPaths: string[]
+    outputDir: string
+    outputName: string
+    separator: string
+    includeHeader: boolean
+  }) => ipcRenderer.invoke('text:merge', payload),
+  bulkRename: (payload: {
+    outputDir: string
+    items: { sourcePath: string; targetName: string }[]
+  }) => ipcRenderer.invoke('file:bulk-rename', payload),
+  checksumFiles: (payload: { inputPaths: string[]; algorithm: 'md5' | 'sha1' | 'sha256' }) =>
+    ipcRenderer.invoke('security:checksum', payload),
+})
+
 // --------- Preload scripts loading ---------
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {
