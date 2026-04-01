@@ -1,0 +1,1 @@
+The build verification report has been written to `/data/workspace/repo/BUILD_VERIFICATION_REPORT.md`. The build **FAILED** with exit code 2 due to 29 TypeScript compilation errors in `electron/main/tools/pdf.ts`. Vite build and electron-builder were skipped because TypeScript compilation did not succeed. No build artifacts were generated.

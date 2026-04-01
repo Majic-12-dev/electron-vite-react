@@ -13,6 +13,7 @@ import {
   updateMetadata,
   compressPdf,
   encryptPdf,
+  repairPdf,
 } from './tools/pdf'
 import {
   convertImages,
@@ -194,6 +195,7 @@ ipcMain.handle('pdf:watermark', async (_, payload) => watermarkPdf(payload))
 ipcMain.handle('pdf:metadata', async (_, payload) => updateMetadata(payload))
 ipcMain.handle('pdf:encrypt', async (_, payload) => encryptPdf(payload))
 ipcMain.handle('pdf:compress', async (_, payload) => compressPdf(payload))
+ipcMain.handle('pdf:repair', async (_, payload) => repairPdf(payload))
 
 ipcMain.handle('image:convert', async (_, payload) => convertImages(payload))
 ipcMain.handle('image:resize', async (_, payload) => resizeImages(payload))

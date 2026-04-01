@@ -16,7 +16,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { FilePlus, GripVertical, Trash2, UploadCloud } from 'lucide-react'
+import { FilePlus, GripVertical, Loader2, Trash2, UploadCloud } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Progress } from '@/components/ui/Progress'
@@ -46,8 +46,11 @@ type BaseToolLayoutProps = {
   instructions?: string
   maxFiles?: number
   reorderable?: boolean
-  onProcess: (files: ToolFile[], context: ProcessContext) => Promise<void>
+  onProcess?: (files: ToolFile[], context: ProcessContext) => Promise<void> | void
   options?: ReactNode
+  children?: ReactNode
+  loading?: boolean
+  result?: ReactNode
 }
 
 const FILE_LIMIT_SOFT = 200
@@ -61,13 +64,16 @@ export function BaseToolLayout({
   reorderable = false,
   onProcess,
   options,
+  children,
+  loading,
+  result: externalResult,
 }: BaseToolLayoutProps) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [files, setFiles] = useState<ToolFile[]>([])
   const [status, setStatus] = useState<'idle' | 'processing' | 'done' | 'error'>('idle')
   const [progress, setProgress] = useState(0)
-  const [result, setResult] = useState<ReactNode | null>(null)
+  const [internalResult, setInternalResult] = useState<ReactNode | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -79,7 +85,8 @@ export function BaseToolLayout({
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   )
 
-  const canProcess = files.length > 0 && status !== 'processing' && files.length <= maxFiles
+  const isProcessing = loading || status === 'processing'
+  const canProcess = !!onProcess && files.length > 0 && !isProcessing && files.length <= maxFiles
   const warning =
     files.length > maxFiles
       ? `Limit reached. Reduce to ${maxFiles} files to continue.`
@@ -117,7 +124,7 @@ export function BaseToolLayout({
   const handleClear = () => {
     setFiles([])
     setStatus('idle')
-    setResult(null)
+    setInternalResult(null)
     setError(null)
     setProgress(0)
   }
@@ -127,11 +134,11 @@ export function BaseToolLayout({
     setStatus('processing')
     setProgress(4)
     setError(null)
-    setResult(null)
+    setInternalResult(null)
     try {
       await onProcess(files, {
         setProgress: (value) => setProgress(clamp(value, 0, 100)),
-        setResult,
+        setResult: setInternalResult,
         setError,
       })
       setProgress(100)
@@ -176,6 +183,8 @@ export function BaseToolLayout({
 
       <div className='grid grid-cols-[minmax(0,1fr)_280px] gap-6'>
         <div className='space-y-4'>
+          {children}
+
           <Card
             className={cn(
               'border-dashed border-2 px-6 py-8 text-center transition',
@@ -249,10 +258,12 @@ export function BaseToolLayout({
             )}
           </Card>
 
-          {status === 'done' && result ? (
+          {children}
+
+          {externalResult !== undefined ? externalResult : status === 'done' && internalResult ? (
             <Card className='space-y-3'>
               <h3 className='text-sm font-semibold text-text'>Results</h3>
-              <div className='text-sm text-muted'>{result}</div>
+              <div className='text-sm text-muted'>{internalResult}</div>
             </Card>
           ) : null}
 
@@ -284,8 +295,11 @@ export function BaseToolLayout({
                     : 'Ready when you are.'}
               </p>
             </div>
-            <Button onClick={handleProcess} disabled={!canProcess}>
-              {status === 'processing' ? 'Processing...' : 'Process'}
+            <Button onClick={handleProcess} disabled={!canProcess || loading}>
+              {(loading || status === 'processing') && (
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              )}
+              {loading || status === 'processing' ? 'Processing...' : 'Process'}
             </Button>
           </div>
           <Progress value={progress} />

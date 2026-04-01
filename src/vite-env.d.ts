@@ -78,6 +78,11 @@ interface Window {
       averageReduction: number
       outputs: string[]
     }>
+    repairPdf: (payload: { inputPaths: string[]; outputDir: string }) => Promise<{
+      outputDir: string
+      totalOutputs: number
+      outputs: string[]
+    }>
     convertImages: (payload: {
       inputPaths: string[]
       outputDir: string

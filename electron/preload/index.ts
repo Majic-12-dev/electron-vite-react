@@ -79,6 +79,8 @@ contextBridge.exposeInMainWorld('api', {
   }) => ipcRenderer.invoke('pdf:encrypt', payload),
   compressPdf: (payload: { inputPaths: string[]; outputDir: string; level: 'low' | 'medium' | 'high' }) =>
     ipcRenderer.invoke('pdf:compress', payload),
+  repairPdf: (payload: { inputPaths: string[]; outputDir: string }) =>
+    ipcRenderer.invoke('pdf:repair', payload),
   convertImages: (payload: {
     inputPaths: string[]
     outputDir: string

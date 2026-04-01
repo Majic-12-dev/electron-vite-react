@@ -1,7 +1,19 @@
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
-import { PDFDocument, degrees, rgb, EncryptOptions } from 'pdf-lib'
+import { PDFDocument, degrees, rgb } from 'pdf-lib'
 import { ensureDir } from '../utils/fs'
+
+interface EncryptOptions {
+  userPassword?: string
+  ownerPassword?: string
+  permissions: {
+    printing: 'printAllowed' | 'notAllowed'
+    modifying: 'modifyingAllowed' | 'notAllowed'
+    copying: 'copyingAllowed' | 'notAllowed'
+    annotating: 'annotatingAllowed' | 'notAllowed'
+    form: 'formAllowed' | 'notAllowed'
+  }
+}
 
 const PERMISSION_MAP = {
   print: { allowed: 'print_allowed' as const, denied: 'not_allowed' as const },
@@ -331,22 +343,22 @@ export async function encryptPdf({
     const bytes = await fs.readFile(filePath)
     const doc = await PDFDocument.load(bytes, { ignoreEncryption: false })
 
-    const encryptOptions: EncryptOptions = {
+    const encryptOptions = {
       userPassword: userPassword || undefined,
       ownerPassword: ownerPassword || undefined,
       permissions: {
-        print: permissions.print ? PERMISSION_MAP.print.allowed : PERMISSION_MAP.print.denied,
-        modify: permissions.modify ? PERMISSION_MAP.modify.allowed : PERMISSION_MAP.modify.denied,
-        copy: permissions.copy ? PERMISSION_MAP.copy.allowed : PERMISSION_MAP.copy.denied,
-        annotate: permissions.annotate ? PERMISSION_MAP.annotate.allowed : PERMISSION_MAP.annotate.denied,
-        form: permissions.form ? PERMISSION_MAP.form.allowed : PERMISSION_MAP.form.denied,
+        printing: permissions.print ? 'printAllowed' : 'notAllowed',
+        modifying: permissions.modify ? 'modifyingAllowed' : 'notAllowed',
+        copying: permissions.copy ? 'copyingAllowed' : 'notAllowed',
+        annotating: permissions.annotate ? 'annotatingAllowed' : 'notAllowed',
+        form: permissions.form ? 'formAllowed' : 'notAllowed',
       },
     }
 
     const baseName = path.parse(filePath).name
     const outputPath = path.join(outputDir, `${sanitizeFileName(baseName)}_encrypted.pdf`)
     await ensureDir(outputDir)
-    await fs.writeFile(outputPath, await doc.save({ encrypt: encryptOptions }))
+    await fs.writeFile(outputPath, await doc.save({ encrypt: encryptOptions } as any))
     outputs.push(outputPath)
   }
 
@@ -393,8 +405,53 @@ export async function compressPdf({ inputPaths, outputDir, level }: CompressPdfP
   }
 }
 
+export type RepairPdfPayload = {
+  inputPaths: string[]
+  outputDir: string
+}
+
+export async function repairPdf({ inputPaths, outputDir }: RepairPdfPayload) {
+  if (!inputPaths.length) {
+    throw new Error('No PDF files provided.')
+  }
+
+  const outputs: string[] = []
+
+  for (const filePath of inputPaths) {
+    let doc: any = null
+    try {
+      // Try to load the PDF, ignoring some errors
+      const bytes = await fs.readFile(filePath)
+      doc = await PDFDocument.load(bytes, { ignoreEncryption: true }).catch(async (err: Error) => {
+        // If loading fails, try again with more lenient options or throw
+        throw new Error(`Failed to load PDF: ${err.message}`)
+      })
+
+      // Re-save creates a fresh, structurally sound PDF
+      const repairedBytes = await doc.save({
+        useObjectStreams: true,
+        addDefaultPage: false,
+      })
+
+      const baseName = path.parse(filePath).name
+      const outputPath = path.join(outputDir, `${sanitizeFileName(baseName)}_repaired.pdf`)
+      await ensureDir(outputDir)
+      await fs.writeFile(outputPath, repairedBytes)
+      outputs.push(outputPath)
+    } catch (error) {
+      console.error(`Repair failed for ${filePath}:`, error)
+      throw error
+    } finally {
+      // PDFDocument doesn't have a close method, but we can null the reference
+      doc = null
+    }
+  }
+
+  return { outputDir, totalOutputs: outputs.length, outputs }
+}
+
 function sanitizeFileName(name: string) {
-  return name.replace(/[<>:"/\\|?*]+/g, '_').trim()
+  return name.replace(/[<>:\"/\\\\|?*]+/g, '_').trim()
 }
 
 function parsePageRanges(input: string, pageCount: number) {

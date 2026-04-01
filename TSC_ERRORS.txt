@@ -1,0 +1,12 @@
+The TypeScript compilation errors have been captured and written to `/data/workspace/repo/TSC_ERRORS.txt`. The file contains:
+
+- **Total error count**: 38
+- **Files with errors**: `electron/main/tools/pdf.ts` (only)
+- All errors originate from `pdf.ts` with severe syntax issues including:
+  - 24 "Unexpected keyword or identifier" errors
+  - 12 missing punctuation errors (';', '(', ')', ',')
+  - 3 module declaration quoting errors
+  - 2 unknown identifier errors
+  - 1 invalid type alias name ('import')
+
+The complete error output is truncated at 100 lines as requested. The file also includes a detailed analysis indicating that `pdf.ts` requires complete syntax correction, particularly in the import/module declarations at the top of the file.

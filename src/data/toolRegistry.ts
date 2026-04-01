@@ -34,8 +34,11 @@ import { PdfWatermarkTool } from '@/tools/pdf/PdfWatermarkTool'
 import { PdfMetadataTool } from '@/tools/pdf/PdfMetadataTool'
 import { PdfUnlockTool } from '@/tools/pdf/PdfUnlockTool'
 import { CompressPdfTool } from '@/tools/pdf/CompressPdfTool'
-import { PlaceholderTool } from '@/tools/PlaceholderTool'
+import { RepairPdfTool } from '@/tools/pdf/RepairPdfTool'
+import { PdfOcrTool } from '@/tools/pdf/PdfOcrTool'
+import { PdfPasswordTool } from '@/tools/pdf/PdfPasswordTool'
 import { ArchiveZipTool } from '@/tools/archive/ArchiveZipTool'
+import { PlaceholderTool } from '@/tools/PlaceholderTool'
 import { ImageConvertTool } from '@/tools/image/ImageConvertTool'
 import { ImageResizeTool } from '@/tools/image/ImageResizeTool'
 import { ImageCompressTool } from '@/tools/image/ImageCompressTool'
@@ -43,10 +46,13 @@ import { ImageToPdfTool } from '@/tools/image/ImageToPdfTool'
 import { ImageExifTool } from '@/tools/image/ImageExifTool'
 import { ImageRenameTool } from '@/tools/image/ImageRenameTool'
 import { ColorFilterTool } from '@/tools/image/ColorFilterTool'
+import { BackgroundRemoverTool } from '@/tools/image/BackgroundRemoverTool'
 import { TextMergeTool } from '@/tools/text/TextMergeTool'
+import { MarkdownTool } from '@/tools/text/MarkdownTool'
 import { BulkRenamerTool } from '@/tools/file/BulkRenamerTool'
 import { EmptyFolderTool } from '@/tools/file/EmptyFolderTool'
 import { LargeFileScoutTool } from '@/tools/file/LargeFileScoutTool'
+import { DuplicateFinderTool } from '@/tools/file/DuplicateFinderTool'
 import { ChecksumTool } from '@/tools/security/ChecksumTool'
 import { EncryptTool } from '@/tools/security/EncryptTool'
 import { FileOrganizerTool } from '@/tools/file/FileOrganizerTool'
@@ -272,7 +278,7 @@ export const tools: ToolDefinition[] = [
     description: 'Preview and convert Markdown files.',
     categoryId: 'text',
     icon: FileType,
-    component: PlaceholderTool,
+    component: MarkdownTool,
   },
   {
     id: 'file-duplicates',
