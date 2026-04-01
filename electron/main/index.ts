@@ -19,6 +19,7 @@ import {
   compressImages,
   imagesToPdf,
   stripExif,
+  filterImages,
 } from './tools/image'
 import { mergeTextFiles } from './tools/text'
 import { bulkRename } from './tools/file'
@@ -195,6 +196,7 @@ ipcMain.handle('image:resize', async (_, payload) => resizeImages(payload))
 ipcMain.handle('image:compress', async (_, payload) => compressImages(payload))
 ipcMain.handle('image:to-pdf', async (_, payload) => imagesToPdf(payload))
 ipcMain.handle('image:strip-exif', async (_, payload) => stripExif(payload))
+ipcMain.handle('image:filter', async (_, payload) => filterImages(payload))
 
 ipcMain.handle('text:merge', async (_, payload) => mergeTextFiles(payload))
 

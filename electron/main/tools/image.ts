@@ -39,6 +39,12 @@ export type StripExifPayload = {
   outputDir: string
 }
 
+export type FilterImagesPayload = {
+  inputPaths: string[]
+  outputDir: string
+  filter: 'grayscale' | 'sepia' | 'invert'
+}
+
 export async function convertImages({
   inputPaths,
   outputDir,
@@ -157,6 +163,42 @@ export async function stripExif({ inputPaths, outputDir }: StripExifPayload) {
       path.join(outputDir, `${sanitizeFileName(parsed.name)}_clean${parsed.ext}`),
     )
     await sharp(filePath).toFile(outputPath)
+    outputs.push(outputPath)
+  }
+
+  return { outputDir, totalOutputs: outputs.length, outputs }
+}
+
+export async function filterImages({ inputPaths, outputDir, filter }: FilterImagesPayload) {
+  if (!inputPaths.length) throw new Error('No images provided.')
+  await ensureDir(outputDir)
+
+  const outputs: string[] = []
+
+  for (const filePath of inputPaths) {
+    const parsed = path.parse(filePath)
+    const filterSuffix = filter === 'grayscale' ? '_grayscale' : filter === 'sepia' ? '_sepia' : '_inverted'
+    const outputPath = await uniquePath(
+      path.join(outputDir, `${sanitizeFileName(parsed.name)}${filterSuffix}${parsed.ext}`),
+    )
+
+    let pipeline = sharp(filePath)
+    switch (filter) {
+      case 'grayscale':
+        pipeline = pipeline.grayscale()
+        break
+      case 'sepia':
+        pipeline = pipeline.modulate({ brightness: 1.1, saturation: 0.5 }).recomb([
+          [0.393, 0.769, 0.189],
+          [0.349, 0.686, 0.168],
+          [0.272, 0.534, 0.131],
+        ])
+        break
+      case 'invert':
+        pipeline = pipeline.negate()
+        break
+    }
+    await pipeline.toFile(outputPath)
     outputs.push(outputPath)
   }
 

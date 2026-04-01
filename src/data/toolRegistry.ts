@@ -38,6 +38,7 @@ import { ImageResizeTool } from '@/tools/image/ImageResizeTool'
 import { ImageCompressTool } from '@/tools/image/ImageCompressTool'
 import { ImageToPdfTool } from '@/tools/image/ImageToPdfTool'
 import { ImageExifTool } from '@/tools/image/ImageExifTool'
+import { ColorFilterTool } from '@/tools/image/ColorFilterTool'
 import { TextMergeTool } from '@/tools/text/TextMergeTool'
 import { BulkRenamerTool } from '@/tools/file/BulkRenamerTool'
 import { ChecksumTool } from '@/tools/security/ChecksumTool'
@@ -240,7 +241,7 @@ export const tools: ToolDefinition[] = [
     description: 'Apply grayscale, sepia, or invert filters.',
     categoryId: 'image',
     icon: Wand2,
-    component: PlaceholderTool,
+    component: ColorFilterTool,
   },
   {
     id: 'image-background',

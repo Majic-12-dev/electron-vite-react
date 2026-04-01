@@ -93,6 +93,8 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('image:to-pdf', payload),
   stripExif: (payload: { inputPaths: string[]; outputDir: string }) =>
     ipcRenderer.invoke('image:strip-exif', payload),
+  filterImages: (payload: { inputPaths: string[]; outputDir: string; filter: 'grayscale' | 'sepia' | 'invert' }) =>
+    ipcRenderer.invoke('image:filter', payload),
   mergeTextFiles: (payload: {
     inputPaths: string[]
     outputDir: string

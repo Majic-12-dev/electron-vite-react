@@ -87,6 +87,15 @@ interface Window {
       totalOutputs: number
       outputs: string[]
     }>
+    filterImages: (payload: {
+      inputPaths: string[]
+      outputDir: string
+      filter: 'grayscale' | 'sepia' | 'invert'
+    }) => Promise<{
+      outputDir: string
+      totalOutputs: number
+      outputs: string[]
+    }>
     mergeTextFiles: (payload: {
       inputPaths: string[]
       outputDir: string
