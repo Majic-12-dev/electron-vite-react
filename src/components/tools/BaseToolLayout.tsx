@@ -54,7 +54,48 @@ type BaseToolLayoutProps = {
   result?: ReactNode
 }
 
+type AcceptPattern =
+  | { type: 'mime'; value: string }
+  | { type: 'extension'; value: string }
+  | { type: 'wildcard'; value: string }
+
 const FILE_LIMIT_SOFT = 200
+
+function parseAcceptPatterns(accept?: string): AcceptPattern[] {
+  if (!accept) return []
+
+  return accept.split(',')
+    .map(p => p.trim())
+    .filter(p => p.length > 0)
+    .map(trimmed => {
+      if (trimmed.includes('*')) {
+        return { type: 'wildcard', value: trimmed }
+      } else if (trimmed.startsWith('.')) {
+        return { type: 'extension', value: trimmed.toLowerCase() }
+      } else {
+        return { type: 'mime', value: trimmed.toLowerCase() }
+      }
+    })
+}
+
+function isFileTypeAccepted(file: File, patterns: AcceptPattern[]): boolean {
+  if (patterns.length === 0) return true
+
+  return patterns.some(pattern => {
+    switch (pattern.type) {
+      case 'mime':
+        return file.type === pattern.value
+      case 'extension':
+        return file.name.toLowerCase().endsWith(pattern.value)
+      case 'wildcard':
+        // Handle patterns like 'image/*' - check if file type starts with the prefix before /*
+        const [prefix] = pattern.value.split('*')
+        return file.type.startsWith(prefix)
+      default:
+        return false
+    }
+  })
+}
 
 export function BaseToolLayout({
   title,
@@ -96,6 +137,8 @@ export function BaseToolLayout({
         ? 'Large batch detected. Consider splitting for faster results.'
         : ''
 
+  const acceptPatterns = useMemo(() => parseAcceptPatterns(accept), [accept])
+
   const handleFiles = (incoming: FileList | File[]) => {
     const list = Array.from(incoming)
     const mapped = list.map((file) => ({
@@ -107,21 +150,45 @@ export function BaseToolLayout({
       path: (file as File & { path?: string }).path,
       lastModified: file.lastModified,
     }))
-    // Filter out files exceeding maxFileSize
-    const allowed: typeof mapped = []
-    const rejected: typeof mapped = []
+
+    // Filter by size
+    const sizeAllowed: typeof mapped = []
+    const sizeRejected: typeof mapped = []
     mapped.forEach((item) => {
       if (item.file.size <= maxFileSize) {
-        allowed.push(item)
+        sizeAllowed.push(item)
       } else {
-        rejected.push(item)
+        sizeRejected.push(item)
       }
     })
-    if (rejected.length > 0) {
-      const names = rejected.map(r => r.name).join(', ')
+
+    // Filter by type (accept patterns)
+    const typeRejected: typeof mapped = []
+    const allowed: typeof mapped = []
+    sizeAllowed.forEach((item) => {
+      if (isFileTypeAccepted(item.file, acceptPatterns)) {
+        allowed.push(item)
+      } else {
+        typeRejected.push(item)
+      }
+    })
+
+    // Build error messages
+    const errors: string[] = []
+    if (sizeRejected.length > 0) {
+      const names = sizeRejected.map(r => r.name).join(', ')
       const limit = formatBytes(maxFileSize)
-      setError(`${rejected.length} file(s) exceed the size limit of ${limit} and were rejected: ${names}`)
+      errors.push(`${sizeRejected.length} file(s) exceed the size limit of ${limit}: ${names}`)
     }
+    if (typeRejected.length > 0) {
+      const names = typeRejected.map(r => r.name).join(', ')
+      const acceptDesc = accept || 'any type'
+      errors.push(`${typeRejected.length} file(s) do not match the accepted types (${acceptDesc}): ${names}`)
+    }
+    if (errors.length > 0) {
+      setError(errors.join(' '))
+    }
+
     setFiles((prev) => {
       const existingKeys = new Set(prev.map(toKey))
       const merged = [...prev]

@@ -41,14 +41,6 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
 
       for (let fileIndex = 0; fileIndex < totalFiles; fileIndex++) {
         const toolFile = files[fileIndex]
-        // File type validation: must be PDF (by MIME type or extension)
-        const fileName = toolFile.file.name.toLowerCase()
-        const isPdfByMime = toolFile.file.type === 'application/pdf'
-        const isPdfByExt = fileName.endsWith('.pdf')
-        if (!isPdfByMime && !isPdfByExt) {
-          errors.push({ name: toolFile.name, message: 'Not a PDF file (invalid type)' })
-          continue
-        }
 
         setStatusMessage(`Processing file ${fileIndex + 1} of ${totalFiles}: ${toolFile.name}`)
 
@@ -169,6 +161,7 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
     <BaseToolLayout
       title={tool.name}
       description={tool.description}
+      accept=".pdf,application/pdf"
       options={
         <div className="space-y-4 text-sm">
           <div className="text-xs text-muted">

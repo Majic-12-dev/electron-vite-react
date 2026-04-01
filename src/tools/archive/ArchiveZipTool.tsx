@@ -27,6 +27,7 @@ export function ArchiveZipTool({ tool }: ArchiveZipToolProps) {
     <BaseToolLayout
       title={tool.name}
       description={tool.description}
+      accept=".zip,.tar,.gz,.bz2,.7z,.rar,.xz,.tar.gz,.tgz"
       onProcess={async (files, context) => {
         const sources = files.map((f) => f.path).filter((p): p is string => !!p)
         if (sources.length === 0) throw new Error('No files selected.')
