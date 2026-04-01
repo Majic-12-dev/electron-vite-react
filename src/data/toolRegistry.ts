@@ -41,6 +41,7 @@ import { ImageExifTool } from '@/tools/image/ImageExifTool'
 import { ColorFilterTool } from '@/tools/image/ColorFilterTool'
 import { TextMergeTool } from '@/tools/text/TextMergeTool'
 import { BulkRenamerTool } from '@/tools/file/BulkRenamerTool'
+import { EmptyFolderTool } from '@/tools/file/EmptyFolderTool'
 import { ChecksumTool } from '@/tools/security/ChecksumTool'
 import { PlaceholderTool } from '@/tools/PlaceholderTool'
 import DashboardTool from '@/tools/productivity/DashboardTool'
@@ -289,7 +290,7 @@ export const tools: ToolDefinition[] = [
     description: 'Remove empty folders safely.',
     categoryId: 'file',
     icon: Folder,
-    component: PlaceholderTool,
+    component: EmptyFolderTool,
   },
   {
     id: 'file-organize',
