@@ -116,6 +116,8 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('file:scan-large', payload),
   checksumFiles: (payload: { inputPaths: string[]; algorithm: 'md5' | 'sha1' | 'sha256' }) =>
     ipcRenderer.invoke('security:checksum', payload),
+  processArchive: (payload: { mode: 'zip' | 'unzip'; sources: string[]; outputPath: string }) =>
+    ipcRenderer.invoke('archive:process', payload),
 })
 
 // --------- Preload scripts loading ---------

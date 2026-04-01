@@ -280,18 +280,3 @@ function categorizeByDate(timestampMs: number): string {
   const month = String(date.getMonth() + 1).padStart(2, '0')
   return `${year}/${month}`
 }
-
-async function uniquePath(targetPath: string) {
-  const parsed = path.parse(targetPath)
-  let attempt = 0
-  let candidate = targetPath
-  while (true) {
-    try {
-      await fs.access(candidate)
-      attempt += 1
-      candidate = path.join(parsed.dir, `${parsed.name}(${attempt})${parsed.ext}`)
-    } catch {
-      return candidate
-    }
-  }
-}

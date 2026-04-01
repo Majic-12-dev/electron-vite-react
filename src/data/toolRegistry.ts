@@ -35,6 +35,7 @@ import { PdfMetadataTool } from '@/tools/pdf/PdfMetadataTool'
 import { PdfUnlockTool } from '@/tools/pdf/PdfUnlockTool'
 import { CompressPdfTool } from '@/tools/pdf/CompressPdfTool'
 import { PlaceholderTool } from '@/tools/PlaceholderTool'
+import { ArchiveZipTool } from '@/tools/archive/ArchiveZipTool'
 import { ImageConvertTool } from '@/tools/image/ImageConvertTool'
 import { ImageResizeTool } from '@/tools/image/ImageResizeTool'
 import { ImageCompressTool } from '@/tools/image/ImageCompressTool'
@@ -317,7 +318,7 @@ export const tools: ToolDefinition[] = [
     description: 'Compress and extract archives.',
     categoryId: 'archive',
     icon: Archive,
-    component: PlaceholderTool,
+    component: ArchiveZipTool,
   },
   {
     id: 'security-encrypt',

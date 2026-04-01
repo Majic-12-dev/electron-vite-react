@@ -12,6 +12,7 @@ import {
   watermarkPdf,
   updateMetadata,
   unlockPdf,
+  compressPdf,
 } from './tools/pdf'
 import {
   convertImages,
@@ -24,6 +25,7 @@ import {
 import { mergeTextFiles } from './tools/text'
 import { bulkRename, deleteEmptyFolders, scanLargeFiles, organizeFiles } from './tools/file'
 import { checksumFiles } from './tools/security'
+import { processArchive } from './tools/archive'
 import { ensureDir } from './utils/fs'
 
 const require = createRequire(import.meta.url)
@@ -190,6 +192,7 @@ ipcMain.handle('pdf:rotate', async (_, payload) => rotatePdf(payload))
 ipcMain.handle('pdf:watermark', async (_, payload) => watermarkPdf(payload))
 ipcMain.handle('pdf:metadata', async (_, payload) => updateMetadata(payload))
 ipcMain.handle('pdf:unlock', async (_, payload) => unlockPdf(payload))
+ipcMain.handle('pdf:compress', async (_, payload) => compressPdf(payload))
 
 ipcMain.handle('image:convert', async (_, payload) => convertImages(payload))
 ipcMain.handle('image:resize', async (_, payload) => resizeImages(payload))
@@ -206,3 +209,4 @@ ipcMain.handle('file:scan-large', async (_, payload) => scanLargeFiles(payload))
 ipcMain.handle('file:organize', async (_, payload) => organizeFiles(payload))
 
 ipcMain.handle('security:checksum', async (_, payload) => checksumFiles(payload))
+ipcMain.handle('archive:process', async (_, payload) => processArchive(payload))

@@ -55,6 +55,16 @@ interface Window {
       outputDir: string
       password: string
     }) => Promise<{ outputDir: string; totalOutputs: number; outputs: string[] }>
+    compressPdf: (payload: {
+      inputPaths: string[]
+      outputDir: string
+      level: 'low' | 'medium' | 'high'
+    }) => Promise<{
+      outputDir: string
+      inputCount: number
+      averageReduction: number
+      outputs: string[]
+    }>
     convertImages: (payload: {
       inputPaths: string[]
       outputDir: string
@@ -103,6 +113,11 @@ interface Window {
       separator: string
       includeHeader: boolean
     }) => Promise<{ outputPath: string; sourceCount: number }>
+    organizeFiles: (payload: {
+      inputPaths: string[]
+      outputDir: string
+      rule: 'extension' | 'date'
+    }) => Promise<{ count: number; outputDir: string; results: string[] }>
     bulkRename: (payload: {
       outputDir: string
       items: { sourcePath: string; targetName: string }[]
@@ -126,5 +141,10 @@ interface Window {
     scanLargeFiles: (payload: { path: string; thresholdBytes: number }) => Promise<
       { path: string; size: number }[]
     >
+    processArchive: (payload: { mode: 'zip' | 'unzip'; sources: string[]; outputPath: string }) => Promise<{
+      mode: 'zip' | 'unzip'
+      outputPath: string
+      count: number
+    }>
   }
 }
