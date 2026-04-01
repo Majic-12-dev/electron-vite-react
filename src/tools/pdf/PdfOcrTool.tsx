@@ -53,10 +53,10 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
         setStatusMessage(`Processing file ${fileIndex + 1} of ${totalFiles}: ${toolFile.name}`)
 
         try {
-          const fileText = await processSinglePdf(toolFile, (pageProgress) => {
+          const fileText = await processSinglePdf(toolFile, (fileProgress) => {
             const perFileWeight = 1 / totalFiles
             const base = (fileIndex / totalFiles) * 100
-            const increment = pageProgress * perFileWeight * 100
+            const increment = fileProgress * perFileWeight * 100
             context.setProgress(Math.round(base + increment))
           })
           combinedText += `=== ${toolFile.name} ===\n\n${fileText}\n\n`
@@ -74,9 +74,9 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
           <div className="text-sm">
             Successfully processed {totalFiles - errors.length} of {totalFiles} files.
           </div>
-          {resultText && (
+          {combinedText && (
             <div className="max-h-96 overflow-y-auto rounded border border-border bg-base/40 p-3 text-sm font-mono text-text whitespace-pre-wrap">
-              {resultText}
+              {combinedText}
             </div>
           )}
           {errors.length > 0 && (
@@ -107,7 +107,7 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
 
   const processSinglePdf = async (
     toolFile: { file: File; name: string },
-    onPageProgress: (progress: number) => Promise<void> | void
+    onFileProgress: (progress: number) => Promise<void> | void
   ): Promise<string> => {
     const { file } = toolFile
     setStatusMessage(`Loading PDF: ${file.name}`)
@@ -116,10 +116,13 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
     const numPages = pdf.numPages
 
+    let currentPage = 0
     const worker = await createWorker('eng', 1, {
       logger: (m: any) => {
         if (m.status === 'recognizing text') {
-          onPageProgress(m.progress)
+          // overall progress within this file: (currentPage-1 + m.progress) / numPages
+          const fileProgress = (currentPage - 1 + m.progress) / numPages
+          onFileProgress(fileProgress)
         }
       },
     })
@@ -128,6 +131,7 @@ export function PdfOcrTool({ tool }: PdfOcrToolProps) {
 
     try {
       for (let i = 1; i <= numPages; i++) {
+        currentPage = i
         setStatusMessage(`Processing ${file.name}: page ${i}/${numPages}`)
         const page = await pdf.getPage(i)
         const viewport = page.getViewport({ scale: 1.5 })
