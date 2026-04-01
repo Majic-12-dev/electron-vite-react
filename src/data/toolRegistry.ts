@@ -33,6 +33,8 @@ import { PdfRotateTool } from '@/tools/pdf/PdfRotateTool'
 import { PdfWatermarkTool } from '@/tools/pdf/PdfWatermarkTool'
 import { PdfMetadataTool } from '@/tools/pdf/PdfMetadataTool'
 import { PdfUnlockTool } from '@/tools/pdf/PdfUnlockTool'
+import { CompressPdfTool } from '@/tools/pdf/CompressPdfTool'
+import { PlaceholderTool } from '@/tools/PlaceholderTool'
 import { ImageConvertTool } from '@/tools/image/ImageConvertTool'
 import { ImageResizeTool } from '@/tools/image/ImageResizeTool'
 import { ImageCompressTool } from '@/tools/image/ImageCompressTool'
@@ -131,7 +133,7 @@ export const tools: ToolDefinition[] = [
     description: 'Reduce file size while preserving quality.',
     categoryId: 'pdf',
     icon: FileMinus,
-    component: PlaceholderTool,
+    component: CompressPdfTool,
   },
   {
     id: 'pdf-ocr',

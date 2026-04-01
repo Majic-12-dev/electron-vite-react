@@ -53,6 +53,12 @@ export type UnlockPdfPayload = {
   password: string
 }
 
+export type CompressPdfPayload = {
+  inputPaths: string[]
+  outputDir: string
+  level: 'low' | 'medium' | 'high'
+}
+
 export async function mergePdf({ inputPaths, outputDir, outputName }: MergePdfPayload) {
   if (!inputPaths.length) {
     throw new Error('No PDF files provided.')
@@ -304,6 +310,46 @@ export async function unlockPdf({ inputPaths, outputDir, password }: UnlockPdfPa
   }
 
   return { outputDir, totalOutputs: outputs.length, outputs }
+}
+
+export async function compressPdf({ inputPaths, outputDir, level }: CompressPdfPayload) {
+  if (!inputPaths.length) {
+    throw new Error('No PDF files provided.')
+  }
+
+  const outputs: string[] = []
+  let totalInputSize = 0
+  let totalOutputSize = 0
+
+  for (const filePath of inputPaths) {
+    const bytes = await fs.readFile(filePath)
+    totalInputSize += bytes.length
+
+    const doc = await PDFDocument.load(bytes, { ignoreEncryption: false })
+
+    const optimizedBytes = await doc.save({
+      useObjectStreams: true,
+      addDefaultPage: false,
+    })
+
+    const baseName = path.parse(filePath).name
+    const outputPath = path.join(outputDir, `${sanitizeFileName(baseName)}_compressed.pdf`)
+    await ensureDir(outputDir)
+    await fs.writeFile(outputPath, optimizedBytes)
+
+    const stats = await fs.stat(outputPath)
+    totalOutputSize += stats.size
+    outputs.push(outputPath)
+  }
+
+  const averageReduction = totalInputSize > 0 ? ((totalInputSize - totalOutputSize) / totalInputSize) * 100 : 0
+
+  return {
+    outputDir,
+    inputCount: inputPaths.length,
+    averageReduction,
+    outputs,
+  }
 }
 
 function sanitizeFileName(name: string) {
