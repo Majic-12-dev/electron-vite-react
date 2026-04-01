@@ -12,17 +12,19 @@ type MarkdownToolProps = {
 export function MarkdownTool({ tool }: MarkdownToolProps) {
   const [markdownText, setMarkdownText] = useState<string>('# Welcome to Markdown Tool\n\nStart typing or load a .md file to see the preview.')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
 
     try {
+      setErrorMsg(null)
       const text = await file.text()
       setMarkdownText(text)
     } catch (error) {
       console.error('Failed to read file:', error)
-      alert('Failed to read the selected file.')
+      setErrorMsg('Failed to read the selected file.')
     }
 
     // Reset input so the same file can be selected again if needed
@@ -33,6 +35,7 @@ export function MarkdownTool({ tool }: MarkdownToolProps) {
 
   const handleDownloadHtml = () => {
     try {
+      setErrorMsg(null)
       // Convert markdown to HTML using marked and sanitize
       const rawHtml = marked.parse(markdownText) as string
       const htmlContent = DOMPurify.sanitize(rawHtml)
@@ -100,7 +103,7 @@ ${htmlContent}
       URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Failed to generate HTML:', error)
-      alert('Failed to download HTML.')
+      setErrorMsg('Failed to download HTML.')
     }
   }
 
@@ -119,6 +122,11 @@ ${htmlContent}
       description={tool.description}
       options={
         <div className="space-y-4 text-sm">
+          {errorMsg && (
+            <div className="text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded p-2">
+              {errorMsg}
+            </div>
+          )}
           <div className="space-y-2">
             <div className="text-xs font-semibold uppercase text-muted">Load Markdown File</div>
             <input
