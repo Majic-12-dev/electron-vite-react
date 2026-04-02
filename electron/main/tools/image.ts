@@ -50,6 +50,19 @@ export type RenameImagesPayload = {
   items: { sourcePath: string; targetName: string }[]
 }
 
+export type WatermarkImagesPayload = {
+  inputPaths: string[]
+  outputDir: string
+  type: 'text' | 'image'
+  text?: string
+  imagePath?: string
+  opacity: number
+  rotation: number
+  size: number
+  position: string
+  color?: string
+}
+
 export async function convertImages({
   inputPaths,
   outputDir,
@@ -266,6 +279,126 @@ export async function imagesToPdf({ inputPaths, outputDir, outputName }: ImagesT
   await fs.writeFile(outputPath, await doc.save())
 
   return { outputPath, pageCount }
+}
+
+export async function watermarkImages({
+  inputPaths,
+  outputDir,
+  type,
+  text,
+  imagePath,
+  opacity,
+  rotation,
+  size,
+  position,
+  color,
+}: WatermarkImagesPayload) {
+  if (!inputPaths.length) throw new Error('No images provided.')
+  if (type === 'text' && !text) throw new Error('No watermark text provided.')
+  if (type === 'image' && !imagePath) throw new Error('No watermark image selected.')
+  await ensureDir(outputDir)
+
+  const positionMap: Record<string, { left: 'left' | 'right' | 'center'; top: 'top' | 'bottom' | 'center' }> = {
+    'top-left': { left: 'left', top: 'top' },
+    'top-center': { left: 'center', top: 'top' },
+    'top-right': { left: 'right', top: 'top' },
+    'center-left': { left: 'left', top: 'center' },
+    center: { left: 'center', top: 'center' },
+    'center-right': { left: 'right', top: 'center' },
+    'bottom-left': { left: 'left', top: 'bottom' },
+    'bottom-center': { left: 'center', top: 'bottom' },
+    'bottom-right': { left: 'right', top: 'bottom' },
+  }
+
+  const { left: hAlign, top: vAlign } = positionMap[position] ?? positionMap.center
+
+  // Build watermark overlay buffer
+  let overlay: Buffer
+  if (type === 'text') {
+    const escapedText = (text ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+    const safeText = text ?? ''
+    const svgWidth = size * (safeText.length * 0.6 + 2)
+    const svgHeight = size + 20
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">\n` +
+      `  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"\n` +
+      `        font-family="Arial, sans-serif" font-size="${size}" fill="${color ?? '#ffffff'}"\n` +
+      `        font-weight="bold">${escapedText}</text>\n</svg>`
+    overlay = await sharp(Buffer.from(svg))
+      .rotate(rotation, { background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .resize({ width: undefined, height: undefined }) // keep original
+      .png()
+      .toBuffer()
+  } else {
+    const stats = await fs.stat(imagePath!)
+    if (stats.size > 50 * 1024 * 1024) throw new Error('Watermark image must be under 50MB.')
+    overlay = await sharp(imagePath!)
+      .resize({ width: size, fit: 'inside', withoutEnlargement: true })
+      .rotate(rotation, { background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .png()
+      .toBuffer()
+  }
+
+  const outputs: string[] = []
+
+  for (const filePath of inputPaths) {
+    const parsed = path.parse(filePath)
+    const outputPath = await uniquePath(
+      path.join(outputDir, `${sanitizeFileName(parsed.name)}_watermarked.${parsed.ext}`),
+    )
+
+    const img = sharp(filePath)
+    const metadata = await img.metadata()
+    if (!metadata.width || !metadata.height) continue
+
+    const wmMeta = await sharp(overlay).metadata()
+    if (!wmMeta.width || !wmMeta.height) continue
+
+    const targetSize = Math.min(size, Math.max(metadata.width, metadata.height) * 0.25)
+    const resizedOverlay = await sharp(overlay)
+      .resize({ width: targetSize, height: targetSize, fit: 'inside' })
+      .png()
+      .ensureAlpha()
+      .toBuffer()
+
+    const resizedMeta = await sharp(resizedOverlay).metadata()
+    if (!resizedMeta.width || !resizedMeta.height) continue
+
+    // Calculate exact pixel position
+    let left = 0, top = 0
+    if (hAlign === 'left') left = 10
+    else if (hAlign === 'center') left = Math.round((metadata.width - resizedMeta.width) / 2)
+    else left = metadata.width - resizedMeta.width - 10
+
+    if (vAlign === 'top') top = 10
+    else if (vAlign === 'center') top = Math.round((metadata.height - resizedMeta.height) / 2)
+    else top = metadata.height - resizedMeta.height - 10
+
+    left = Math.max(0, left)
+    top = Math.max(0, top)
+
+    // Apply opacity: if opacity < 1, composite resized overlay onto transparent canvas
+    let finalOverlay = resizedOverlay
+    if (opacity < 1) {
+      const canvasSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${resizedMeta.width}" height="${resizedMeta.height}"/>`
+      finalOverlay = await sharp(Buffer.from(canvasSvg))
+        .composite([{ input: resizedOverlay, blend: 'atop' }])
+        .png()
+        .toBuffer()
+    }
+
+    const result = await img
+      .composite([{ input: finalOverlay, left, top, blend: 'over' }])
+      .toBuffer()
+
+    await fs.writeFile(outputPath, result)
+    outputs.push(outputPath)
+  }
+
+  return { outputDir, totalOutputs: outputs.length, outputs }
 }
 
 function applyFormat(

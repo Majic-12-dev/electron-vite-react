@@ -136,6 +136,18 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('image:rename', payload),
   processSecurity: (payload: { mode: 'encrypt' | 'decrypt'; file: string; password: string; output: string }) =>
     ipcRenderer.invoke('security:process', payload),
+  watermarkImages: (payload: {
+    inputPaths: string[];
+    outputDir: string;
+    type: 'text' | 'image';
+    text?: string;
+    imagePath?: string;
+    size: number;
+    color?: string;
+    position: 'top-left' | 'top-right' | 'center' | 'bottom-left' | 'bottom-right';
+    rotation: number;
+    opacity: number;
+  }) => ipcRenderer.invoke('image:watermark', payload),
 })
 
 // --------- Preload scripts loading ---------

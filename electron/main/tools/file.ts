@@ -184,11 +184,18 @@ export type ScanLargeFilesPayload = {
 export async function scanLargeFiles({ path: rootPath, thresholdBytes }: ScanLargeFilesPayload) {
   const files: { path: string; size: number }[] = []
   const stack: string[] = [rootPath]
+  const visited = new Set<string>()
 
   while (stack.length) {
     const current = stack.pop()!
 
     try {
+      const realPath = await fs.realpath(current)
+      if (visited.has(realPath)) {
+        continue
+      }
+      visited.add(realPath)
+
       const entries = await fs.readdir(current, { withFileTypes: true })
       for (const entry of entries) {
         const fullPath = path.join(current, entry.name)

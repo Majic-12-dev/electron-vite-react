@@ -181,5 +181,17 @@ interface Window {
       password: string
       output: string
     }) => Promise<{ success: boolean; path: string }>
+    watermarkImages: (payload: {
+      inputPaths: string[]
+      outputDir: string
+      type: 'text' | 'image'
+      text?: string
+      imagePath?: string
+      opacity: number
+      rotation: number
+      size: number
+      position: string
+      color?: string
+    }) => Promise<{ outputDir: string; totalOutputs: number; outputs: string[] }>
   }
 }

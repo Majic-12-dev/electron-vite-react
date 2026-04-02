@@ -46,6 +46,7 @@ import { ImageExifTool } from '@/tools/image/ImageExifTool'
 import { ImageRenameTool } from '@/tools/image/ImageRenameTool'
 import { ColorFilterTool } from '@/tools/image/ColorFilterTool'
 import { BackgroundRemoverTool } from '@/tools/image/BackgroundRemoverTool'
+import { ImageWatermarkTool } from '@/tools/image/ImageWatermarkTool'
 import { TextMergeTool } from '@/tools/text/TextMergeTool'
 import { MarkdownTool } from '@/tools/text/MarkdownTool'
 import { BulkRenamerTool } from '@/tools/file/BulkRenamerTool'
@@ -262,6 +263,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'image',
     icon: Sparkles,
     component: BackgroundRemoverTool,
+  },
+  {
+    id: 'image-watermark',
+    name: 'Image Watermark',
+    description: 'Add text or image watermarks to photos in batch.',
+    categoryId: 'image',
+    icon: PencilRuler,
+    component: ImageWatermarkTool,
   },
   {
     id: 'text-merge',
