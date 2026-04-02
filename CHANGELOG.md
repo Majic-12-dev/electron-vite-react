@@ -4,7 +4,39 @@ All notable changes to DocFlow Pro will be documented in this file.
 
 ## [Unreleased]
 
-### 🆕 New Tools (6)
+### 🆕 New Tools (10 + 4 bonus)
+
+#### Developer Category (3)
+- **Favicon Generator** — Generate favicons in multiple sizes (16x16, 32x32, 48x48, 64x64) from uploaded images with preview and download.
+- **HTTP Headers Tool** — Inspect and display HTTP response headers for any URL, with security header analysis and grading.
+- **OpenGraph Preview Tool** — Preview Open Graph / social media card rendering for any URL, showing title, description, image, and site metadata.
+
+#### File Category (1 + 1 bonus)
+- **CSV Analyzer** — Upload CSV files, view summary statistics, column types, duplicates, and export cleaned/filtered results.
+- **Markdown to PDF Converter** (bonus) — Convert Markdown documents to styled PDF with table of contents and syntax-highlighted code blocks.
+
+#### Image Category (1 + 1 bonus)
+- **SVG to PNG Converter** — Convert SVG files to raster PNG images with configurable output dimensions and transparent background support.
+- **Image Diff Tool** (bonus) — Side-by-side and pixel-diff comparison of two images with overlay slider and mismatch highlighting.
+
+#### PDF Category (1)
+- **PDF Batch Compressor** — Compress multiple PDFs at once with configurable quality settings and progress tracking.
+
+#### Security Category (1)
+- **Data Anonymizer** — Replace PII (names, emails, phones, SSNs, IPs, credit cards) with realistic fake data using pattern matching.
+
+#### Text Category (2 + 2 bonus)
+- **ASCII Art Generator** — Convert images to ASCII art with configurable character sets, color output, and multiple dithering modes.
+- **Regex Test Suite** — Real-time regex pattern testing with match highlighting, capture group visualization, and regex cheat sheet.
+- **Text Statistics** — Comprehensive text analysis: word count, character count, sentence count, reading time, readability scores, and frequency analysis.
+- **CSS Formatter** (bonus) — Format/minify/beautify CSS with configurable brace style, indentation, and property sorting.
+- **JSON Diff** (bonus) — Deep comparison of two JSON objects with syntax highlighting, patch generation, and structural diff visualization.
+
+#### Tool Wiring (2 fixes)
+- **BackgroundRemoverTool.tsx** — Complete rewrite (+303 lines): replaced broken canvas-based removal with proper `@imgly/background-removal` integration, added drag-and-drop upload, progress UI, and dual download (PNG/WebP).
+- **ImageMetadataTool.tsx** — Wired into toolRegistry.ts with correct category assignment, icon, and props.
+
+### 🆕 New Tools (previously documented — 6)
 
 #### PDF Category
 - **PDF Redaction Tool** — Permanently black out sensitive regions in PDFs with visual selection and page navigation.

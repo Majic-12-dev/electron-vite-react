@@ -138,6 +138,7 @@ import { TimeZoneConverterTool } from '@/tools/productivity/TimeZoneConverterToo
 import { TimestampConverterTool } from '@/tools/text/TimestampConverterTool'
 import { RegexTesterTool } from '@/tools/text/RegexTesterTool'
 import { RegexPatternLibraryTool } from '@/tools/text/RegexPatternLibraryTool'
+import RegexTestSuiteTool from '@/tools/text/RegexTestSuiteTool'
 import { Base64EncoderTool } from '@/tools/productivity/Base64EncoderTool'
 import { XmlFormatterTool } from '@/tools/text/XmlFormatterTool'
 import { ImageCollageTool } from '@/tools/image/ImageCollageTool'
@@ -148,6 +149,7 @@ import { SlugGeneratorTool } from '@/tools/text/SlugGeneratorTool'
 import { Base64Tool } from '@/tools/text/Base64Tool'
 import { TextHashTool } from '@/tools/security/TextHashTool'
 import { TextEncryptTool } from '@/tools/security/TextEncryptTool'
+import DataAnonymizerTool from '@/tools/security/DataAnonymizerTool'
 import { PomodoroTool } from '@/tools/productivity/PomodoroTool'
 import { ImageToBase64Tool } from '@/tools/image/ImageToBase64Tool'
 import { UuidGeneratorTool } from '@/tools/productivity/UuidGeneratorTool'
@@ -178,12 +180,23 @@ import { UrlEncoderTool } from '@/tools/text/UrlEncoderTool'
 import { SubnetCalculatorTool } from '@/tools/network/SubnetCalculatorTool'
 import { SqlFormatterTool } from '@/tools/text/SQLFormatterTool'
 import { SvgOptimizerTool } from '@/tools/image/SVGOptimizerTool'
+import { CsvAnalyzerTool } from '@/tools/file/CsvAnalyzerTool'
+import { JsonDiffTool } from '@/tools/text/JsonDiffTool'
+import { SvgToPngTool } from '@/tools/image/SvgToPngTool'
+import { AsciiArtTool } from '@/tools/text/AsciiArtTool'
 import { RegexReplacerTool } from '@/tools/text/RegexReplacerTool'
 import { QuickNotesTool } from '@/tools/productivity/QuickNotesTool'
 import { BookmarkManagerTool } from '@/tools/productivity/BookmarkManagerTool'
 import { ArchiveExtractTool } from '@/tools/archive/ArchiveExtractTool'
 import { ColorPickerTool } from '@/tools/productivity/ColorPickerTool'
 import { CssBeautifierTool } from '@/tools/text/CSSBeautifierTool'
+import { PdfBatchCompressTool } from '@/tools/pdf/PdfBatchCompressTool'
+import { TextStatsTool } from '@/tools/text/TextStatsTool'
+import { CssFormatterTool } from '@/tools/text/CSSFormatterTool'
+import { FaviconGeneratorTool } from '@/tools/developer/FaviconGeneratorTool'
+import { HTTPHeadersTool } from '@/tools/developer/HTTPHeadersTool'
+import { OpenGraphPreviewTool } from '@/tools/developer/OpenGraphPreviewTool'
+import { Eye } from 'lucide-react'
 
 export type ToolCategory = {
   id: string
@@ -454,6 +467,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'image',
     icon: Wand2,
     component: ColorFilterTool,
+  },
+  {
+    id: 'image-metadata',
+    name: 'Image Metadata',
+    description: 'View and edit image metadata and EXIF information.',
+    categoryId: 'image',
+    icon: FileImage,
+    component: ImageMetadataTool,
   },
   {
     id: 'image-background',
@@ -768,6 +789,14 @@ export const tools: ToolDefinition[] = [
     component: Base64Tool,
   },
   {
+    id: 'data-anonymizer',
+    name: 'Data Anonymizer',
+    description: 'Detect and redact PII (emails, phones, SSNs, credit cards, IPs) from text with masking options.',
+    categoryId: 'security',
+    icon: Shield,
+    component: DataAnonymizerTool,
+  },
+  {
     id: 'text-hash',
     name: 'Text Hash Generator',
     description: 'Compute SHA-1, SHA-256, SHA-512, and MD5 hashes of any text.',
@@ -936,6 +965,14 @@ export const tools: ToolDefinition[] = [
     component: PasswordAuditorTool,
   },
   {
+    id: 'regex-test-suite',
+    name: 'Regex Test Suite',
+    description: 'Test regular expressions with real-time matching, highlight, and capture group analysis.',
+    categoryId: 'text',
+    icon: Search,
+    component: RegexTestSuiteTool,
+  },
+  {
     id: 'qr-code-decoder',
     name: 'QR Code Decoder',
     description: 'Decode QR codes from images. Upload a screenshot or photo containing a QR code to extract its data.',
@@ -1064,12 +1101,100 @@ export const tools: ToolDefinition[] = [
     component: QuickNotesTool,
   },
   {
+    id: 'url-encoder',
+    name: 'URL Encoder / Decoder',
+    description: 'Encode and decode URLs using encodeURIComponent or encodeURI with live preview.',
+    categoryId: 'text',
+    icon: Link2,
+    component: UrlEncoderTool,
+  },
+  {
     id: 'bookmark-manager',
     name: 'Bookmark Manager',
     description: 'Organize, search, and manage your favorite links with tags, notes, and JSON export.',
     categoryId: 'productivity',
     icon: Bookmark,
     component: BookmarkManagerTool,
+  },
+  {
+    id: 'favicon-generator',
+    name: 'Favicon Generator',
+    description: 'Generate favicon icons in multiple sizes from a single image with download pack and HTML snippet.',
+    categoryId: 'productivity',
+    icon: ImagePlus,
+    component: FaviconGeneratorTool,
+  },
+  {
+    id: 'http-headers',
+    name: 'HTTP Headers Checker',
+    description: 'Fetch and inspect HTTP response headers from any URL with CORS and proxy modes.',
+    categoryId: 'productivity',
+    icon: Globe,
+    component: HTTPHeadersTool,
+  },
+  {
+    id: 'og-preview',
+    name: 'Open Graph Preview',
+    description: 'Generate and preview social media meta tags (OG, Twitter Cards) with live card previews.',
+    categoryId: 'productivity',
+    icon: Eye,
+    component: OpenGraphPreviewTool,
+  },
+  {
+    id: 'csv-analyzer',
+    name: 'CSV Analyzer',
+    description: 'Upload, filter, sort, and export CSV data with column statistics and type detection.',
+    categoryId: 'file',
+    icon: Table,
+    component: CsvAnalyzerTool,
+  },
+  {
+    id: 'json-diff',
+    name: 'JSON Diff',
+    description: 'Compare two JSON objects and find added, removed, and modified keys with color-coded results.',
+    categoryId: 'text',
+    icon: Diff,
+    component: JsonDiffTool,
+  },
+  {
+    id: 'svg-to-png',
+    name: 'SVG to PNG',
+    description: 'Convert SVG markup or files to PNG images with resolution and background controls.',
+    categoryId: 'image',
+    icon: FileImage,
+    component: SvgToPngTool,
+  },
+  {
+    id: 'ascii-art',
+    name: 'ASCII Art Generator',
+    description: 'Generate ASCII art from text with multiple built-in font styles and history.',
+    categoryId: 'text',
+    icon: Type,
+    component: AsciiArtTool,
+  },
+  {
+    id: 'pdf-batch-compress',
+    name: 'PDF Batch Compress (Advanced)',
+    description: 'Compress multiple PDFs in batch with custom quality, DPI, and annotation stripping controls.',
+    categoryId: 'pdf',
+    icon: FileMinus,
+    component: PdfBatchCompressTool,
+  },
+  {
+    id: 'text-stats',
+    name: 'Text Stats',
+    description: 'Comprehensive text analysis: word/sentence/paragraph counts, readability scores, keyword density, and character frequency.',
+    categoryId: 'text',
+    icon: BarChart3,
+    component: TextStatsTool,
+  },
+  {
+    id: 'css-formatter',
+    name: 'CSS Minifier & Beautifier',
+    description: 'Minify or beautify CSS with copy-to-clipboard, file download, and size comparison stats.',
+    categoryId: 'text',
+    icon: Paintbrush,
+    component: CssFormatterTool,
   },
 ]
 
