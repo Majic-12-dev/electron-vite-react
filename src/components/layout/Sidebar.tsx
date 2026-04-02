@@ -1,12 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { ChevronDown, Crown, Settings } from 'lucide-react'
+import { ChevronDown, Crown, Search, Settings } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
 import { categories, getToolById, toolsByCategory } from '@/data/toolRegistry'
 
-export function Sidebar() {
+type SidebarProps = {
+  onOpenSearch: () => void
+}
+
+export function Sidebar({ onOpenSearch }: SidebarProps) {
   const location = useLocation()
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({})
 
@@ -34,6 +38,24 @@ export function Sidebar() {
         </div>
         <Badge className='border-0 bg-accent/10 text-accent'>v0.1</Badge>
       </div>
+
+      {/* Search button */}
+      <button
+        type='button'
+        onClick={onOpenSearch}
+        className={cn(
+          'flex w-full items-center justify-between rounded-xl border border-border/60 bg-base/40 px-3 py-2.5 text-sm text-muted transition hover:border-border hover:text-text',
+        )}
+        aria-label='Search tools'
+      >
+        <span className='flex items-center gap-2'>
+          <Search className='h-4 w-4' />
+          Search tools…
+        </span>
+        <kbd className='hidden rounded bg-panel-strong px-1.5 py-0.5 text-[10px] font-mono text-muted sm:inline'>
+          ⌘K
+        </kbd>
+      </button>
 
       <nav className='flex-1 space-y-4 overflow-y-auto pr-1'>
         {categories.map((category) => {

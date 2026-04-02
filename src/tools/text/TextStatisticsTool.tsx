@@ -227,7 +227,7 @@ Top Words: ${stats.topWords.map(([w, c]) => `${w} (${c})`).join(', ')}
                 <div>
                   <div className="text-xs text-muted">Flesch Reading Ease</div>
                   <div className={`text-lg font-mono font-bold ${
-                    stats.flesh >= 70 ? 'text-green-400' : stats.flesh >= 50 ? 'text-yellow-400' : 'text-red-400'
+                    stats.flesch >= 70 ? 'text-green-400' : stats.flesch >= 50 ? 'text-yellow-400' : 'text-red-400'
                   }`}>
                     {stats.flesch.toFixed(1)}
                   </div>

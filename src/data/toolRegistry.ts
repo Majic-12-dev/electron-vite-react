@@ -46,6 +46,12 @@ import {
   Hash,
   ListTodo,
   Code,
+  FileUp,
+  FileType2,
+  BarChart3,
+  ShieldCheck,
+  Volume2,
+  Split,
 } from 'lucide-react'
 import { PdfMergeTool } from '@/tools/pdf/PdfMergeTool'
 import { PdfSplitTool } from '@/tools/pdf/PdfSplitTool'
@@ -103,7 +109,16 @@ import { TextEncryptTool } from '@/tools/security/TextEncryptTool'
 import { PomodoroTool } from '@/tools/productivity/PomodoroTool'
 import { ImageToBase64Tool } from '@/tools/image/ImageToBase64Tool'
 import { UuidGeneratorTool } from '@/tools/productivity/UuidGeneratorTool'
-
+import { MarkdownPreviewTool } from '@/tools/text/MarkdownPreviewTool'
+import { HtmlEntityTool } from '@/tools/text/HtmlEntityTool'
+import { TextStatisticsTool } from '@/tools/text/TextStatisticsTool'
+import { CipherTool } from '@/tools/text/CipherTool'
+import { TextToSpeechTool } from '@/tools/text/TextToSpeechTool'
+import { ColorConverterTool } from '@/tools/productivity/ColorConverterTool'
+import { CronExpressionTool } from '@/tools/productivity/CronExpressionTool'
+import { HtmlCodeTool } from '@/tools/text/HtmlCodeTool'
+import { NumberBaseConverterTool } from '@/tools/productivity/NumberBaseConverterTool'
+import { TextSplitterTool } from '@/tools/text/TextSplitterTool'
 export type ToolCategory = {
   id: string
   label: string
@@ -613,6 +628,86 @@ export const tools: ToolDefinition[] = [
     categoryId: 'productivity',
     icon: ListTodo,
     component: UuidGeneratorTool,
+  },
+  {
+    id: 'markdown-preview',
+    name: 'Markdown Preview',
+    description: 'Live Markdown preview with HTML export, formatting, and syntax reference.',
+    categoryId: 'text',
+    icon: FileUp,
+    component: MarkdownPreviewTool,
+  },
+  {
+    id: 'html-entity',
+    name: 'HTML Entity Encoder / Decoder',
+    description: 'Encode and decode HTML entities with support for named, decimal, and hex formats.',
+    categoryId: 'text',
+    icon: FileType2,
+    component: HtmlEntityTool,
+  },
+  {
+    id: 'text-statistics',
+    name: 'Text Statistics',
+    description: 'Comprehensive text analysis including readability scores, word frequency, and time estimates.',
+    categoryId: 'text',
+    icon: BarChart3,
+    component: TextStatisticsTool,
+  },
+  {
+    id: 'cipher',
+    name: 'Cipher Encoder / Decoder',
+    description: 'Encrypt and decrypt text using Caesar, ROT13, Vigenère, and Atbash ciphers.',
+    categoryId: 'text',
+    icon: ShieldCheck,
+    component: CipherTool,
+  },
+  {
+    id: 'text-to-speech',
+    name: 'Text to Speech',
+    description: 'Convert text to speech with configurable voice, speed, pitch, and volume using the browser API.',
+    categoryId: 'text',
+    icon: Volume2,
+    component: TextToSpeechTool,
+  },
+  {
+    id: 'color-converter',
+    name: 'Color Converter',
+    description: 'Convert between HEX, RGB, and HSL color formats with live preview and copy.',
+    categoryId: 'productivity',
+    icon: Palette,
+    component: ColorConverterTool,
+  },
+  {
+    id: 'cron-expression',
+    name: 'Cron Expression Helper',
+    description: 'Generate and parse cron expressions with human-readable descriptions.',
+    categoryId: 'productivity',
+    icon: Code2,
+    component: CronExpressionTool,
+  },
+  {
+    id: 'html-code-tool',
+    name: 'HTML Code Toolkit',
+    description: 'Minify, beautify, and convert HTML snippets from other formats.',
+    categoryId: 'text',
+    icon: Code2,
+    component: HtmlCodeTool,
+  },
+  {
+    id: 'number-base-converter',
+    name: 'Number Base Converter',
+    description: 'Convert between decimal, hexadecimal, octal, and binary number systems.',
+    categoryId: 'productivity',
+    icon: Hash,
+    component: NumberBaseConverterTool,
+  },
+  {
+    id: 'text-splitter',
+    name: 'Text Splitter',
+    description: 'Split text by line, word, sentence, or custom delimiter with chunking and preview.',
+    categoryId: 'text',
+    icon: Split,
+    component: TextSplitterTool,
   },
 ]
 

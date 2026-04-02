@@ -6,7 +6,14 @@ type Preferences = {
   defaultOutputDir: string
 }
 
-type AppState = {
+const MAX_RECENT_TOOLS = 8
+
+type UiState = {
+  commandPaletteOpen: boolean
+  setCommandPaletteOpen: (open: boolean) => void
+}
+
+type AppState = UiState & {
   preferences: Preferences
   recentTools: string[]
   setDarkMode: (enabled: boolean) => void
@@ -15,11 +22,11 @@ type AppState = {
   clearRecentTools: () => void
 }
 
-const MAX_RECENT_TOOLS = 8
-
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
+      commandPaletteOpen: false,
+      setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
       preferences: {
         darkMode: false,
         defaultOutputDir: '',
