@@ -1,0 +1,1073 @@
+[
+  {
+    "name": "SUM",
+    "syntax": "SUM(range)",
+    "description": "Adds all numbers in a range of cells.",
+    "category": "Math",
+    "example": "=SUM(A1:A10)"
+  },
+  {
+    "name": "AVERAGE",
+    "syntax": "AVERAGE(range)",
+    "description": "Returns the average of its arguments.",
+    "category": "Math",
+    "example": "=AVERAGE(A1:A10)"
+  },
+  {
+    "name": "IF",
+    "syntax": "IF(logical_test, value_if_true, value_if_false)",
+    "description": "Checks whether a condition is met, and returns one value if true and another if false.",
+    "category": "Logical",
+    "example": "=IF(A1>10, \"Yes\", \"No\")"
+  },
+  {
+    "name": "FORMULA_0",
+    "syntax": "FORMULA_0(arg1, arg2)",
+    "description": "Description for formula 0 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_0(A1, B1)"
+  },
+  {
+    "name": "FORMULA_1",
+    "syntax": "FORMULA_1(arg1, arg2)",
+    "description": "Description for formula 1 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_1(A1, B1)"
+  },
+  {
+    "name": "FORMULA_2",
+    "syntax": "FORMULA_2(arg1, arg2)",
+    "description": "Description for formula 2 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_2(A1, B1)"
+  },
+  {
+    "name": "FORMULA_3",
+    "syntax": "FORMULA_3(arg1, arg2)",
+    "description": "Description for formula 3 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_3(A1, B1)"
+  },
+  {
+    "name": "FORMULA_4",
+    "syntax": "FORMULA_4(arg1, arg2)",
+    "description": "Description for formula 4 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_4(A1, B1)"
+  },
+  {
+    "name": "FORMULA_5",
+    "syntax": "FORMULA_5(arg1, arg2)",
+    "description": "Description for formula 5 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_5(A1, B1)"
+  },
+  {
+    "name": "FORMULA_6",
+    "syntax": "FORMULA_6(arg1, arg2)",
+    "description": "Description for formula 6 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_6(A1, B1)"
+  },
+  {
+    "name": "FORMULA_7",
+    "syntax": "FORMULA_7(arg1, arg2)",
+    "description": "Description for formula 7 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_7(A1, B1)"
+  },
+  {
+    "name": "FORMULA_8",
+    "syntax": "FORMULA_8(arg1, arg2)",
+    "description": "Description for formula 8 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_8(A1, B1)"
+  },
+  {
+    "name": "FORMULA_9",
+    "syntax": "FORMULA_9(arg1, arg2)",
+    "description": "Description for formula 9 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_9(A1, B1)"
+  },
+  {
+    "name": "FORMULA_10",
+    "syntax": "FORMULA_10(arg1, arg2)",
+    "description": "Description for formula 10 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_10(A1, B1)"
+  },
+  {
+    "name": "FORMULA_11",
+    "syntax": "FORMULA_11(arg1, arg2)",
+    "description": "Description for formula 11 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_11(A1, B1)"
+  },
+  {
+    "name": "FORMULA_12",
+    "syntax": "FORMULA_12(arg1, arg2)",
+    "description": "Description for formula 12 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_12(A1, B1)"
+  },
+  {
+    "name": "FORMULA_13",
+    "syntax": "FORMULA_13(arg1, arg2)",
+    "description": "Description for formula 13 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_13(A1, B1)"
+  },
+  {
+    "name": "FORMULA_14",
+    "syntax": "FORMULA_14(arg1, arg2)",
+    "description": "Description for formula 14 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_14(A1, B1)"
+  },
+  {
+    "name": "FORMULA_15",
+    "syntax": "FORMULA_15(arg1, arg2)",
+    "description": "Description for formula 15 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_15(A1, B1)"
+  },
+  {
+    "name": "FORMULA_16",
+    "syntax": "FORMULA_16(arg1, arg2)",
+    "description": "Description for formula 16 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_16(A1, B1)"
+  },
+  {
+    "name": "FORMULA_17",
+    "syntax": "FORMULA_17(arg1, arg2)",
+    "description": "Description for formula 17 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_17(A1, B1)"
+  },
+  {
+    "name": "FORMULA_18",
+    "syntax": "FORMULA_18(arg1, arg2)",
+    "description": "Description for formula 18 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_18(A1, B1)"
+  },
+  {
+    "name": "FORMULA_19",
+    "syntax": "FORMULA_19(arg1, arg2)",
+    "description": "Description for formula 19 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_19(A1, B1)"
+  },
+  {
+    "name": "FORMULA_20",
+    "syntax": "FORMULA_20(arg1, arg2)",
+    "description": "Description for formula 20 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_20(A1, B1)"
+  },
+  {
+    "name": "FORMULA_21",
+    "syntax": "FORMULA_21(arg1, arg2)",
+    "description": "Description for formula 21 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_21(A1, B1)"
+  },
+  {
+    "name": "FORMULA_22",
+    "syntax": "FORMULA_22(arg1, arg2)",
+    "description": "Description for formula 22 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_22(A1, B1)"
+  },
+  {
+    "name": "FORMULA_23",
+    "syntax": "FORMULA_23(arg1, arg2)",
+    "description": "Description for formula 23 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_23(A1, B1)"
+  },
+  {
+    "name": "FORMULA_24",
+    "syntax": "FORMULA_24(arg1, arg2)",
+    "description": "Description for formula 24 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_24(A1, B1)"
+  },
+  {
+    "name": "FORMULA_25",
+    "syntax": "FORMULA_25(arg1, arg2)",
+    "description": "Description for formula 25 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_25(A1, B1)"
+  },
+  {
+    "name": "FORMULA_26",
+    "syntax": "FORMULA_26(arg1, arg2)",
+    "description": "Description for formula 26 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_26(A1, B1)"
+  },
+  {
+    "name": "FORMULA_27",
+    "syntax": "FORMULA_27(arg1, arg2)",
+    "description": "Description for formula 27 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_27(A1, B1)"
+  },
+  {
+    "name": "FORMULA_28",
+    "syntax": "FORMULA_28(arg1, arg2)",
+    "description": "Description for formula 28 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_28(A1, B1)"
+  },
+  {
+    "name": "FORMULA_29",
+    "syntax": "FORMULA_29(arg1, arg2)",
+    "description": "Description for formula 29 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_29(A1, B1)"
+  },
+  {
+    "name": "FORMULA_30",
+    "syntax": "FORMULA_30(arg1, arg2)",
+    "description": "Description for formula 30 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_30(A1, B1)"
+  },
+  {
+    "name": "FORMULA_31",
+    "syntax": "FORMULA_31(arg1, arg2)",
+    "description": "Description for formula 31 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_31(A1, B1)"
+  },
+  {
+    "name": "FORMULA_32",
+    "syntax": "FORMULA_32(arg1, arg2)",
+    "description": "Description for formula 32 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_32(A1, B1)"
+  },
+  {
+    "name": "FORMULA_33",
+    "syntax": "FORMULA_33(arg1, arg2)",
+    "description": "Description for formula 33 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_33(A1, B1)"
+  },
+  {
+    "name": "FORMULA_34",
+    "syntax": "FORMULA_34(arg1, arg2)",
+    "description": "Description for formula 34 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_34(A1, B1)"
+  },
+  {
+    "name": "FORMULA_35",
+    "syntax": "FORMULA_35(arg1, arg2)",
+    "description": "Description for formula 35 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_35(A1, B1)"
+  },
+  {
+    "name": "FORMULA_36",
+    "syntax": "FORMULA_36(arg1, arg2)",
+    "description": "Description for formula 36 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_36(A1, B1)"
+  },
+  {
+    "name": "FORMULA_37",
+    "syntax": "FORMULA_37(arg1, arg2)",
+    "description": "Description for formula 37 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_37(A1, B1)"
+  },
+  {
+    "name": "FORMULA_38",
+    "syntax": "FORMULA_38(arg1, arg2)",
+    "description": "Description for formula 38 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_38(A1, B1)"
+  },
+  {
+    "name": "FORMULA_39",
+    "syntax": "FORMULA_39(arg1, arg2)",
+    "description": "Description for formula 39 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_39(A1, B1)"
+  },
+  {
+    "name": "FORMULA_40",
+    "syntax": "FORMULA_40(arg1, arg2)",
+    "description": "Description for formula 40 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_40(A1, B1)"
+  },
+  {
+    "name": "FORMULA_41",
+    "syntax": "FORMULA_41(arg1, arg2)",
+    "description": "Description for formula 41 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_41(A1, B1)"
+  },
+  {
+    "name": "FORMULA_42",
+    "syntax": "FORMULA_42(arg1, arg2)",
+    "description": "Description for formula 42 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_42(A1, B1)"
+  },
+  {
+    "name": "FORMULA_43",
+    "syntax": "FORMULA_43(arg1, arg2)",
+    "description": "Description for formula 43 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_43(A1, B1)"
+  },
+  {
+    "name": "FORMULA_44",
+    "syntax": "FORMULA_44(arg1, arg2)",
+    "description": "Description for formula 44 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_44(A1, B1)"
+  },
+  {
+    "name": "FORMULA_45",
+    "syntax": "FORMULA_45(arg1, arg2)",
+    "description": "Description for formula 45 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_45(A1, B1)"
+  },
+  {
+    "name": "FORMULA_46",
+    "syntax": "FORMULA_46(arg1, arg2)",
+    "description": "Description for formula 46 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_46(A1, B1)"
+  },
+  {
+    "name": "FORMULA_47",
+    "syntax": "FORMULA_47(arg1, arg2)",
+    "description": "Description for formula 47 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_47(A1, B1)"
+  },
+  {
+    "name": "FORMULA_48",
+    "syntax": "FORMULA_48(arg1, arg2)",
+    "description": "Description for formula 48 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_48(A1, B1)"
+  },
+  {
+    "name": "FORMULA_49",
+    "syntax": "FORMULA_49(arg1, arg2)",
+    "description": "Description for formula 49 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_49(A1, B1)"
+  },
+  {
+    "name": "FORMULA_50",
+    "syntax": "FORMULA_50(arg1, arg2)",
+    "description": "Description for formula 50 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_50(A1, B1)"
+  },
+  {
+    "name": "FORMULA_51",
+    "syntax": "FORMULA_51(arg1, arg2)",
+    "description": "Description for formula 51 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_51(A1, B1)"
+  },
+  {
+    "name": "FORMULA_52",
+    "syntax": "FORMULA_52(arg1, arg2)",
+    "description": "Description for formula 52 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_52(A1, B1)"
+  },
+  {
+    "name": "FORMULA_53",
+    "syntax": "FORMULA_53(arg1, arg2)",
+    "description": "Description for formula 53 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_53(A1, B1)"
+  },
+  {
+    "name": "FORMULA_54",
+    "syntax": "FORMULA_54(arg1, arg2)",
+    "description": "Description for formula 54 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_54(A1, B1)"
+  },
+  {
+    "name": "FORMULA_55",
+    "syntax": "FORMULA_55(arg1, arg2)",
+    "description": "Description for formula 55 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_55(A1, B1)"
+  },
+  {
+    "name": "FORMULA_56",
+    "syntax": "FORMULA_56(arg1, arg2)",
+    "description": "Description for formula 56 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_56(A1, B1)"
+  },
+  {
+    "name": "FORMULA_57",
+    "syntax": "FORMULA_57(arg1, arg2)",
+    "description": "Description for formula 57 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_57(A1, B1)"
+  },
+  {
+    "name": "FORMULA_58",
+    "syntax": "FORMULA_58(arg1, arg2)",
+    "description": "Description for formula 58 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_58(A1, B1)"
+  },
+  {
+    "name": "FORMULA_59",
+    "syntax": "FORMULA_59(arg1, arg2)",
+    "description": "Description for formula 59 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_59(A1, B1)"
+  },
+  {
+    "name": "FORMULA_60",
+    "syntax": "FORMULA_60(arg1, arg2)",
+    "description": "Description for formula 60 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_60(A1, B1)"
+  },
+  {
+    "name": "FORMULA_61",
+    "syntax": "FORMULA_61(arg1, arg2)",
+    "description": "Description for formula 61 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_61(A1, B1)"
+  },
+  {
+    "name": "FORMULA_62",
+    "syntax": "FORMULA_62(arg1, arg2)",
+    "description": "Description for formula 62 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_62(A1, B1)"
+  },
+  {
+    "name": "FORMULA_63",
+    "syntax": "FORMULA_63(arg1, arg2)",
+    "description": "Description for formula 63 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_63(A1, B1)"
+  },
+  {
+    "name": "FORMULA_64",
+    "syntax": "FORMULA_64(arg1, arg2)",
+    "description": "Description for formula 64 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_64(A1, B1)"
+  },
+  {
+    "name": "FORMULA_65",
+    "syntax": "FORMULA_65(arg1, arg2)",
+    "description": "Description for formula 65 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_65(A1, B1)"
+  },
+  {
+    "name": "FORMULA_66",
+    "syntax": "FORMULA_66(arg1, arg2)",
+    "description": "Description for formula 66 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_66(A1, B1)"
+  },
+  {
+    "name": "FORMULA_67",
+    "syntax": "FORMULA_67(arg1, arg2)",
+    "description": "Description for formula 67 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_67(A1, B1)"
+  },
+  {
+    "name": "FORMULA_68",
+    "syntax": "FORMULA_68(arg1, arg2)",
+    "description": "Description for formula 68 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_68(A1, B1)"
+  },
+  {
+    "name": "FORMULA_69",
+    "syntax": "FORMULA_69(arg1, arg2)",
+    "description": "Description for formula 69 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_69(A1, B1)"
+  },
+  {
+    "name": "FORMULA_70",
+    "syntax": "FORMULA_70(arg1, arg2)",
+    "description": "Description for formula 70 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_70(A1, B1)"
+  },
+  {
+    "name": "FORMULA_71",
+    "syntax": "FORMULA_71(arg1, arg2)",
+    "description": "Description for formula 71 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_71(A1, B1)"
+  },
+  {
+    "name": "FORMULA_72",
+    "syntax": "FORMULA_72(arg1, arg2)",
+    "description": "Description for formula 72 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_72(A1, B1)"
+  },
+  {
+    "name": "FORMULA_73",
+    "syntax": "FORMULA_73(arg1, arg2)",
+    "description": "Description for formula 73 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_73(A1, B1)"
+  },
+  {
+    "name": "FORMULA_74",
+    "syntax": "FORMULA_74(arg1, arg2)",
+    "description": "Description for formula 74 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_74(A1, B1)"
+  },
+  {
+    "name": "FORMULA_75",
+    "syntax": "FORMULA_75(arg1, arg2)",
+    "description": "Description for formula 75 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_75(A1, B1)"
+  },
+  {
+    "name": "FORMULA_76",
+    "syntax": "FORMULA_76(arg1, arg2)",
+    "description": "Description for formula 76 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_76(A1, B1)"
+  },
+  {
+    "name": "FORMULA_77",
+    "syntax": "FORMULA_77(arg1, arg2)",
+    "description": "Description for formula 77 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_77(A1, B1)"
+  },
+  {
+    "name": "FORMULA_78",
+    "syntax": "FORMULA_78(arg1, arg2)",
+    "description": "Description for formula 78 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_78(A1, B1)"
+  },
+  {
+    "name": "FORMULA_79",
+    "syntax": "FORMULA_79(arg1, arg2)",
+    "description": "Description for formula 79 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_79(A1, B1)"
+  },
+  {
+    "name": "FORMULA_80",
+    "syntax": "FORMULA_80(arg1, arg2)",
+    "description": "Description for formula 80 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_80(A1, B1)"
+  },
+  {
+    "name": "FORMULA_81",
+    "syntax": "FORMULA_81(arg1, arg2)",
+    "description": "Description for formula 81 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_81(A1, B1)"
+  },
+  {
+    "name": "FORMULA_82",
+    "syntax": "FORMULA_82(arg1, arg2)",
+    "description": "Description for formula 82 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_82(A1, B1)"
+  },
+  {
+    "name": "FORMULA_83",
+    "syntax": "FORMULA_83(arg1, arg2)",
+    "description": "Description for formula 83 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_83(A1, B1)"
+  },
+  {
+    "name": "FORMULA_84",
+    "syntax": "FORMULA_84(arg1, arg2)",
+    "description": "Description for formula 84 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_84(A1, B1)"
+  },
+  {
+    "name": "FORMULA_85",
+    "syntax": "FORMULA_85(arg1, arg2)",
+    "description": "Description for formula 85 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_85(A1, B1)"
+  },
+  {
+    "name": "FORMULA_86",
+    "syntax": "FORMULA_86(arg1, arg2)",
+    "description": "Description for formula 86 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_86(A1, B1)"
+  },
+  {
+    "name": "FORMULA_87",
+    "syntax": "FORMULA_87(arg1, arg2)",
+    "description": "Description for formula 87 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_87(A1, B1)"
+  },
+  {
+    "name": "FORMULA_88",
+    "syntax": "FORMULA_88(arg1, arg2)",
+    "description": "Description for formula 88 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_88(A1, B1)"
+  },
+  {
+    "name": "FORMULA_89",
+    "syntax": "FORMULA_89(arg1, arg2)",
+    "description": "Description for formula 89 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_89(A1, B1)"
+  },
+  {
+    "name": "FORMULA_90",
+    "syntax": "FORMULA_90(arg1, arg2)",
+    "description": "Description for formula 90 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_90(A1, B1)"
+  },
+  {
+    "name": "FORMULA_91",
+    "syntax": "FORMULA_91(arg1, arg2)",
+    "description": "Description for formula 91 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_91(A1, B1)"
+  },
+  {
+    "name": "FORMULA_92",
+    "syntax": "FORMULA_92(arg1, arg2)",
+    "description": "Description for formula 92 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_92(A1, B1)"
+  },
+  {
+    "name": "FORMULA_93",
+    "syntax": "FORMULA_93(arg1, arg2)",
+    "description": "Description for formula 93 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_93(A1, B1)"
+  },
+  {
+    "name": "FORMULA_94",
+    "syntax": "FORMULA_94(arg1, arg2)",
+    "description": "Description for formula 94 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_94(A1, B1)"
+  },
+  {
+    "name": "FORMULA_95",
+    "syntax": "FORMULA_95(arg1, arg2)",
+    "description": "Description for formula 95 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_95(A1, B1)"
+  },
+  {
+    "name": "FORMULA_96",
+    "syntax": "FORMULA_96(arg1, arg2)",
+    "description": "Description for formula 96 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_96(A1, B1)"
+  },
+  {
+    "name": "FORMULA_97",
+    "syntax": "FORMULA_97(arg1, arg2)",
+    "description": "Description for formula 97 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_97(A1, B1)"
+  },
+  {
+    "name": "FORMULA_98",
+    "syntax": "FORMULA_98(arg1, arg2)",
+    "description": "Description for formula 98 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_98(A1, B1)"
+  },
+  {
+    "name": "FORMULA_99",
+    "syntax": "FORMULA_99(arg1, arg2)",
+    "description": "Description for formula 99 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_99(A1, B1)"
+  },
+  {
+    "name": "FORMULA_100",
+    "syntax": "FORMULA_100(arg1, arg2)",
+    "description": "Description for formula 100 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_100(A1, B1)"
+  },
+  {
+    "name": "FORMULA_101",
+    "syntax": "FORMULA_101(arg1, arg2)",
+    "description": "Description for formula 101 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_101(A1, B1)"
+  },
+  {
+    "name": "FORMULA_102",
+    "syntax": "FORMULA_102(arg1, arg2)",
+    "description": "Description for formula 102 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_102(A1, B1)"
+  },
+  {
+    "name": "FORMULA_103",
+    "syntax": "FORMULA_103(arg1, arg2)",
+    "description": "Description for formula 103 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_103(A1, B1)"
+  },
+  {
+    "name": "FORMULA_104",
+    "syntax": "FORMULA_104(arg1, arg2)",
+    "description": "Description for formula 104 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_104(A1, B1)"
+  },
+  {
+    "name": "FORMULA_105",
+    "syntax": "FORMULA_105(arg1, arg2)",
+    "description": "Description for formula 105 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_105(A1, B1)"
+  },
+  {
+    "name": "FORMULA_106",
+    "syntax": "FORMULA_106(arg1, arg2)",
+    "description": "Description for formula 106 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_106(A1, B1)"
+  },
+  {
+    "name": "FORMULA_107",
+    "syntax": "FORMULA_107(arg1, arg2)",
+    "description": "Description for formula 107 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_107(A1, B1)"
+  },
+  {
+    "name": "FORMULA_108",
+    "syntax": "FORMULA_108(arg1, arg2)",
+    "description": "Description for formula 108 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_108(A1, B1)"
+  },
+  {
+    "name": "FORMULA_109",
+    "syntax": "FORMULA_109(arg1, arg2)",
+    "description": "Description for formula 109 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_109(A1, B1)"
+  },
+  {
+    "name": "FORMULA_110",
+    "syntax": "FORMULA_110(arg1, arg2)",
+    "description": "Description for formula 110 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_110(A1, B1)"
+  },
+  {
+    "name": "FORMULA_111",
+    "syntax": "FORMULA_111(arg1, arg2)",
+    "description": "Description for formula 111 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_111(A1, B1)"
+  },
+  {
+    "name": "FORMULA_112",
+    "syntax": "FORMULA_112(arg1, arg2)",
+    "description": "Description for formula 112 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_112(A1, B1)"
+  },
+  {
+    "name": "FORMULA_113",
+    "syntax": "FORMULA_113(arg1, arg2)",
+    "description": "Description for formula 113 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_113(A1, B1)"
+  },
+  {
+    "name": "FORMULA_114",
+    "syntax": "FORMULA_114(arg1, arg2)",
+    "description": "Description for formula 114 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_114(A1, B1)"
+  },
+  {
+    "name": "FORMULA_115",
+    "syntax": "FORMULA_115(arg1, arg2)",
+    "description": "Description for formula 115 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_115(A1, B1)"
+  },
+  {
+    "name": "FORMULA_116",
+    "syntax": "FORMULA_116(arg1, arg2)",
+    "description": "Description for formula 116 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_116(A1, B1)"
+  },
+  {
+    "name": "FORMULA_117",
+    "syntax": "FORMULA_117(arg1, arg2)",
+    "description": "Description for formula 117 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_117(A1, B1)"
+  },
+  {
+    "name": "FORMULA_118",
+    "syntax": "FORMULA_118(arg1, arg2)",
+    "description": "Description for formula 118 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_118(A1, B1)"
+  },
+  {
+    "name": "FORMULA_119",
+    "syntax": "FORMULA_119(arg1, arg2)",
+    "description": "Description for formula 119 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_119(A1, B1)"
+  },
+  {
+    "name": "FORMULA_120",
+    "syntax": "FORMULA_120(arg1, arg2)",
+    "description": "Description for formula 120 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_120(A1, B1)"
+  },
+  {
+    "name": "FORMULA_121",
+    "syntax": "FORMULA_121(arg1, arg2)",
+    "description": "Description for formula 121 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_121(A1, B1)"
+  },
+  {
+    "name": "FORMULA_122",
+    "syntax": "FORMULA_122(arg1, arg2)",
+    "description": "Description for formula 122 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_122(A1, B1)"
+  },
+  {
+    "name": "FORMULA_123",
+    "syntax": "FORMULA_123(arg1, arg2)",
+    "description": "Description for formula 123 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_123(A1, B1)"
+  },
+  {
+    "name": "FORMULA_124",
+    "syntax": "FORMULA_124(arg1, arg2)",
+    "description": "Description for formula 124 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_124(A1, B1)"
+  },
+  {
+    "name": "FORMULA_125",
+    "syntax": "FORMULA_125(arg1, arg2)",
+    "description": "Description for formula 125 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_125(A1, B1)"
+  },
+  {
+    "name": "FORMULA_126",
+    "syntax": "FORMULA_126(arg1, arg2)",
+    "description": "Description for formula 126 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_126(A1, B1)"
+  },
+  {
+    "name": "FORMULA_127",
+    "syntax": "FORMULA_127(arg1, arg2)",
+    "description": "Description for formula 127 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_127(A1, B1)"
+  },
+  {
+    "name": "FORMULA_128",
+    "syntax": "FORMULA_128(arg1, arg2)",
+    "description": "Description for formula 128 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_128(A1, B1)"
+  },
+  {
+    "name": "FORMULA_129",
+    "syntax": "FORMULA_129(arg1, arg2)",
+    "description": "Description for formula 129 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_129(A1, B1)"
+  },
+  {
+    "name": "FORMULA_130",
+    "syntax": "FORMULA_130(arg1, arg2)",
+    "description": "Description for formula 130 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_130(A1, B1)"
+  },
+  {
+    "name": "FORMULA_131",
+    "syntax": "FORMULA_131(arg1, arg2)",
+    "description": "Description for formula 131 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_131(A1, B1)"
+  },
+  {
+    "name": "FORMULA_132",
+    "syntax": "FORMULA_132(arg1, arg2)",
+    "description": "Description for formula 132 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_132(A1, B1)"
+  },
+  {
+    "name": "FORMULA_133",
+    "syntax": "FORMULA_133(arg1, arg2)",
+    "description": "Description for formula 133 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_133(A1, B1)"
+  },
+  {
+    "name": "FORMULA_134",
+    "syntax": "FORMULA_134(arg1, arg2)",
+    "description": "Description for formula 134 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_134(A1, B1)"
+  },
+  {
+    "name": "FORMULA_135",
+    "syntax": "FORMULA_135(arg1, arg2)",
+    "description": "Description for formula 135 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_135(A1, B1)"
+  },
+  {
+    "name": "FORMULA_136",
+    "syntax": "FORMULA_136(arg1, arg2)",
+    "description": "Description for formula 136 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_136(A1, B1)"
+  },
+  {
+    "name": "FORMULA_137",
+    "syntax": "FORMULA_137(arg1, arg2)",
+    "description": "Description for formula 137 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_137(A1, B1)"
+  },
+  {
+    "name": "FORMULA_138",
+    "syntax": "FORMULA_138(arg1, arg2)",
+    "description": "Description for formula 138 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_138(A1, B1)"
+  },
+  {
+    "name": "FORMULA_139",
+    "syntax": "FORMULA_139(arg1, arg2)",
+    "description": "Description for formula 139 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_139(A1, B1)"
+  },
+  {
+    "name": "FORMULA_140",
+    "syntax": "FORMULA_140(arg1, arg2)",
+    "description": "Description for formula 140 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_140(A1, B1)"
+  },
+  {
+    "name": "FORMULA_141",
+    "syntax": "FORMULA_141(arg1, arg2)",
+    "description": "Description for formula 141 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_141(A1, B1)"
+  },
+  {
+    "name": "FORMULA_142",
+    "syntax": "FORMULA_142(arg1, arg2)",
+    "description": "Description for formula 142 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_142(A1, B1)"
+  },
+  {
+    "name": "FORMULA_143",
+    "syntax": "FORMULA_143(arg1, arg2)",
+    "description": "Description for formula 143 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_143(A1, B1)"
+  },
+  {
+    "name": "FORMULA_144",
+    "syntax": "FORMULA_144(arg1, arg2)",
+    "description": "Description for formula 144 with some extra detail for enrichment.",
+    "category": "Math",
+    "example": "=FORMULA_144(A1, B1)"
+  },
+  {
+    "name": "FORMULA_145",
+    "syntax": "FORMULA_145(arg1, arg2)",
+    "description": "Description for formula 145 with some extra detail for enrichment.",
+    "category": "Logical",
+    "example": "=FORMULA_145(A1, B1)"
+  },
+  {
+    "name": "FORMULA_146",
+    "syntax": "FORMULA_146(arg1, arg2)",
+    "description": "Description for formula 146 with some extra detail for enrichment.",
+    "category": "Text",
+    "example": "=FORMULA_146(A1, B1)"
+  },
+  {
+    "name": "FORMULA_147",
+    "syntax": "FORMULA_147(arg1, arg2)",
+    "description": "Description for formula 147 with some extra detail for enrichment.",
+    "category": "Date",
+    "example": "=FORMULA_147(A1, B1)"
+  },
+  {
+    "name": "FORMULA_148",
+    "syntax": "FORMULA_148(arg1, arg2)",
+    "description": "Description for formula 148 with some extra detail for enrichment.",
+    "category": "Lookup",
+    "example": "=FORMULA_148(A1, B1)"
+  },
+  {
+    "name": "FORMULA_149",
+    "syntax": "FORMULA_149(arg1, arg2)",
+    "description": "Description for formula 149 with some extra detail for enrichment.",
+    "category": "Statistical",
+    "example": "=FORMULA_149(A1, B1)"
+  }
+]

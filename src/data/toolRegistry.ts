@@ -150,7 +150,8 @@ import { TimestampConverterTool } from '@/tools/text/TimestampConverterTool'
 import { RegexTesterTool } from '@/tools/text/RegexTesterTool'
 import { RegexPatternLibraryTool } from '@/tools/text/RegexPatternLibraryTool'
 import RegexTestSuiteTool from '@/tools/text/RegexTestSuiteTool'
-import { Base64EncoderTool } from '@/tools/productivity/Base64EncoderTool'
+import { Sigma } from 'lucide-react'
+import { ExcelFormulaTool } from '@/tools/productivity/ExcelFormulaTool'
 import { XmlFormatterTool } from '@/tools/text/XmlFormatterTool'
 import { ImageCollageTool } from '@/tools/image/ImageCollageTool'
 import { WordCounterTool } from '@/tools/text/WordCounterTool'
@@ -800,6 +801,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'text',
     icon: Clock,
     component: TimestampConverterTool,
+  },
+  {
+    id: 'excel-formula',
+    name: 'Excel Formula Tool',
+    description: 'Search, filter, and build complex Excel formulas interactively.',
+    categoryId: 'productivity',
+    icon: Sigma,
+    component: ExcelFormulaTool,
   },
   {
     id: 'base64-encoder',

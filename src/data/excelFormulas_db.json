@@ -1,0 +1,2387 @@
+[
+  {
+    "name": "XLOOKUP",
+    "category": "Lookup & Reference",
+    "popularity": 1,
+    "syntax": "XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])",
+    "placeholders": [
+      "lookup_value",
+      "lookup_array",
+      "return_array",
+      "if_not_found",
+      "match_mode",
+      "search_mode"
+    ]
+  },
+  {
+    "name": "INDEX",
+    "category": "Lookup & Reference",
+    "popularity": 2,
+    "syntax": "INDEX(array, row_num, [column_num])",
+    "placeholders": [
+      "array",
+      "row_num",
+      "column_num"
+    ]
+  },
+  {
+    "name": "MATCH",
+    "category": "Lookup & Reference",
+    "popularity": 3,
+    "syntax": "MATCH(lookup_value, lookup_array, [match_type])",
+    "placeholders": [
+      "lookup_value",
+      "lookup_array",
+      "match_type"
+    ]
+  },
+  {
+    "name": "VLOOKUP",
+    "category": "Lookup & Reference",
+    "popularity": 4,
+    "syntax": "VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])",
+    "placeholders": [
+      "lookup_value",
+      "table_array",
+      "col_index_num",
+      "range_lookup"
+    ]
+  },
+  {
+    "name": "HLOOKUP",
+    "category": "Lookup & Reference",
+    "popularity": 5,
+    "syntax": "HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])",
+    "placeholders": [
+      "lookup_value",
+      "table_array",
+      "row_index_num",
+      "range_lookup"
+    ]
+  },
+  {
+    "name": "XMATCH",
+    "category": "Lookup & Reference",
+    "popularity": 6,
+    "syntax": "XMATCH(lookup_value, lookup_array, [match_mode], [search_mode])",
+    "placeholders": [
+      "lookup_value",
+      "lookup_array",
+      "match_mode",
+      "search_mode"
+    ]
+  },
+  {
+    "name": "LOOKUP",
+    "category": "Lookup & Reference",
+    "popularity": 7,
+    "syntax": "LOOKUP(lookup_value, lookup_vector, [result_vector])",
+    "placeholders": [
+      "lookup_value",
+      "lookup_vector",
+      "result_vector"
+    ]
+  },
+  {
+    "name": "CHOOSE",
+    "category": "Lookup & Reference",
+    "popularity": 8,
+    "syntax": "CHOOSE(index_num, value1, [value2], ...)",
+    "placeholders": [
+      "index_num",
+      "value1",
+      "value2"
+    ]
+  },
+  {
+    "name": "OFFSET",
+    "category": "Lookup & Reference",
+    "popularity": 9,
+    "syntax": "OFFSET(reference, rows, cols, [height], [width])",
+    "placeholders": [
+      "reference",
+      "rows",
+      "cols",
+      "height",
+      "width"
+    ]
+  },
+  {
+    "name": "INDIRECT",
+    "category": "Lookup & Reference",
+    "popularity": 10,
+    "syntax": "INDIRECT(ref_text, [a1])",
+    "placeholders": [
+      "ref_text",
+      "a1"
+    ]
+  },
+  {
+    "name": "TRANSPOSE",
+    "category": "Lookup & Reference",
+    "popularity": 11,
+    "syntax": "TRANSPOSE(array)",
+    "placeholders": [
+      "array"
+    ]
+  },
+  {
+    "name": "SORT",
+    "category": "Lookup & Reference",
+    "popularity": 12,
+    "syntax": "SORT(array, [sort_index], [sort_order], [by_col])",
+    "placeholders": [
+      "array",
+      "sort_index",
+      "sort_order",
+      "by_col"
+    ]
+  },
+  {
+    "name": "FILTER",
+    "category": "Lookup & Reference",
+    "popularity": 13,
+    "syntax": "FILTER(array, include, [if_empty])",
+    "placeholders": [
+      "array",
+      "include",
+      "if_empty"
+    ]
+  },
+  {
+    "name": "UNIQUE",
+    "category": "Lookup & Reference",
+    "popularity": 14,
+    "syntax": "UNIQUE(array, [by_col], [exactly_once])",
+    "placeholders": [
+      "array",
+      "by_col",
+      "exactly_once"
+    ]
+  },
+  {
+    "name": "SORTBY",
+    "category": "Lookup & Reference",
+    "popularity": 15,
+    "syntax": "SORTBY(array, by_array1, [by_array2], ...)",
+    "placeholders": [
+      "array",
+      "by_array1",
+      "by_array2"
+    ]
+  },
+  {
+    "name": "SEQUENCE",
+    "category": "Lookup & Reference",
+    "popularity": 16,
+    "syntax": "SEQUENCE(rows, [columns], [start], [step])",
+    "placeholders": [
+      "rows",
+      "columns",
+      "start",
+      "step"
+    ]
+  },
+  {
+    "name": "RANDARRAY",
+    "category": "Lookup & Reference",
+    "popularity": 17,
+    "syntax": "RANDARRAY([rows], [columns], [min], [max], [integer])",
+    "placeholders": [
+      "rows",
+      "columns",
+      "min",
+      "max",
+      "integer"
+    ]
+  },
+  {
+    "name": "TOCOL",
+    "category": "Lookup & Reference",
+    "popularity": 18,
+    "syntax": "TOCOL(array, [ignore], [scan_by_col])",
+    "placeholders": [
+      "array",
+      "ignore",
+      "scan_by_col"
+    ]
+  },
+  {
+    "name": "TOROW",
+    "category": "Lookup & Reference",
+    "popularity": 19,
+    "syntax": "TOROW(array, [ignore], [scan_by_col])",
+    "placeholders": [
+      "array",
+      "ignore",
+      "scan_by_col"
+    ]
+  },
+  {
+    "name": "VSTACK",
+    "category": "Lookup & Reference",
+    "popularity": 20,
+    "syntax": "VSTACK(array1, [array2], ...)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "HSTACK",
+    "category": "Lookup & Reference",
+    "popularity": 21,
+    "syntax": "HSTACK(array1, [array2], ...)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "TAKE",
+    "category": "Lookup & Reference",
+    "popularity": 22,
+    "syntax": "TAKE(array, rows, [cols])",
+    "placeholders": [
+      "array",
+      "rows",
+      "cols"
+    ]
+  },
+  {
+    "name": "DROP",
+    "category": "Lookup & Reference",
+    "popularity": 23,
+    "syntax": "DROP(array, rows, [cols])",
+    "placeholders": [
+      "array",
+      "rows",
+      "cols"
+    ]
+  },
+  {
+    "name": "CHOOSEROWS",
+    "category": "Lookup & Reference",
+    "popularity": 24,
+    "syntax": "CHOOSEROWS(array, row_num1, [row_num2], ...)",
+    "placeholders": [
+      "array",
+      "row_num1",
+      "row_num2"
+    ]
+  },
+  {
+    "name": "CHOOSECOLS",
+    "category": "Lookup & Reference",
+    "popularity": 25,
+    "syntax": "CHOOSECOLS(array, col_num1, [col_num2], ...)",
+    "placeholders": [
+      "array",
+      "col_num1",
+      "col_num2"
+    ]
+  },
+  {
+    "name": "WRAPCOLS",
+    "category": "Lookup & Reference",
+    "popularity": 26,
+    "syntax": "WRAPCOLS(array, wrap_count, [pad_with])",
+    "placeholders": [
+      "array",
+      "wrap_count",
+      "pad_with"
+    ]
+  },
+  {
+    "name": "WRAPROWS",
+    "category": "Lookup & Reference",
+    "popularity": 27,
+    "syntax": "WRAPROWS(array, wrap_count, [pad_with])",
+    "placeholders": [
+      "array",
+      "wrap_count",
+      "pad_with"
+    ]
+  },
+  {
+    "name": "TEXTAFTER",
+    "category": "Lookup & Reference",
+    "popularity": 28,
+    "syntax": "TEXTAFTER(text, delimiter, [instance_num], [match_mode], [match_end])",
+    "placeholders": [
+      "text",
+      "delimiter",
+      "instance_num",
+      "match_mode",
+      "match_end"
+    ]
+  },
+  {
+    "name": "TEXTBEFORE",
+    "category": "Lookup & Reference",
+    "popularity": 29,
+    "syntax": "TEXTBEFORE(text, delimiter, [instance_num], [match_mode], [match_end])",
+    "placeholders": [
+      "text",
+      "delimiter",
+      "instance_num",
+      "match_mode",
+      "match_end"
+    ]
+  },
+  {
+    "name": "TEXTSPLIT",
+    "category": "Lookup & Reference",
+    "popularity": 30,
+    "syntax": "TEXTSPLIT(text, col_delimiter, [row_delimiter], [ignore_empty], [match_mode], [pad_with])",
+    "placeholders": [
+      "text",
+      "col_delimiter",
+      "row_delimiter",
+      "ignore_empty",
+      "match_mode",
+      "pad_with"
+    ]
+  },
+  {
+    "name": "SUM",
+    "category": "Math & Trig",
+    "popularity": 31,
+    "syntax": "SUM(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "SUMIF",
+    "category": "Math & Trig",
+    "popularity": 32,
+    "syntax": "SUMIF(range, criteria, [sum_range])",
+    "placeholders": [
+      "range",
+      "criteria",
+      "sum_range"
+    ]
+  },
+  {
+    "name": "SUMIFS",
+    "category": "Math & Trig",
+    "popularity": 33,
+    "syntax": "SUMIFS(sum_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)",
+    "placeholders": [
+      "sum_range",
+      "criteria_range1",
+      "criteria1",
+      "criteria_range2",
+      "criteria2"
+    ]
+  },
+  {
+    "name": "SUMPRODUCT",
+    "category": "Math & Trig",
+    "popularity": 34,
+    "syntax": "SUMPRODUCT(array1, [array2], ...)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "COUNT",
+    "category": "Math & Trig",
+    "popularity": 35,
+    "syntax": "COUNT(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "COUNTA",
+    "category": "Math & Trig",
+    "popularity": 36,
+    "syntax": "COUNTA(value1, [value2], ...)",
+    "placeholders": [
+      "value1",
+      "value2"
+    ]
+  },
+  {
+    "name": "COUNTBLANK",
+    "category": "Math & Trig",
+    "popularity": 37,
+    "syntax": "COUNTBLANK(range)",
+    "placeholders": [
+      "range"
+    ]
+  },
+  {
+    "name": "COUNTIF",
+    "category": "Math & Trig",
+    "popularity": 38,
+    "syntax": "COUNTIF(range, criteria)",
+    "placeholders": [
+      "range",
+      "criteria"
+    ]
+  },
+  {
+    "name": "COUNTIFS",
+    "category": "Math & Trig",
+    "popularity": 39,
+    "syntax": "COUNTIFS(criteria_range1, criteria1, [criteria_range2, criteria2], ...)",
+    "placeholders": [
+      "criteria_range1",
+      "criteria1",
+      "criteria_range2",
+      "criteria2"
+    ]
+  },
+  {
+    "name": "AVERAGE",
+    "category": "Math & Trig",
+    "popularity": 40,
+    "syntax": "AVERAGE(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "AVERAGEIF",
+    "category": "Math & Trig",
+    "popularity": 41,
+    "syntax": "AVERAGEIF(range, criteria, [average_range])",
+    "placeholders": [
+      "range",
+      "criteria",
+      "average_range"
+    ]
+  },
+  {
+    "name": "AVERAGEIFS",
+    "category": "Math & Trig",
+    "popularity": 42,
+    "syntax": "AVERAGEIFS(average_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)",
+    "placeholders": [
+      "average_range",
+      "criteria_range1",
+      "criteria1",
+      "criteria_range2",
+      "criteria2"
+    ]
+  },
+  {
+    "name": "MIN",
+    "category": "Math & Trig",
+    "popularity": 43,
+    "syntax": "MIN(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "MAX",
+    "category": "Math & Trig",
+    "popularity": 44,
+    "syntax": "MAX(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "SMALL",
+    "category": "Math & Trig",
+    "popularity": 45,
+    "syntax": "SMALL(array, k)",
+    "placeholders": [
+      "array",
+      "k"
+    ]
+  },
+  {
+    "name": "LARGE",
+    "category": "Math & Trig",
+    "popularity": 46,
+    "syntax": "LARGE(array, k)",
+    "placeholders": [
+      "array",
+      "k"
+    ]
+  },
+  {
+    "name": "ROUND",
+    "category": "Math & Trig",
+    "popularity": 47,
+    "syntax": "ROUND(number, num_digits)",
+    "placeholders": [
+      "number",
+      "num_digits"
+    ]
+  },
+  {
+    "name": "ROUNDUP",
+    "category": "Math & Trig",
+    "popularity": 48,
+    "syntax": "ROUNDUP(number, num_digits)",
+    "placeholders": [
+      "number",
+      "num_digits"
+    ]
+  },
+  {
+    "name": "ROUNDDOWN",
+    "category": "Math & Trig",
+    "popularity": 49,
+    "syntax": "ROUNDDOWN(number, num_digits)",
+    "placeholders": [
+      "number",
+      "num_digits"
+    ]
+  },
+  {
+    "name": "MROUND",
+    "category": "Math & Trig",
+    "popularity": 50,
+    "syntax": "MROUND(number, multiple)",
+    "placeholders": [
+      "number",
+      "multiple"
+    ]
+  },
+  {
+    "name": "CEILING.MATH",
+    "category": "Math & Trig",
+    "popularity": 51,
+    "syntax": "CEILING.MATH(number, [significance], [mode])",
+    "placeholders": [
+      "number",
+      "significance",
+      "mode"
+    ]
+  },
+  {
+    "name": "FLOOR.MATH",
+    "category": "Math & Trig",
+    "popularity": 52,
+    "syntax": "FLOOR.MATH(number, [significance], [mode])",
+    "placeholders": [
+      "number",
+      "significance",
+      "mode"
+    ]
+  },
+  {
+    "name": "INT",
+    "category": "Math & Trig",
+    "popularity": 53,
+    "syntax": "INT(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "TRUNC",
+    "category": "Math & Trig",
+    "popularity": 54,
+    "syntax": "TRUNC(number, [num_digits])",
+    "placeholders": [
+      "number",
+      "num_digits"
+    ]
+  },
+  {
+    "name": "MOD",
+    "category": "Math & Trig",
+    "popularity": 55,
+    "syntax": "MOD(number, divisor)",
+    "placeholders": [
+      "number",
+      "divisor"
+    ]
+  },
+  {
+    "name": "QUOTIENT",
+    "category": "Math & Trig",
+    "popularity": 56,
+    "syntax": "QUOTIENT(numerator, denominator)",
+    "placeholders": [
+      "numerator",
+      "denominator"
+    ]
+  },
+  {
+    "name": "PRODUCT",
+    "category": "Math & Trig",
+    "popularity": 57,
+    "syntax": "PRODUCT(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "POWER",
+    "category": "Math & Trig",
+    "popularity": 58,
+    "syntax": "POWER(number, power)",
+    "placeholders": [
+      "number",
+      "power"
+    ]
+  },
+  {
+    "name": "SQRT",
+    "category": "Math & Trig",
+    "popularity": 59,
+    "syntax": "SQRT(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "ABS",
+    "category": "Math & Trig",
+    "popularity": 60,
+    "syntax": "ABS(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "SIGN",
+    "category": "Math & Trig",
+    "popularity": 61,
+    "syntax": "SIGN(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "SUMX2MY2",
+    "category": "Math & Trig",
+    "popularity": 62,
+    "syntax": "SUMX2MY2(array_x, array_y)",
+    "placeholders": [
+      "array_x",
+      "array_y"
+    ]
+  },
+  {
+    "name": "SUMX2PY2",
+    "category": "Math & Trig",
+    "popularity": 63,
+    "syntax": "SUMX2PY2(array_x, array_y)",
+    "placeholders": [
+      "array_x",
+      "array_y"
+    ]
+  },
+  {
+    "name": "SUMXMY2",
+    "category": "Math & Trig",
+    "popularity": 64,
+    "syntax": "SUMXMY2(array_x, array_y)",
+    "placeholders": [
+      "array_x",
+      "array_y"
+    ]
+  },
+  {
+    "name": "DEGREES",
+    "category": "Math & Trig",
+    "popularity": 65,
+    "syntax": "DEGREES(angle)",
+    "placeholders": [
+      "angle"
+    ]
+  },
+  {
+    "name": "RADIANS",
+    "category": "Math & Trig",
+    "popularity": 66,
+    "syntax": "RADIANS(angle)",
+    "placeholders": [
+      "angle"
+    ]
+  },
+  {
+    "name": "PI",
+    "category": "Math & Trig",
+    "popularity": 67,
+    "syntax": "PI()",
+    "placeholders": []
+  },
+  {
+    "name": "SIN",
+    "category": "Math & Trig",
+    "popularity": 68,
+    "syntax": "SIN(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "COS",
+    "category": "Math & Trig",
+    "popularity": 69,
+    "syntax": "COS(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "TAN",
+    "category": "Math & Trig",
+    "popularity": 70,
+    "syntax": "TAN(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "ASIN",
+    "category": "Math & Trig",
+    "popularity": 71,
+    "syntax": "ASIN(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "ACOS",
+    "category": "Math & Trig",
+    "popularity": 72,
+    "syntax": "ACOS(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "ATAN",
+    "category": "Math & Trig",
+    "popularity": 73,
+    "syntax": "ATAN(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "EXP",
+    "category": "Math & Trig",
+    "popularity": 74,
+    "syntax": "EXP(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "LN",
+    "category": "Math & Trig",
+    "popularity": 75,
+    "syntax": "LN(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "LOG",
+    "category": "Math & Trig",
+    "popularity": 76,
+    "syntax": "LOG(number, [base])",
+    "placeholders": [
+      "number",
+      "base"
+    ]
+  },
+  {
+    "name": "LOG10",
+    "category": "Math & Trig",
+    "popularity": 77,
+    "syntax": "LOG10(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "FACT",
+    "category": "Math & Trig",
+    "popularity": 78,
+    "syntax": "FACT(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "FACTDOUBLE",
+    "category": "Math & Trig",
+    "popularity": 79,
+    "syntax": "FACTDOUBLE(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "GCD",
+    "category": "Math & Trig",
+    "popularity": 80,
+    "syntax": "GCD(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "LCM",
+    "category": "Math & Trig",
+    "popularity": 81,
+    "syntax": "LCM(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "MDETERM",
+    "category": "Math & Trig",
+    "popularity": 82,
+    "syntax": "MDETERM(array)",
+    "placeholders": [
+      "array"
+    ]
+  },
+  {
+    "name": "MINVERSE",
+    "category": "Math & Trig",
+    "popularity": 83,
+    "syntax": "MINVERSE(array)",
+    "placeholders": [
+      "array"
+    ]
+  },
+  {
+    "name": "MMULT",
+    "category": "Math & Trig",
+    "popularity": 84,
+    "syntax": "MMULT(array1, array2)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "LEFT",
+    "category": "Text",
+    "popularity": 85,
+    "syntax": "LEFT(text, [num_chars])",
+    "placeholders": [
+      "text",
+      "num_chars"
+    ]
+  },
+  {
+    "name": "RIGHT",
+    "category": "Text",
+    "popularity": 86,
+    "syntax": "RIGHT(text, [num_chars])",
+    "placeholders": [
+      "text",
+      "num_chars"
+    ]
+  },
+  {
+    "name": "MID",
+    "category": "Text",
+    "popularity": 87,
+    "syntax": "MID(text, start_num, num_chars)",
+    "placeholders": [
+      "text",
+      "start_num",
+      "num_chars"
+    ]
+  },
+  {
+    "name": "LEN",
+    "category": "Text",
+    "popularity": 88,
+    "syntax": "LEN(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "TRIM",
+    "category": "Text",
+    "popularity": 89,
+    "syntax": "TRIM(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "CONCAT",
+    "category": "Text",
+    "popularity": 90,
+    "syntax": "CONCAT(text1, [text2], ...)",
+    "placeholders": [
+      "text1",
+      "text2"
+    ]
+  },
+  {
+    "name": "CONCATENATE",
+    "category": "Text",
+    "popularity": 91,
+    "syntax": "CONCATENATE(text1, [text2], ...)",
+    "placeholders": [
+      "text1",
+      "text2"
+    ]
+  },
+  {
+    "name": "TEXTJOIN",
+    "category": "Text",
+    "popularity": 92,
+    "syntax": "TEXTJOIN(delimiter, ignore_empty, text1, [text2], ...)",
+    "placeholders": [
+      "delimiter",
+      "ignore_empty",
+      "text1",
+      "text2"
+    ]
+  },
+  {
+    "name": "UPPER",
+    "category": "Text",
+    "popularity": 93,
+    "syntax": "UPPER(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "LOWER",
+    "category": "Text",
+    "popularity": 94,
+    "syntax": "LOWER(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "PROPER",
+    "category": "Text",
+    "popularity": 95,
+    "syntax": "PROPER(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "VALUE",
+    "category": "Text",
+    "popularity": 96,
+    "syntax": "VALUE(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "TEXT",
+    "category": "Text",
+    "popularity": 97,
+    "syntax": "TEXT(value, format_text)",
+    "placeholders": [
+      "value",
+      "format_text"
+    ]
+  },
+  {
+    "name": "SUBSTITUTE",
+    "category": "Text",
+    "popularity": 98,
+    "syntax": "SUBSTITUTE(text, old_text, new_text, [instance_num])",
+    "placeholders": [
+      "text",
+      "old_text",
+      "new_text",
+      "instance_num"
+    ]
+  },
+  {
+    "name": "REPLACE",
+    "category": "Text",
+    "popularity": 99,
+    "syntax": "REPLACE(old_text, start_num, num_chars, new_text)",
+    "placeholders": [
+      "old_text",
+      "start_num",
+      "num_chars",
+      "new_text"
+    ]
+  },
+  {
+    "name": "SEARCH",
+    "category": "Text",
+    "popularity": 100,
+    "syntax": "SEARCH(find_text, within_text, [start_num])",
+    "placeholders": [
+      "find_text",
+      "within_text",
+      "start_num"
+    ]
+  },
+  {
+    "name": "FIND",
+    "category": "Text",
+    "popularity": 101,
+    "syntax": "FIND(find_text, within_text, [start_num])",
+    "placeholders": [
+      "find_text",
+      "within_text",
+      "start_num"
+    ]
+  },
+  {
+    "name": "EXACT",
+    "category": "Text",
+    "popularity": 102,
+    "syntax": "EXACT(text1, text2)",
+    "placeholders": [
+      "text1",
+      "text2"
+    ]
+  },
+  {
+    "name": "CODE",
+    "category": "Text",
+    "popularity": 103,
+    "syntax": "CODE(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "CHAR",
+    "category": "Text",
+    "popularity": 104,
+    "syntax": "CHAR(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "CLEAN",
+    "category": "Text",
+    "popularity": 105,
+    "syntax": "CLEAN(text)",
+    "placeholders": [
+      "text"
+    ]
+  },
+  {
+    "name": "UNICHAR",
+    "category": "Text",
+    "popularity": 106,
+    "syntax": "UNICHAR(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "DOLLAR",
+    "category": "Text",
+    "popularity": 107,
+    "syntax": "DOLLAR(number, [decimals])",
+    "placeholders": [
+      "number",
+      "decimals"
+    ]
+  },
+  {
+    "name": "FIXED",
+    "category": "Text",
+    "popularity": 108,
+    "syntax": "FIXED(number, [decimals], [no_commas])",
+    "placeholders": [
+      "number",
+      "decimals",
+      "no_commas"
+    ]
+  },
+  {
+    "name": "T",
+    "category": "Text",
+    "popularity": 109,
+    "syntax": "T(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "FILTERXML",
+    "category": "Text",
+    "popularity": 110,
+    "syntax": "FILTERXML(xml, xpath)",
+    "placeholders": [
+      "xml",
+      "xpath"
+    ]
+  },
+  {
+    "name": "IF",
+    "category": "Logical",
+    "popularity": 111,
+    "syntax": "IF(logical_test, [value_if_true], [value_if_false])",
+    "placeholders": [
+      "logical_test",
+      "value_if_true",
+      "value_if_false"
+    ]
+  },
+  {
+    "name": "IFS",
+    "category": "Logical",
+    "popularity": 112,
+    "syntax": "IFS(logical_test1, value_if_true1, [logical_test2, value_if_true2], ...)",
+    "placeholders": [
+      "logical_test1",
+      "value_if_true1",
+      "logical_test2",
+      "value_if_true2"
+    ]
+  },
+  {
+    "name": "SWITCH",
+    "category": "Logical",
+    "popularity": 113,
+    "syntax": "SWITCH(expression, value1, result1, [default_or_value2, result2], ...)",
+    "placeholders": [
+      "expression",
+      "value1",
+      "result1",
+      "default_or_value2",
+      "result2"
+    ]
+  },
+  {
+    "name": "AND",
+    "category": "Logical",
+    "popularity": 114,
+    "syntax": "AND(logical1, [logical2], ...)",
+    "placeholders": [
+      "logical1",
+      "logical2"
+    ]
+  },
+  {
+    "name": "OR",
+    "category": "Logical",
+    "popularity": 115,
+    "syntax": "OR(logical1, [logical2], ...)",
+    "placeholders": [
+      "logical1",
+      "logical2"
+    ]
+  },
+  {
+    "name": "NOT",
+    "category": "Logical",
+    "popularity": 116,
+    "syntax": "NOT(logical1)",
+    "placeholders": [
+      "logical1"
+    ]
+  },
+  {
+    "name": "IFERROR",
+    "category": "Logical",
+    "popularity": 117,
+    "syntax": "IFERROR(value, value_if_error)",
+    "placeholders": [
+      "value",
+      "value_if_error"
+    ]
+  },
+  {
+    "name": "IFNA",
+    "category": "Logical",
+    "popularity": 118,
+    "syntax": "IFNA(value, value_if_na)",
+    "placeholders": [
+      "value",
+      "value_if_na"
+    ]
+  },
+  {
+    "name": "TRUE",
+    "category": "Logical",
+    "popularity": 119,
+    "syntax": "TRUE()",
+    "placeholders": []
+  },
+  {
+    "name": "FALSE",
+    "category": "Logical",
+    "popularity": 120,
+    "syntax": "FALSE()",
+    "placeholders": []
+  },
+  {
+    "name": "TODAY",
+    "category": "Date & Time",
+    "popularity": 121,
+    "syntax": "TODAY()",
+    "placeholders": []
+  },
+  {
+    "name": "NOW",
+    "category": "Date & Time",
+    "popularity": 122,
+    "syntax": "NOW()",
+    "placeholders": []
+  },
+  {
+    "name": "DATE",
+    "category": "Date & Time",
+    "popularity": 123,
+    "syntax": "DATE(year, month, day)",
+    "placeholders": [
+      "year",
+      "month",
+      "day"
+    ]
+  },
+  {
+    "name": "TIME",
+    "category": "Date & Time",
+    "popularity": 124,
+    "syntax": "TIME(hour, minute, second)",
+    "placeholders": [
+      "hour",
+      "minute",
+      "second"
+    ]
+  },
+  {
+    "name": "DATEVALUE",
+    "category": "Date & Time",
+    "popularity": 125,
+    "syntax": "DATEVALUE(date_text)",
+    "placeholders": [
+      "date_text"
+    ]
+  },
+  {
+    "name": "TIMEVALUE",
+    "category": "Date & Time",
+    "popularity": 126,
+    "syntax": "TIMEVALUE(time_text)",
+    "placeholders": [
+      "time_text"
+    ]
+  },
+  {
+    "name": "DAY",
+    "category": "Date & Time",
+    "popularity": 127,
+    "syntax": "DAY(serial_number)",
+    "placeholders": [
+      "serial_number"
+    ]
+  },
+  {
+    "name": "MONTH",
+    "category": "Date & Time",
+    "popularity": 128,
+    "syntax": "MONTH(serial_number)",
+    "placeholders": [
+      "serial_number"
+    ]
+  },
+  {
+    "name": "YEAR",
+    "category": "Date & Time",
+    "popularity": 129,
+    "syntax": "YEAR(serial_number)",
+    "placeholders": [
+      "serial_number"
+    ]
+  },
+  {
+    "name": "DATEDIF",
+    "category": "Date & Time",
+    "popularity": 130,
+    "syntax": "DATEDIF(start_date, end_date, unit)",
+    "placeholders": [
+      "start_date",
+      "end_date",
+      "unit"
+    ]
+  },
+  {
+    "name": "EDATE",
+    "category": "Date & Time",
+    "popularity": 131,
+    "syntax": "EDATE(start_date, months)",
+    "placeholders": [
+      "start_date",
+      "months"
+    ]
+  },
+  {
+    "name": "EOMONTH",
+    "category": "Date & Time",
+    "popularity": 132,
+    "syntax": "EOMONTH(start_date, months)",
+    "placeholders": [
+      "start_date",
+      "months"
+    ]
+  },
+  {
+    "name": "NETWORKDAYS",
+    "category": "Date & Time",
+    "popularity": 133,
+    "syntax": "NETWORKDAYS(start_date, end_date, [holidays])",
+    "placeholders": [
+      "start_date",
+      "end_date",
+      "holidays"
+    ]
+  },
+  {
+    "name": "WORKDAY",
+    "category": "Date & Time",
+    "popularity": 134,
+    "syntax": "WORKDAY(start_date, days, [holidays])",
+    "placeholders": [
+      "start_date",
+      "days",
+      "holidays"
+    ]
+  },
+  {
+    "name": "HOUR",
+    "category": "Date & Time",
+    "popularity": 135,
+    "syntax": "HOUR(serial_number)",
+    "placeholders": [
+      "serial_number"
+    ]
+  },
+  {
+    "name": "MINUTE",
+    "category": "Date & Time",
+    "popularity": 136,
+    "syntax": "MINUTE(serial_number)",
+    "placeholders": [
+      "serial_number"
+    ]
+  },
+  {
+    "name": "SECOND",
+    "category": "Date & Time",
+    "popularity": 137,
+    "syntax": "SECOND(serial_number)",
+    "placeholders": [
+      "serial_number"
+    ]
+  },
+  {
+    "name": "WEEKNUM",
+    "category": "Date & Time",
+    "popularity": 138,
+    "syntax": "WEEKNUM(serial_number, [return_type])",
+    "placeholders": [
+      "serial_number",
+      "return_type"
+    ]
+  },
+  {
+    "name": "ISOWEEKNUM",
+    "category": "Date & Time",
+    "popularity": 139,
+    "syntax": "ISOWEEKNUM(date)",
+    "placeholders": [
+      "date"
+    ]
+  },
+  {
+    "name": "WEEKDAY",
+    "category": "Date & Time",
+    "popularity": 140,
+    "syntax": "WEEKDAY(serial_number, [return_type])",
+    "placeholders": [
+      "serial_number",
+      "return_type"
+    ]
+  },
+  {
+    "name": "MEDIAN",
+    "category": "Statistical",
+    "popularity": 141,
+    "syntax": "MEDIAN(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "MODE.SNGL",
+    "category": "Statistical",
+    "popularity": 142,
+    "syntax": "MODE.SNGL(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "MODE.MULT",
+    "category": "Statistical",
+    "popularity": 143,
+    "syntax": "MODE.MULT(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "STDEV.P",
+    "category": "Statistical",
+    "popularity": 144,
+    "syntax": "STDEV.P(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "STDEV.S",
+    "category": "Statistical",
+    "popularity": 145,
+    "syntax": "STDEV.S(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "VAR.P",
+    "category": "Statistical",
+    "popularity": 146,
+    "syntax": "VAR.P(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "VAR.S",
+    "category": "Statistical",
+    "popularity": 147,
+    "syntax": "VAR.S(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "PERCENTILE.INC",
+    "category": "Statistical",
+    "popularity": 148,
+    "syntax": "PERCENTILE.INC(array, k)",
+    "placeholders": [
+      "array",
+      "k"
+    ]
+  },
+  {
+    "name": "PERCENTILE.EXC",
+    "category": "Statistical",
+    "popularity": 149,
+    "syntax": "PERCENTILE.EXC(array, k)",
+    "placeholders": [
+      "array",
+      "k"
+    ]
+  },
+  {
+    "name": "QUARTILE.INC",
+    "category": "Statistical",
+    "popularity": 150,
+    "syntax": "QUARTILE.INC(array, quart)",
+    "placeholders": [
+      "array",
+      "quart"
+    ]
+  },
+  {
+    "name": "QUARTILE.EXC",
+    "category": "Statistical",
+    "popularity": 151,
+    "syntax": "QUARTILE.EXC(array, quart)",
+    "placeholders": [
+      "array",
+      "quart"
+    ]
+  },
+  {
+    "name": "RANK.EQ",
+    "category": "Statistical",
+    "popularity": 152,
+    "syntax": "RANK.EQ(number, ref, [order])",
+    "placeholders": [
+      "number",
+      "ref",
+      "order"
+    ]
+  },
+  {
+    "name": "RANK.AVG",
+    "category": "Statistical",
+    "popularity": 153,
+    "syntax": "RANK.AVG(number, ref, [order])",
+    "placeholders": [
+      "number",
+      "ref",
+      "order"
+    ]
+  },
+  {
+    "name": "PERCENTRANK.INC",
+    "category": "Statistical",
+    "popularity": 154,
+    "syntax": "PERCENTRANK.INC(array, x, [significance])",
+    "placeholders": [
+      "array",
+      "x",
+      "significance"
+    ]
+  },
+  {
+    "name": "PERCENTRANK.EXC",
+    "category": "Statistical",
+    "popularity": 155,
+    "syntax": "PERCENTRANK.EXC(array, x, [significance])",
+    "placeholders": [
+      "array",
+      "x",
+      "significance"
+    ]
+  },
+  {
+    "name": "FORECAST.LINEAR",
+    "category": "Statistical",
+    "popularity": 156,
+    "syntax": "FORECAST.LINEAR(x, known_ys, known_xs)",
+    "placeholders": [
+      "x",
+      "known_ys",
+      "known_xs"
+    ]
+  },
+  {
+    "name": "TREND",
+    "category": "Statistical",
+    "popularity": 157,
+    "syntax": "TREND(known_ys, [known_xs], [new_xs], [const])",
+    "placeholders": [
+      "known_ys",
+      "known_xs",
+      "new_xs",
+      "const"
+    ]
+  },
+  {
+    "name": "INTERCEPT",
+    "category": "Statistical",
+    "popularity": 158,
+    "syntax": "INTERCEPT(known_ys, known_xs)",
+    "placeholders": [
+      "known_ys",
+      "known_xs"
+    ]
+  },
+  {
+    "name": "SLOPE",
+    "category": "Statistical",
+    "popularity": 159,
+    "syntax": "SLOPE(known_ys, known_xs)",
+    "placeholders": [
+      "known_ys",
+      "known_xs"
+    ]
+  },
+  {
+    "name": "CORREL",
+    "category": "Statistical",
+    "popularity": 160,
+    "syntax": "CORREL(array1, array2)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "COVARIANCE.P",
+    "category": "Statistical",
+    "popularity": 161,
+    "syntax": "COVARIANCE.P(array1, array2)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "COVARIANCE.S",
+    "category": "Statistical",
+    "popularity": 162,
+    "syntax": "COVARIANCE.S(array1, array2)",
+    "placeholders": [
+      "array1",
+      "array2"
+    ]
+  },
+  {
+    "name": "FISHER",
+    "category": "Statistical",
+    "popularity": 163,
+    "syntax": "FISHER(x)",
+    "placeholders": [
+      "x"
+    ]
+  },
+  {
+    "name": "FISHERINV",
+    "category": "Statistical",
+    "popularity": 164,
+    "syntax": "FISHERINV(y)",
+    "placeholders": [
+      "y"
+    ]
+  },
+  {
+    "name": "KURT",
+    "category": "Statistical",
+    "popularity": 165,
+    "syntax": "KURT(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "SKEW",
+    "category": "Statistical",
+    "popularity": 166,
+    "syntax": "SKEW(number1, [number2], ...)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "STANDARDIZE",
+    "category": "Statistical",
+    "popularity": 167,
+    "syntax": "STANDARDIZE(x, mean, standard_dev)",
+    "placeholders": [
+      "x",
+      "mean",
+      "standard_dev"
+    ]
+  },
+  {
+    "name": "NORM.DIST",
+    "category": "Statistical",
+    "popularity": 168,
+    "syntax": "NORM.DIST(x, mean, standard_dev, cumulative)",
+    "placeholders": [
+      "x",
+      "mean",
+      "standard_dev",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "NORM.INV",
+    "category": "Statistical",
+    "popularity": 169,
+    "syntax": "NORM.INV(probability, mean, standard_dev)",
+    "placeholders": [
+      "probability",
+      "mean",
+      "standard_dev"
+    ]
+  },
+  {
+    "name": "NORM.S.DIST",
+    "category": "Statistical",
+    "popularity": 170,
+    "syntax": "NORM.S.DIST(z, cumulative)",
+    "placeholders": [
+      "z",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "NORM.S.INV",
+    "category": "Statistical",
+    "popularity": 171,
+    "syntax": "NORM.S.INV(probability)",
+    "placeholders": [
+      "probability"
+    ]
+  },
+  {
+    "name": "GAMMA",
+    "category": "Statistical",
+    "popularity": 172,
+    "syntax": "GAMMA(number)",
+    "placeholders": [
+      "number"
+    ]
+  },
+  {
+    "name": "GAMMALN",
+    "category": "Statistical",
+    "popularity": 173,
+    "syntax": "GAMMALN(x)",
+    "placeholders": [
+      "x"
+    ]
+  },
+  {
+    "name": "BETADIST",
+    "category": "Statistical",
+    "popularity": 174,
+    "syntax": "BETADIST(x, alpha, beta, cumulative)",
+    "placeholders": [
+      "x",
+      "alpha",
+      "beta",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "BINOM.DIST",
+    "category": "Statistical",
+    "popularity": 175,
+    "syntax": "BINOM.DIST(trials, probability_s, number_s, cumulative)",
+    "placeholders": [
+      "trials",
+      "probability_s",
+      "number_s",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "CHISQ.DIST",
+    "category": "Statistical",
+    "popularity": 176,
+    "syntax": "CHISQ.DIST(x, deg_freedom, cumulative)",
+    "placeholders": [
+      "x",
+      "deg_freedom",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "F.DIST",
+    "category": "Statistical",
+    "popularity": 177,
+    "syntax": "F.DIST(x, deg_freedom1, deg_freedom2, cumulative)",
+    "placeholders": [
+      "x",
+      "deg_freedom1",
+      "deg_freedom2",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "T.DIST",
+    "category": "Statistical",
+    "popularity": 178,
+    "syntax": "T.DIST(x, deg_freedom, cumulative)",
+    "placeholders": [
+      "x",
+      "deg_freedom",
+      "cumulative"
+    ]
+  },
+  {
+    "name": "PMT",
+    "category": "Financial",
+    "popularity": 179,
+    "syntax": "PMT(rate, nper, pv, [fv], [type])",
+    "placeholders": [
+      "rate",
+      "nper",
+      "pv",
+      "fv",
+      "type"
+    ]
+  },
+  {
+    "name": "IPMT",
+    "category": "Financial",
+    "popularity": 180,
+    "syntax": "IPMT(rate, per, nper, pv, [fv], [type])",
+    "placeholders": [
+      "rate",
+      "per",
+      "nper",
+      "pv",
+      "fv",
+      "type"
+    ]
+  },
+  {
+    "name": "PPMT",
+    "category": "Financial",
+    "popularity": 181,
+    "syntax": "PPMT(rate, per, nper, pv, [fv], [type])",
+    "placeholders": [
+      "rate",
+      "per",
+      "nper",
+      "pv",
+      "fv",
+      "type"
+    ]
+  },
+  {
+    "name": "RATE",
+    "category": "Financial",
+    "popularity": 182,
+    "syntax": "RATE(nper, pmt, pv, [fv], [type], [guess])",
+    "placeholders": [
+      "nper",
+      "pmt",
+      "pv",
+      "fv",
+      "type",
+      "guess"
+    ]
+  },
+  {
+    "name": "NPER",
+    "category": "Financial",
+    "popularity": 183,
+    "syntax": "NPER(rate, pmt, pv, [fv], [type])",
+    "placeholders": [
+      "rate",
+      "pmt",
+      "pv",
+      "fv",
+      "type"
+    ]
+  },
+  {
+    "name": "PV",
+    "category": "Financial",
+    "popularity": 184,
+    "syntax": "PV(rate, nper, pmt, [fv], [type])",
+    "placeholders": [
+      "rate",
+      "nper",
+      "pmt",
+      "fv",
+      "type"
+    ]
+  },
+  {
+    "name": "FV",
+    "category": "Financial",
+    "popularity": 185,
+    "syntax": "FV(rate, nper, pmt, [pv], [type])",
+    "placeholders": [
+      "rate",
+      "nper",
+      "pmt",
+      "pv",
+      "type"
+    ]
+  },
+  {
+    "name": "NPV",
+    "category": "Financial",
+    "popularity": 186,
+    "syntax": "NPV(rate, value1, [value2], ...)",
+    "placeholders": [
+      "rate",
+      "value1",
+      "value2"
+    ]
+  },
+  {
+    "name": "XNPV",
+    "category": "Financial",
+    "popularity": 187,
+    "syntax": "XNPV(rate, values, dates)",
+    "placeholders": [
+      "rate",
+      "values",
+      "dates"
+    ]
+  },
+  {
+    "name": "IRR",
+    "category": "Financial",
+    "popularity": 188,
+    "syntax": "IRR(values, [guess])",
+    "placeholders": [
+      "values",
+      "guess"
+    ]
+  },
+  {
+    "name": "XIRR",
+    "category": "Financial",
+    "popularity": 189,
+    "syntax": "XIRR(values, dates, [guess])",
+    "placeholders": [
+      "values",
+      "dates",
+      "guess"
+    ]
+  },
+  {
+    "name": "MIRR",
+    "category": "Financial",
+    "popularity": 190,
+    "syntax": "MIRR(values, finance_rate, reinvest_rate)",
+    "placeholders": [
+      "values",
+      "finance_rate",
+      "reinvest_rate"
+    ]
+  },
+  {
+    "name": "CUMPRINC",
+    "category": "Financial",
+    "popularity": 191,
+    "syntax": "CUMPRINC(rate, nper, pv, start_period, end_period, type)",
+    "placeholders": [
+      "rate",
+      "nper",
+      "pv",
+      "start_period",
+      "end_period",
+      "type"
+    ]
+  },
+  {
+    "name": "CUMIPMT",
+    "category": "Financial",
+    "popularity": 192,
+    "syntax": "CUMIPMT(rate, nper, pv, start_period, end_period, type)",
+    "placeholders": [
+      "rate",
+      "nper",
+      "pv",
+      "start_period",
+      "end_period",
+      "type"
+    ]
+  },
+  {
+    "name": "DDB",
+    "category": "Financial",
+    "popularity": 193,
+    "syntax": "DDB(cost, salvage, life, period, [factor])",
+    "placeholders": [
+      "cost",
+      "salvage",
+      "life",
+      "period",
+      "factor"
+    ]
+  },
+  {
+    "name": "SLN",
+    "category": "Financial",
+    "popularity": 194,
+    "syntax": "SLN(cost, salvage, life)",
+    "placeholders": [
+      "cost",
+      "salvage",
+      "life"
+    ]
+  },
+  {
+    "name": "SYD",
+    "category": "Financial",
+    "popularity": 195,
+    "syntax": "SYD(cost, salvage, life, period)",
+    "placeholders": [
+      "cost",
+      "salvage",
+      "life",
+      "period"
+    ]
+  },
+  {
+    "name": "EFFECT",
+    "category": "Financial",
+    "popularity": 196,
+    "syntax": "EFFECT(nominal_rate, npery)",
+    "placeholders": [
+      "nominal_rate",
+      "npery"
+    ]
+  },
+  {
+    "name": "NOMINAL",
+    "category": "Financial",
+    "popularity": 197,
+    "syntax": "NOMINAL(effect_rate, npery)",
+    "placeholders": [
+      "effect_rate",
+      "npery"
+    ]
+  },
+  {
+    "name": "DOLLARDE",
+    "category": "Financial",
+    "popularity": 198,
+    "syntax": "DOLLARDE(fractional_dollar, fraction)",
+    "placeholders": [
+      "fractional_dollar",
+      "fraction"
+    ]
+  },
+  {
+    "name": "DOLLARFR",
+    "category": "Financial",
+    "popularity": 199,
+    "syntax": "DOLLARFR(decimal_dollar, fraction)",
+    "placeholders": [
+      "decimal_dollar",
+      "fraction"
+    ]
+  },
+  {
+    "name": "ISBLANK",
+    "category": "Information",
+    "popularity": 200,
+    "syntax": "ISBLANK(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISERR",
+    "category": "Information",
+    "popularity": 201,
+    "syntax": "ISERR(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISERROR",
+    "category": "Information",
+    "popularity": 202,
+    "syntax": "ISERROR(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISNA",
+    "category": "Information",
+    "popularity": 203,
+    "syntax": "ISNA(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISNUMBER",
+    "category": "Information",
+    "popularity": 204,
+    "syntax": "ISNUMBER(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISTEXT",
+    "category": "Information",
+    "popularity": 205,
+    "syntax": "ISTEXT(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISLOGICAL",
+    "category": "Information",
+    "popularity": 206,
+    "syntax": "ISLOGICAL(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "ISFORMULA",
+    "category": "Information",
+    "popularity": 207,
+    "syntax": "ISFORMULA(reference)",
+    "placeholders": [
+      "reference"
+    ]
+  },
+  {
+    "name": "TYPE",
+    "category": "Information",
+    "popularity": 208,
+    "syntax": "TYPE(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "N",
+    "category": "Information",
+    "popularity": 209,
+    "syntax": "N(value)",
+    "placeholders": [
+      "value"
+    ]
+  },
+  {
+    "name": "NA",
+    "category": "Information",
+    "popularity": 210,
+    "syntax": "NA()",
+    "placeholders": []
+  },
+  {
+    "name": "BITAND",
+    "category": "Engineering",
+    "popularity": 211,
+    "syntax": "BITAND(number1, number2)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "BITOR",
+    "category": "Engineering",
+    "popularity": 212,
+    "syntax": "BITOR(number1, number2)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "BITXOR",
+    "category": "Engineering",
+    "popularity": 213,
+    "syntax": "BITXOR(number1, number2)",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "BITLSHIFT",
+    "category": "Engineering",
+    "popularity": 214,
+    "syntax": "BITLSHIFT(number, shift)",
+    "placeholders": [
+      "number",
+      "shift"
+    ]
+  },
+  {
+    "name": "BITRSHIFT",
+    "category": "Engineering",
+    "popularity": 215,
+    "syntax": "BITRSHIFT(number, shift)",
+    "placeholders": [
+      "number",
+      "shift"
+    ]
+  },
+  {
+    "name": "DELTA",
+    "category": "Engineering",
+    "popularity": 216,
+    "syntax": "DELTA(number1, [number2])",
+    "placeholders": [
+      "number1",
+      "number2"
+    ]
+  },
+  {
+    "name": "ERF",
+    "category": "Engineering",
+    "popularity": 217,
+    "syntax": "ERF(x, [y])",
+    "placeholders": [
+      "x",
+      "y"
+    ]
+  },
+  {
+    "name": "ERFC",
+    "category": "Engineering",
+    "popularity": 218,
+    "syntax": "ERFC(x)",
+    "placeholders": [
+      "x"
+    ]
+  },
+  {
+    "name": "GESTEP",
+    "category": "Engineering",
+    "popularity": 219,
+    "syntax": "GESTEP(number, [step])",
+    "placeholders": [
+      "number",
+      "step"
+    ]
+  },
+  {
+    "name": "CONVERT",
+    "category": "Engineering",
+    "popularity": 220,
+    "syntax": "CONVERT(number, from_unit, to_unit)",
+    "placeholders": [
+      "number",
+      "from_unit",
+      "to_unit"
+    ]
+  },
+  {
+    "name": "DSUM",
+    "category": "Database",
+    "popularity": 221,
+    "syntax": "DSUM(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DCOUNT",
+    "category": "Database",
+    "popularity": 222,
+    "syntax": "DCOUNT(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DCOUNTA",
+    "category": "Database",
+    "popularity": 223,
+    "syntax": "DCOUNTA(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DGET",
+    "category": "Database",
+    "popularity": 224,
+    "syntax": "DGET(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DMAX",
+    "category": "Database",
+    "popularity": 225,
+    "syntax": "DMAX(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DMIN",
+    "category": "Database",
+    "popularity": 226,
+    "syntax": "DMIN(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DPRODUCT",
+    "category": "Database",
+    "popularity": 227,
+    "syntax": "DPRODUCT(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DSTDEV",
+    "category": "Database",
+    "popularity": 228,
+    "syntax": "DSTDEV(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DSTDEVP",
+    "category": "Database",
+    "popularity": 229,
+    "syntax": "DSTDEVP(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DVAR",
+    "category": "Database",
+    "popularity": 230,
+    "syntax": "DVAR(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  },
+  {
+    "name": "DVARP",
+    "category": "Database",
+    "popularity": 231,
+    "syntax": "DVARP(database, field, criteria)",
+    "placeholders": [
+      "database",
+      "field",
+      "criteria"
+    ]
+  }
+]
