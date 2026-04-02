@@ -4,7 +4,7 @@ All notable changes to DocFlow Pro will be documented in this file.
 
 ## [Unreleased]
 
-### 🆕 New Tools (10 + 4 bonus)
+### 🆕 New Tools (12 + 4 bonus)
 
 #### Developer Category (3)
 - **Favicon Generator** — Generate favicons in multiple sizes (16x16, 32x32, 48x48, 64x64) from uploaded images with preview and download.
@@ -35,6 +35,10 @@ All notable changes to DocFlow Pro will be documented in this file.
 #### Tool Wiring (2 fixes)
 - **BackgroundRemoverTool.tsx** — Complete rewrite (+303 lines): replaced broken canvas-based removal with proper `@imgly/background-removal` integration, added drag-and-drop upload, progress UI, and dual download (PNG/WebP).
 - **ImageMetadataTool.tsx** — Wired into toolRegistry.ts with correct category assignment, icon, and props.
+
+#### Audio Category (2)
+- **Audio Metadata Viewer** — Inspect audio file properties: duration, sample rate, channels, bitrate estimate, peak/RMS levels, dynamic range, and waveform preview visualization. JSON export and clipboard copy supported.
+- **Audio Converter** — Convert audio formats (WAV, WebM), resample to configurable sample rates (8kHz–96kHz), convert channels (mono/stereo), and select bit depth (8/16/32-bit for WAV). Client-side processing with no server upload.
 
 ### 🆕 New Tools (previously documented — 6)
 

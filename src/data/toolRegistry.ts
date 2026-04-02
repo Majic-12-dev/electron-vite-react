@@ -3,7 +3,6 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Archive,
   ArrowLeftRight,
-  AudioLines,
   Camera,
   BadgeCheck,
   BarChart3,
@@ -200,9 +199,9 @@ import { HTTPHeadersTool } from '@/tools/developer/HTTPHeadersTool'
 import { OpenGraphPreviewTool } from '@/tools/developer/OpenGraphPreviewTool'
 import ImageDiffTool from '@/tools/image/ImageDiffTool'
 import MarkdownToPdfTool from '@/tools/file/MarkdownToPdfTool'
+import { Eye, AudioLines } from 'lucide-react'
 import AudioMetadataTool from '@/tools/audio/AudioMetadataTool'
 import AudioConverterTool from '@/tools/audio/AudioConverterTool'
-import { Eye } from 'lucide-react'
 
 export type ToolCategory = {
   id: string
@@ -266,8 +265,8 @@ export const categories: ToolCategory[] = [
   {
     id: 'audio',
     label: 'Audio',
-    description: 'Audio file analysis and conversion tools',
-    icon: Music,
+    description: 'Audio file analysis and conversion tools.',
+    icon: AudioLines,
   },
 ]
 
