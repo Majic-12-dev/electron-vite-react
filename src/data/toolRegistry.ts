@@ -112,6 +112,7 @@ import { UnitConverterTool } from '@/tools/productivity/UnitConverterTool'
 import { ColorPaletteTool } from '@/tools/productivity/ColorPaletteTool'
 import { TimestampConverterTool } from '@/tools/text/TimestampConverterTool'
 import { RegexTesterTool } from '@/tools/text/RegexTesterTool'
+import { RegexPatternLibraryTool } from '@/tools/text/RegexPatternLibraryTool'
 import { Base64EncoderTool } from '@/tools/productivity/Base64EncoderTool'
 import { XmlFormatterTool } from '@/tools/text/XmlFormatterTool'
 import { ImageCollageTool } from '@/tools/image/ImageCollageTool'
@@ -144,6 +145,7 @@ import { ImageSlicerTool } from '@/tools/image/ImageSlicerTool'
 import { ColorContrastCheckerTool } from '@/tools/productivity/ColorContrastCheckerTool'
 import { DataConverterTool } from '@/tools/productivity/DataConverterTool'
 import { MetaTagGeneratorTool } from '@/tools/text/MetaTagGeneratorTool'
+import { CodeMinifierTool } from '@/tools/text/CodeMinifierTool'
 export type ToolCategory = {
   id: string
   label: string
@@ -559,6 +561,14 @@ export const tools: ToolDefinition[] = [
     component: RegexTesterTool,
   },
   {
+    id: 'regex-pattern-library',
+    name: 'Regex Pattern Library',
+    description: 'Browse named regex presets and test patterns with real-time highlighting.',
+    categoryId: 'text',
+    icon: Regex,
+    component: RegexPatternLibraryTool,
+  },
+  {
     id: 'color-palette',
     name: 'Color Palette Generator',
     description: 'Generate harmonious color palettes using complementary, analogous, triadic, and split-complementary modes.',
@@ -869,6 +879,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'text',
     icon: FileCode,
     component: MetaTagGeneratorTool,
+  },
+  {
+    id: 'code-minifier',
+    name: 'Code Minifier',
+    description: 'Minify HTML, CSS, and JavaScript by removing whitespace and comments.',
+    categoryId: 'text',
+    icon: Code,
+    component: CodeMinifierTool,
   },
 ]
 

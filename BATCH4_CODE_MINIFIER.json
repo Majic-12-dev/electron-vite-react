@@ -1,0 +1,21 @@
+File created and validated:
+
+**`/data/workspace/repo/src/tools/text/CodeMinifierTool.tsx`** — 448 lines, 0 alert(), 0 TS errors.
+
+**Feature check:**
+| Requirement | Status |
+|---|---|
+| Extends `BaseToolLayout` | ✅ |
+| `{ tool: ToolDefinition }` prop | ✅ |
+| HTML minify/beautify | ✅ (`minifyHtml`, `beautifyHtml`) |
+| CSS minify/beautify | ✅ (`minifyCss`, `beautifyCss`) |
+| JS minify/beautify | ✅ (`minifyJs` – char-by-char preserving strings, `beautifyJs`) |
+| Format selector dropdown | ✅ (`Select` with HTML/CSS/JS) |
+| Minify / Beautify toggle | ✅ two-button action switcher |
+| Input textarea | ✅ monospace `Textarea` |
+| Output area | ✅ `Card` with `pre.fon` |
+| Copy to clipboard | ✅ with 2s "Copied!" feedback |
+| Download | ✅ auto-named (`code.min.html`, `code.js`, etc.) |
+| Size reduction stats | ✅ percentage + byte delta shown in panel |
+| No `alert()` | ✅ verified `grep -c` = 0 |
+| `npx tsc --noEmit` | ✅ 0 matches for `CodeMinifierTool` |
