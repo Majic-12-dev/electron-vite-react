@@ -78,7 +78,17 @@ import {
   Type,
   Volume2,
   Wand2,
+  Video,
+  ImageIcon as ImageIconIcon,
+  Scissors as Trim,
+  Mic as MicIcon,
+  Eye,
+  AudioLines,
 } from 'lucide-react'
+import { GifCreatorTool } from '@/tools/video/GifCreatorTool'
+import { WebpConverterTool } from '@/tools/image/WebpConverterTool'
+import { MemeGeneratorTool } from '@/tools/image/MemeGeneratorTool'
+import { ExifViewerTool } from '@/tools/image/ExifViewerTool'
 import { PdfRedactionTool } from '@/tools/pdf/PdfRedactionTool'
 import { PdfFormFillerTool } from '@/tools/pdf/PdfFormFillerTool'
 import { PdfToTextTool } from '@/tools/pdf/PdfToTextTool'
@@ -197,9 +207,15 @@ import { CssFormatterTool } from '@/tools/text/CSSFormatterTool'
 import { FaviconGeneratorTool } from '@/tools/developer/FaviconGeneratorTool'
 import { HTTPHeadersTool } from '@/tools/developer/HTTPHeadersTool'
 import { OpenGraphPreviewTool } from '@/tools/developer/OpenGraphPreviewTool'
+import { VideoCompressorTool } from '@/tools/video/VideoCompressorTool'
+import { ApiTesterTool } from '@/tools/developer/ApiTesterTool'
+import { ScreenshotTool } from '@/tools/developer/ScreenshotTool'
+import AudioTrimmerTool from '@/tools/audio/AudioTrimmerTool'
+import AudioRecorderTool from '@/tools/audio/AudioRecorderTool'
+import { PortScannerTool } from '@/tools/network/PortScannerTool'
+import { SslCheckerTool } from '@/tools/network/SslCheckerTool'
 import ImageDiffTool from '@/tools/image/ImageDiffTool'
 import MarkdownToPdfTool from '@/tools/file/MarkdownToPdfTool'
-import { Eye, AudioLines } from 'lucide-react'
 import AudioMetadataTool from '@/tools/audio/AudioMetadataTool'
 import AudioConverterTool from '@/tools/audio/AudioConverterTool'
 
@@ -268,9 +284,35 @@ export const categories: ToolCategory[] = [
     description: 'Audio file analysis and conversion tools.',
     icon: AudioLines,
   },
+  {
+    id: 'video',
+    label: 'Video',
+    description: 'Create and edit video assets and animations.',
+    icon: Video,
+  },
+  {
+    id: 'developer',
+    label: 'Developer',
+    description: 'Tools for building, testing, and debugging applications.',
+    icon: Code2,
+  },
+  {
+    id: 'network',
+    label: 'Network',
+    description: 'Analyze network settings, check SSL, and calculate subnets.',
+    icon: Network,
+  },
 ]
 
 export const tools: ToolDefinition[] = [
+  {
+    id: 'gif-creator',
+    name: 'GIF Creator',
+    description: 'Convert image sequences into animated GIFs with customizable delays and quality.',
+    categoryId: 'video',
+    icon: Image,
+    component: GifCreatorTool,
+  },
   {
     id: 'pdf-redact',
     name: 'PDF Redaction',
@@ -430,6 +472,30 @@ export const tools: ToolDefinition[] = [
     categoryId: 'image',
     icon: ImageDown,
     component: ImageConvertTool,
+  },
+  {
+    id: 'webp-converter',
+    name: 'WebP Converter',
+    description: 'Convert images between WebP, PNG, and JPEG formats using Canvas API.',
+    categoryId: 'image',
+    icon: ImageDown,
+    component: WebpConverterTool,
+  },
+  {
+    id: 'meme-generator',
+    name: 'Meme Generator',
+    description: 'Add classic meme text overlays to your images with customizable fonts and styling.',
+    categoryId: 'image',
+    icon: Type,
+    component: MemeGeneratorTool,
+  },
+  {
+    id: 'exif-viewer',
+    name: 'EXIF Viewer',
+    description: 'View complete EXIF metadata from your photos including camera settings and GPS.',
+    categoryId: 'image',
+    icon: ScanText,
+    component: ExifViewerTool,
   },
   {
     id: 'image-resize',
@@ -1231,6 +1297,79 @@ export const tools: ToolDefinition[] = [
     icon: ArrowLeftRight,
     component: AudioConverterTool,
   },
+
+  // Video Tools
+  {
+    id: 'gif-creator',
+    name: 'GIF Creator',
+    description: 'Turn image sequences into animated GIFs with customizable frame delay and loop settings.',
+    categoryId: 'video',
+    icon: ImageIcon,
+    component: GifCreatorTool,
+  },
+  {
+    id: 'video-compressor',
+    name: 'Video Compressor',
+    description: 'Reduce video file size with adjustable quality, resolution, and format settings.',
+    categoryId: 'video',
+    icon: Video,
+    component: VideoCompressorTool,
+  },
+
+  // Developer Tools
+  {
+    id: 'api-tester',
+    name: 'API Tester',
+    description: 'Send HTTP requests with custom methods, headers, and body. View responses with syntax highlighting.',
+    categoryId: 'developer',
+    icon: Network,
+    component: ApiTesterTool,
+  },
+  {
+    id: 'screenshot-tool',
+    name: 'Screenshot Capture',
+    description: 'Capture screenshots of your screen, application windows, or camera. Includes quick editing and export.',
+    categoryId: 'developer',
+    icon: Camera,
+    component: ScreenshotTool,
+  },
+
+  // Audio Tools
+  {
+    id: 'audio-trimmer',
+    name: 'Audio Trimmer',
+    description: 'Trim audio files with precise start/end time selection. Preview before export.',
+    categoryId: 'audio',
+    icon: Scissors,
+    component: AudioTrimmerTool,
+  },
+  {
+    id: 'audio-recorder',
+    name: 'Audio Recorder',
+    description: 'Record audio from microphone with real-time level monitoring and format options.',
+    categoryId: 'audio',
+    icon: Mic,
+    component: AudioRecorderTool,
+  },
+
+  // Network Tools (added to existing network category)
+  {
+    id: 'port-scanner',
+    name: 'Port Scanner',
+    description: 'Scan a host for open ports using WebSocket/HTTP probes. Limited by browser security.',
+    categoryId: 'network',
+    icon: Search,
+    component: PortScannerTool,
+  },
+  {
+    id: 'ssl-checker',
+    name: 'SSL Certificate Checker',
+    description: 'Inspect SSL/TLS certificates for validity, issuer, expiration, and security details.',
+    categoryId: 'network',
+    icon: ShieldCheck,
+    component: SslCheckerTool,
+  },
+
   {
     id: 'subnet-calculator',
     name: 'Subnet Calculator',

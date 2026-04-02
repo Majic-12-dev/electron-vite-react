@@ -365,7 +365,7 @@ export function GifCreatorTool({ tool }: GifCreatorToolProps) {
   const formatSize = (bytes: number) =>
     bytes < 1024 * 1024 ? `${(bytes / 1024).toFixed(1)} KB` : `${(bytes / (1024 * 1024)).toFixed(2)} MB`
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'ArrowLeft') {
       setPreviewIndex(prev => Math.max(0, prev - 1))
     } else if (e.key === 'ArrowRight') {

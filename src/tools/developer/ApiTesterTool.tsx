@@ -163,7 +163,6 @@ export function ApiTesterTool({ tool }: ApiTesterToolProps) {
     <BaseToolLayout
       title={tool.name}
       description={tool.description}
-      onKeyDown={handleKeyDown}
     >
       <div className="space-y-4">
         {/* URL and Method Row */}
