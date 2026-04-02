@@ -140,6 +140,10 @@ import { ImageEnhancerTool } from '@/tools/image/ImageEnhancerTool'
 import { GradientGeneratorTool } from '@/tools/productivity/GradientGeneratorTool'
 import { FileShredderTool } from '@/tools/security/FileShredderTool'
 import { BackgroundEnhancerTool } from '@/tools/image/BackgroundEnhancerTool'
+import { ImageSlicerTool } from '@/tools/image/ImageSlicerTool'
+import { ColorContrastCheckerTool } from '@/tools/productivity/ColorContrastCheckerTool'
+import { DataConverterTool } from '@/tools/productivity/DataConverterTool'
+import { MetaTagGeneratorTool } from '@/tools/text/MetaTagGeneratorTool'
 export type ToolCategory = {
   id: string
   label: string
@@ -833,6 +837,38 @@ export const tools: ToolDefinition[] = [
     categoryId: 'image',
     icon: Sparkles,
     component: BackgroundEnhancerTool,
+  },
+  {
+    id: 'image-slicer',
+    name: 'Image Slicer',
+    description: 'Split images into grid slices for social media carousels and tiles.',
+    categoryId: 'image',
+    icon: SplitSquareVertical,
+    component: ImageSlicerTool,
+  },
+  {
+    id: 'color-contrast',
+    name: 'Color Contrast Checker',
+    description: 'Verify WCAG contrast ratios for accessible text and UI design.',
+    categoryId: 'productivity',
+    icon: ShieldCheck,
+    component: ColorContrastCheckerTool,
+  },
+  {
+    id: 'data-converter',
+    name: 'Data Format Converter',
+    description: 'Convert between CSV, TSV, JSON, and XML with live preview.',
+    categoryId: 'productivity',
+    icon: ArrowLeftRight,
+    component: DataConverterTool,
+  },
+  {
+    id: 'meta-tag-generator',
+    name: 'Meta Tag Generator',
+    description: 'Generate HTML meta tags, Open Graph, Twitter Cards, and JSON-LD with social preview.',
+    categoryId: 'text',
+    icon: FileCode,
+    component: MetaTagGeneratorTool,
   },
 ]
 
