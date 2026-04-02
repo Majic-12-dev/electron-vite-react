@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
-import { PDFDocument, degrees, rgb, StandardFonts } from 'pdf-lib'
+import { PDFDocument, degrees, rgb, StandardFonts, PDFDict, PDFName, PDFRawStream, PDFArray, PDFNumber } from 'pdf-lib'
 import { ensureDir } from '../utils/fs'
 import { validatePaths } from '../utils/pathValidation'
 
@@ -783,4 +783,357 @@ async function uniqueOutPath(targetPath: string) {
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max)
+}
+
+// ─── PDF Image Extraction ──────────────────────────────────────────────────────────────────
+export type ExtractPdfImagesPayload = {
+  filePath: string
+}
+
+export type ExtractPdfImageResult = {
+  data: string
+  page: number
+  format: 'jpeg' | 'png'
+}
+
+export async function extractPdfImages({
+  filePath,
+}: ExtractPdfImagesPayload): Promise<{ images: ExtractPdfImageResult[] }> {
+  const rawBytes = await fs.readFile(filePath)
+  const doc = await PDFDocument.load(rawBytes, { ignoreEncryption: true })
+  const pageCount = doc.getPageCount()
+
+  const images: ExtractPdfImageResult[] = []
+
+  // Scan raw PDF bytes for image XObjects.
+  // This works by finding stream objects marked with /Subtype /Image and extracting them.
+  // Handles DCTDecode (JPEG) streams directly and FlateDecode streams after decompression.
+  for (let pageIdx = 0; pageIdx < pageCount; pageIdx += 1) {
+    const page = doc.getPage(pageIdx)
+
+    try {
+      const resources = page.node.Resources()
+      if (!resources) continue
+
+      const xObjectDict = resources.lookup(PDFName.of('XObject'))
+      if (!xObjectDict || !(xObjectDict instanceof PDFDict)) continue
+
+      const keys = xObjectDict.keys()
+      for (const key of keys) {
+        try {
+          const xobjRaw = xObjectDict.lookup(key, PDFDict)
+          if (!xobjRaw) continue
+
+          const subtype = xobjRaw.lookup(PDFName.of('Subtype'))
+          if (!(subtype instanceof PDFName) || subtype.toString() !== '/Image') continue
+
+          // This is an image XObject
+          const width = xobjRaw.lookup(PDFName.of('Width'))
+          const height = xobjRaw.lookup(PDFName.of('Height'))
+          if (!width || !height) continue
+
+          // Get the stream data — xobjRaw is a PDFRawStream but TS narrows it
+          // to `never` for PDFDict & PDFRawStream when looking up with PDFDict type.
+          // Use `any` cast since pdf-lib's lookup returns PDFDict but image XObjects are PDFRawStream.
+          const xobjStream = xobjRaw as unknown as { contents: () => Uint8Array }
+          const streamBytes = typeof xobjStream.contents === 'function' ? xobjStream.contents() : await extractDecodedStream(xobjStream as any)
+          if (!streamBytes || streamBytes.length === 0) continue
+
+          // Determine the image format
+          const filterVal = xobjRaw.lookup(PDFName.of('Filter'))
+          const colorSpace = xobjRaw.lookup(PDFName.of('ColorSpace'))
+
+          let format: 'jpeg' | 'png' = 'jpeg'
+          let imageData: Uint8Array | null = null
+
+          if (isJpegEncoded(filterVal)) {
+            // DCTDecode - try to wrap in valid JPEG or use raw
+            imageData = tryWrapAsJpeg(streamBytes)
+            if (imageData) format = 'jpeg'
+          }
+
+          // Fallback: try PNG
+          if (!imageData) {
+            imageData = tryConvertToPng(streamBytes, xobjRaw)
+            if (imageData) format = 'png'
+          }
+
+          // Last resort: try raw bytes as JPEG
+          if (!imageData) {
+            imageData = tryExtractJpegFromRaw(streamBytes)
+            if (imageData) format = 'jpeg'
+          }
+
+          if (imageData && imageData.length > 200) {
+            const mimeType = format === 'jpeg' ? 'image/jpeg' : 'image/png'
+            const base64 = `data:${mimeType};base64,${Buffer.from(imageData).toString('base64')}`
+            images.push({ data: base64, page: pageIdx + 1, format })
+          }
+        } catch (e) {
+          console.warn(`Failed to extract XObject image from page ${pageIdx + 1}:`, e)
+          continue
+        }
+      }
+    } catch (e) {
+      console.warn(`Failed to scan page ${pageIdx + 1} for images:`, e)
+      continue
+    }
+  }
+
+  return { images }
+}
+
+// ─── PDF Page Reorder ──────────────────────────────────────────────────────────────────
+export type ReorderPdfPagesPayload = {
+  filePath: string
+  pageOrder: number[]
+  outputDir: string
+  outputName?: string
+}
+
+export type GetPdfPageCountPayload = {
+  filePath: string
+}
+
+export async function getPdfPageCount({
+  filePath,
+}: GetPdfPageCountPayload): Promise<{ pageCount: number }> {
+  const bytes = await fs.readFile(filePath)
+  const doc = await PDFDocument.load(bytes, { ignoreEncryption: true })
+  return { pageCount: doc.getPageCount() }
+}
+
+export async function reorderPdfPages({
+  filePath,
+  pageOrder,
+  outputDir,
+  outputName,
+}: ReorderPdfPagesPayload): Promise<{ outputPath: string; pageCount: number }> {
+  if (!pageOrder.length) {
+    throw new Error('No pages specified for the new order.')
+  }
+
+  const bytes = await fs.readFile(filePath)
+  const srcDoc = await PDFDocument.load(bytes, { ignoreEncryption: true })
+  const srcPageCount = srcDoc.getPageCount()
+
+  for (const idx of pageOrder) {
+    if (idx < 0 || idx >= srcPageCount) {
+      throw new Error(`Invalid page index: ${idx}. PDF has ${srcPageCount} pages (0-indexed).`)
+    }
+  }
+
+  const newDoc = await PDFDocument.create()
+  const pages = await newDoc.copyPages(srcDoc, pageOrder)
+  pages.forEach((page) => newDoc.addPage(page))
+
+  const baseName = path.parse(filePath).name
+  const safeName = sanitizeFileName(outputName || `${baseName}_reordered.pdf`)
+  const finalName = safeName.endsWith('.pdf') ? safeName : `${safeName}.pdf`
+  const outputPath = path.join(outputDir, finalName)
+  await ensureDir(outputDir)
+  await fs.writeFile(outputPath, await newDoc.save())
+
+  return { outputPath, pageCount: pages.length }
+}
+
+// ─── Internal helpers for image extraction ───────────────────────────────────────
+
+function isJpegEncoded(filterVal: any): boolean {
+  if (!filterVal) return false
+  if (filterVal instanceof PDFName) return filterVal.toString() === '/DCTDecode'
+  if (Array.isArray(filterVal)) {
+    for (const f of filterVal as any[]) {
+      if (f instanceof PDFName && (f.toString() === '/DCTDecode')) return true
+    }
+  }
+  if (filterVal instanceof PDFArray) {
+    for (let i = 0; i < filterVal.size(); i++) {
+      const f = filterVal.lookup(i)
+      if (f instanceof PDFName && f.toString() === '/DCTDecode') return true
+    }
+  }
+  return false
+}
+
+function tryWrapAsJpeg(streamBytes: Uint8Array): Uint8Array | null {
+  // Check if it's already a valid JPEG
+  if (
+    streamBytes[0] === 0xff &&
+    streamBytes[1] === 0xd8 &&
+    streamBytes[streamBytes.length - 2] === 0xff &&
+    streamBytes[streamBytes.length - 1] === 0xd9
+  ) {
+    return streamBytes
+  }
+
+  // Try to embed in JPEG structure
+  // For DCTDecode streams that lack JPEG markers, wrap with SOI and EOI
+  if (streamBytes.length > 10) {
+    const soi = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00])
+    const eoi = new Uint8Array([0xff, 0xd9])
+    const wrapped = new Uint8Array(soi.length + streamBytes.length + eoi.length)
+    wrapped.set(soi, 0)
+    wrapped.set(streamBytes, soi.length)
+    wrapped.set(eoi, soi.length + streamBytes.length)
+    return wrapped
+  }
+  return null
+}
+
+function tryExtractJpegFromRaw(streamBytes: Uint8Array): Uint8Array | null {
+  // Scan for JPEG markers in the raw stream
+  let jpegStart = -1
+  for (let i = 0; i < streamBytes.length - 1 && jpegStart < 0; i++) {
+    if ((streamBytes as any as number[])[i] === 0xff && (streamBytes as any as number[])[i + 1] === 0xd8) {
+      jpegStart = i
+    }
+  }
+
+  if (jpegStart < 0) return null
+
+  let jpegEnd = streamBytes.length
+  for (let i = jpegStart + 2; i < streamBytes.length - 1; i++) {
+    if ((streamBytes as any as number[])[i] === 0xff && (streamBytes as any as number[])[i + 1] === 0xd9) {
+      jpegEnd = i + 2
+      break
+    }
+  }
+
+  return streamBytes.slice(jpegStart, jpegEnd)
+}
+
+function tryConvertToPng(streamBytes: Uint8Array, xobj: PDFDict): Uint8Array | null {
+  // Try to convert raw pixel data to PNG using basic PNG signature + IHDR + IDAT + IEND
+  // This is a fallback for non-JPEG images in FlateDecode format
+  const widthObj = xobj.lookup(PDFName.of('Width'))
+  const heightObj = xobj.lookup(PDFName.of('Height'))
+  const bitsPerComponent = xobj.lookup(PDFName.of('BitsPerComponent'))
+  const colorSpaceVal = xobj.lookup(PDFName.of('ColorSpace'))
+
+  // Extract numeric values
+  const width = extractPdfInt(widthObj)
+  const height = extractPdfInt(heightObj)
+  const bits = extractPdfInt(bitsPerComponent) || 8
+
+  if (!width || !height || width > 10000 || height > 10000) return null
+
+  // Determine channels from color space
+  let channels = 3
+  if (colorSpaceVal instanceof PDFName) {
+    if (colorSpaceVal.toString() === '/DeviceGray' || colorSpaceVal.toString() === '/Gray') channels = 1
+  }
+
+  // Build minimal PNG
+  try {
+    const rowSize = Math.ceil((width * bits * channels) / 8)
+    if (rowSize === 0 || rowSize * height !== streamBytes.length && streamBytes.length > rowSize * height + 10) {
+      // For FlateDecode, attempt to decompress
+      const zlib = require('zlib')
+      try {
+        const inflated = zlib.inflateSync(streamBytes)
+        if (inflated && inflated.length > 0) {
+          return encodePng(inflated, width, height, channels)
+        }
+      } catch {
+        // zlib failed, skip
+      }
+    } else {
+      return encodePng(streamBytes.slice(0, rowSize * height), width, height, channels)
+    }
+  } catch {
+    return null
+  }
+  return null
+}
+
+function encodePng(pixelData: Uint8Array, width: number, height: number, channels: number): Uint8Array | null {
+  // Minimal PNG encoder
+  const zlib = require('zlib')
+  const chunks: Uint8Array[] = []
+
+  // PNG Header
+  chunks.push(new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
+
+  // IHDR
+  const ihdrData = new Uint8Array(13)
+  writeBEInt32(ihdrData, 0, width)
+  writeBEInt32(ihdrData, 4, height)
+  ihdrData[8] = 8 // bits per component
+  ihdrData[9] = channels === 1 ? 0 : 2 // grayscale or RGB
+  ihdrData[10] = 0 // compression method
+  ihdrData[11] = 0 // filter method
+  ihdrData[12] = 0 // interlace
+  chunks.push(makePngChunk('IHDR', ihdrData))
+
+  // IDAT
+  let idatData: Uint8Array
+  try {
+    idatData = zlib.deflateSync(pixelData)
+  } catch {
+    return null
+  }
+  chunks.push(makePngChunk('IDAT', idatData))
+
+  // IEND
+  chunks.push(makePngChunk('IEND', new Uint8Array(0)))
+
+  // Combine
+  let totalLen = 0
+  for (const c of chunks) totalLen += c.length
+  const png = new Uint8Array(totalLen)
+  let offset = 0
+  for (const c of chunks) {
+    png.set(c, offset)
+    offset += c.length
+  }
+  return png
+}
+
+function makePngChunk(type: string, data: Uint8Array): Uint8Array {
+  // Convert ASCII type to bytes
+  const typeBytes = new Uint8Array(4)
+  for (let i = 0; i < 4 && i < type.length; i++) {
+    typeBytes[i] = type.charCodeAt(i)
+  }
+
+  const chunk = new Uint8Array(4 + 4 + data.length + 4)
+  writeBEInt32(chunk, 0, data.length) // Length
+  chunk.set(typeBytes, 4) // Type
+  chunk.set(data, 8) // Data
+
+  // CRC
+  const crc = crc32(chunk, 4, 4 + data.length)
+  writeBEInt32(chunk, 8 + data.length, crc)
+  return chunk
+}
+
+function crc32(data: Uint8Array, start: number, end: number): number {
+  let crc = 0xffffffff
+  for (let i = start; i < end; i++) {
+    crc ^= data[i]
+    for (let j = 0; j < 8; j++) {
+      if (crc & 1) crc = (crc >>> 1) ^ 0xedb88320
+      else crc >>>= 1
+    }
+  }
+  return crc ^ 0xffffffff
+}
+
+function writeBEInt32(arr: Uint8Array, offset: number, value: number) {
+  arr[offset] = (value >>> 24) & 0xff
+  arr[offset + 1] = (value >>> 16) & 0xff
+  arr[offset + 2] = (value >>> 8) & 0xff
+  arr[offset + 3] = value & 0xff
+}
+
+async function extractDecodedStream(xobj: any): Promise<Uint8Array | null> {
+  // If xobj is a raw stream, return contents
+  if (typeof xobj?.contents === 'function') return xobj.contents()
+  return null
+}
+
+function extractPdfInt(val: any): number {
+  if (val instanceof PDFNumber) return val.asNumber()
+  return typeof val === 'number' ? val : NaN
 }

@@ -6,9 +6,11 @@ import {
   ArrowLeftRight,
   Braces,
   Clock,
+  Code2,
   Combine,
   Diff,
   FileArchive,
+  FileCode,
   FileDigit,
   FileImage,
   FileInput,
@@ -21,6 +23,7 @@ import {
   Image,
   ImageDown,
   ImageMinus,
+  ImagePlus,
   ImageUp,
   KeyRound,
   Layers,
@@ -36,6 +39,13 @@ import {
   Table2,
   TextCursorInput,
   Wand2,
+  Type,
+  CaseSensitive,
+  Link2,
+  Timer,
+  Hash,
+  ListTodo,
+  Code,
 } from 'lucide-react'
 import { PdfMergeTool } from '@/tools/pdf/PdfMergeTool'
 import { PdfSplitTool } from '@/tools/pdf/PdfSplitTool'
@@ -48,6 +58,8 @@ import { RepairPdfTool } from '@/tools/pdf/RepairPdfTool'
 import { PdfOcrTool } from '@/tools/pdf/PdfOcrTool'
 import { PdfPasswordTool } from '@/tools/pdf/PdfPasswordTool'
 import { PdfToImagesTool } from '@/tools/pdf/PdfToImagesTool'
+import { PdfExtractImagesTool } from '@/tools/pdf/PdfExtractImagesTool'
+import { PdfReorderTool } from '@/tools/pdf/PdfReorderTool'
 import { ArchiveZipTool } from '@/tools/archive/ArchiveZipTool'
 import { ImageConvertTool } from '@/tools/image/ImageConvertTool'
 import { ImageResizeTool } from '@/tools/image/ImageResizeTool'
@@ -78,6 +90,19 @@ import { UnitConverterTool } from '@/tools/productivity/UnitConverterTool'
 import { ColorPaletteTool } from '@/tools/productivity/ColorPaletteTool'
 import { TimestampConverterTool } from '@/tools/text/TimestampConverterTool'
 import { RegexTesterTool } from '@/tools/text/RegexTesterTool'
+import { Base64EncoderTool } from '@/tools/productivity/Base64EncoderTool'
+import { XmlFormatterTool } from '@/tools/text/XmlFormatterTool'
+import { ImageCollageTool } from '@/tools/image/ImageCollageTool'
+import { WordCounterTool } from '@/tools/text/WordCounterTool'
+import { CaseConverterTool } from '@/tools/text/CaseConverterTool'
+import { LoremGeneratorTool } from '@/tools/productivity/LoremGeneratorTool'
+import { SlugGeneratorTool } from '@/tools/text/SlugGeneratorTool'
+import { Base64Tool } from '@/tools/text/Base64Tool'
+import { TextHashTool } from '@/tools/security/TextHashTool'
+import { TextEncryptTool } from '@/tools/security/TextEncryptTool'
+import { PomodoroTool } from '@/tools/productivity/PomodoroTool'
+import { ImageToBase64Tool } from '@/tools/image/ImageToBase64Tool'
+import { UuidGeneratorTool } from '@/tools/productivity/UuidGeneratorTool'
 
 export type ToolCategory = {
   id: string
@@ -228,6 +253,22 @@ export const tools: ToolDefinition[] = [
     categoryId: 'pdf',
     icon: FileImage,
     component: PdfToImagesTool,
+  },
+  {
+    id: 'pdf-extract-images',
+    name: 'PDF Image Extractor',
+    description: 'Extract embedded images from PDF documents.',
+    categoryId: 'pdf',
+    icon: FileImage,
+    component: PdfExtractImagesTool,
+  },
+  {
+    id: 'pdf-reorder',
+    name: 'PDF Page Reorder',
+    description: 'Rearrange, remove, and reorder PDF pages with drag and drop.',
+    categoryId: 'pdf',
+    icon: ArrowLeftRight,
+    component: PdfReorderTool,
   },
   {
     id: 'image-convert',
@@ -468,6 +509,110 @@ export const tools: ToolDefinition[] = [
     categoryId: 'text',
     icon: Clock,
     component: TimestampConverterTool,
+  },
+  {
+    id: 'base64-encoder',
+    name: 'Base64 Encoder / Decoder',
+    description: 'Encode text or files to Base64, decode Base64 back to text or files.',
+    categoryId: 'productivity',
+    icon: FileCode,
+    component: Base64EncoderTool,
+  },
+  {
+    id: 'xml-formatter',
+    name: 'XML Formatter / Validator',
+    description: 'Pretty-print, minify, and validate XML with detailed error reporting.',
+    categoryId: 'text',
+    icon: Code2,
+    component: XmlFormatterTool,
+  },
+  {
+    id: 'image-collage',
+    name: 'Image Collage Maker',
+    description: 'Arrange multiple images into a collage with layouts, spacing, and background controls.',
+    categoryId: 'image',
+    icon: ImagePlus,
+    component: ImageCollageTool,
+  },
+  {
+    id: 'word-counter',
+    name: 'Word Counter',
+    description: 'Live word count, character analysis, and reading time estimation.',
+    categoryId: 'text',
+    icon: Type,
+    component: WordCounterTool,
+  },
+  {
+    id: 'case-converter',
+    name: 'Case Converter',
+    description: 'Transform text to UPPERCASE, lowercase, camelCase, snake_case, kebab-case, and more.',
+    categoryId: 'text',
+    icon: CaseSensitive,
+    component: CaseConverterTool,
+  },
+  {
+    id: 'lorem-generator',
+    name: 'Lorem Ipsum Generator',
+    description: 'Generate placeholder text for paragraphs, sentences, or words.',
+    categoryId: 'productivity',
+    icon: FileCode,
+    component: LoremGeneratorTool,
+  },
+  {
+    id: 'slug-generator',
+    name: 'Slug Generator',
+    description: 'Convert any text into a URL-safe slug with configurable separators.',
+    categoryId: 'text',
+    icon: Link2,
+    component: SlugGeneratorTool,
+  },
+  {
+    id: 'base64-text',
+    name: 'Base64 Encode / Decode',
+    description: 'Encode text to Base64 and decode Base64 strings back to text.',
+    categoryId: 'text',
+    icon: FileCode,
+    component: Base64Tool,
+  },
+  {
+    id: 'text-hash',
+    name: 'Text Hash Generator',
+    description: 'Compute SHA-1, SHA-256, SHA-512, and MD5 hashes of any text.',
+    categoryId: 'security',
+    icon: Hash,
+    component: TextHashTool,
+  },
+  {
+    id: 'text-encrypt',
+    name: 'Text Encrypt / Decrypt',
+    description: 'AES-256-GCM encryption and decryption of text with password protection.',
+    categoryId: 'security',
+    icon: Shield,
+    component: TextEncryptTool,
+  },
+  {
+    id: 'pomodoro',
+    name: 'Pomodoro Timer',
+    description: 'Stay focused with configurable work/break intervals and session tracking.',
+    categoryId: 'productivity',
+    icon: Timer,
+    component: PomodoroTool,
+  },
+  {
+    id: 'image-to-base64',
+    name: 'Image to Base64',
+    description: 'Convert images to Base64 data URIs with preview and copy.',
+    categoryId: 'image',
+    icon: ImagePlus,
+    component: ImageToBase64Tool,
+  },
+  {
+    id: 'uuid-generator',
+    name: 'UUID Generator',
+    description: 'Generate random UUIDs (v4) and time-sortable UUIDs (v7) with batch support.',
+    categoryId: 'productivity',
+    icon: ListTodo,
+    component: UuidGeneratorTool,
   },
 ]
 

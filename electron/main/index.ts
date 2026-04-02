@@ -16,6 +16,9 @@ import {
   encryptPdf,
   repairPdf,
   pdfToImages,
+  extractPdfImages,
+  reorderPdfPages,
+  getPdfPageCount,
 } from './tools/pdf'
 import {
   convertImages,
@@ -200,6 +203,26 @@ ipcMain.handle('pdf:compress', async (_, payload) => compressPdf(payload))
 ipcMain.handle('pdf:repair', async (_, payload) => repairPdf(payload))
 ipcMain.handle('pdf:to-images', async (_, payload) => pdfToImages(payload))
 ipcMain.handle('pdf:unlock', async (_, payload) => unlockPdf(payload))
+ipcMain.handle('pdf:extract-images', async (_, payload) => extractPdfImages(payload))
+ipcMain.handle('pdf:get-page-count', async (_, payload) => getPdfPageCount(payload))
+ipcMain.handle('pdf:reorder-pages', async (_, payload) => {
+  const result = await reorderPdfPages(payload)
+  return result
+})
+ipcMain.handle('pdf:download-extracted-images', async (_, payload) => {
+  const { images, outputDir, baseName } = payload
+  // Write images to disk
+  const { promises: fs } = await import('node:fs')
+  await ensureDir(outputDir)
+  let count = 0
+  for (const img of images) {
+    const ext = img.format === 'jpeg' ? 'jpg' : 'png'
+    const safeName = `${baseName.replace(/[<>:"/\\\\|?*]+/g, '_')}_page${img.page}_${count + 1}.${ext}`
+    await fs.writeFile(`${outputDir}/${safeName}`, Buffer.from(img.data.split(',')[1], 'base64'))
+    count++
+  }
+  return { count, outputDir }
+})
 
 ipcMain.handle('image:convert', async (_, payload) => convertImages(payload))
 ipcMain.handle('image:resize', async (_, payload) => resizeImages(payload))

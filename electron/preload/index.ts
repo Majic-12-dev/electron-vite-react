@@ -156,6 +156,14 @@ contextBridge.exposeInMainWorld('api', {
     rotation: number;
     opacity: number;
   }) => ipcRenderer.invoke('image:watermark', payload),
+  extractImages: (payload: { filePath: string }) =>
+    ipcRenderer.invoke('pdf:extract-images', payload),
+  downloadExtractedImages: (payload: { images: { data: string; page: number; format: 'jpeg' | 'png' }[]; outputDir: string; baseName: string }) =>
+    ipcRenderer.invoke('pdf:download-extracted-images', payload),
+  getPdfPageCount: (payload: { filePath: string }) =>
+    ipcRenderer.invoke('pdf:get-page-count', payload),
+  reorderPages: (payload: { filePath: string; pageOrder: number[]; outputDir: string; outputName?: string }) =>
+    ipcRenderer.invoke('pdf:reorder-pages', payload),
 })
 
 // --------- Preload scripts loading ---------

@@ -201,5 +201,20 @@ interface Window {
       position: string
       color?: string
     }) => Promise<{ outputDir: string; totalOutputs: number; outputs: string[] }>
+    extractImages: (payload: { filePath: string }) => Promise<{
+      images: { data: string; page: number; format: 'jpeg' | 'png' }[]
+    }>
+    downloadExtractedImages: (payload: {
+      images: { data: string; page: number; format: 'jpeg' | 'png' }[]
+      outputDir: string
+      baseName: string
+    }) => Promise<{ count: number; outputDir: string }>
+    getPdfPageCount: (payload: { filePath: string }) => Promise<{ pageCount: number }>
+    reorderPages: (payload: {
+      filePath: string
+      pageOrder: number[]
+      outputDir: string
+      outputName?: string
+    }) => Promise<{ outputPath: string; pageCount: number }>
   }
 }
