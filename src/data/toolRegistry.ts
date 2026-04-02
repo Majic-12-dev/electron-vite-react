@@ -3,7 +3,9 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Archive,
   BadgeCheck,
+  Braces,
   Combine,
+  Diff,
   FileArchive,
   FileDigit,
   FileImage,
@@ -18,8 +20,10 @@ import {
   ImageDown,
   ImageMinus,
   ImageUp,
+  KeyRound,
   Layers,
   PencilRuler,
+  QrCode,
   ScanText,
   Shield,
   Sparkles,
@@ -50,6 +54,8 @@ import { BackgroundRemoverTool } from '@/tools/image/BackgroundRemoverTool'
 import { ImageWatermarkTool } from '@/tools/image/ImageWatermarkTool'
 import { TextMergeTool } from '@/tools/text/TextMergeTool'
 import { MarkdownTool } from '@/tools/text/MarkdownTool'
+import { TextDiffTool } from '@/tools/text/TextDiffTool'
+import { JsonFormatterTool } from '@/tools/text/JsonFormatterTool'
 import { BulkRenamerTool } from '@/tools/file/BulkRenamerTool'
 import { EmptyFolderTool } from '@/tools/file/EmptyFolderTool'
 import { LargeFileScoutTool } from '@/tools/file/LargeFileScoutTool'
@@ -58,6 +64,8 @@ import { ChecksumTool } from '@/tools/security/ChecksumTool'
 import { EncryptTool } from '@/tools/security/EncryptTool'
 import { FileOrganizerTool } from '@/tools/file/FileOrganizerTool'
 import DashboardTool from '@/tools/productivity/DashboardTool'
+import { QrCodeGeneratorTool } from '@/tools/productivity/QrCodeGeneratorTool'
+import { PasswordGeneratorTool } from '@/tools/security/PasswordGeneratorTool'
 
 export type ToolCategory = {
   id: string
@@ -298,6 +306,22 @@ export const tools: ToolDefinition[] = [
     component: MarkdownTool,
   },
   {
+    id: 'text-diff',
+    name: 'Text Diff',
+    description: 'Compare two text blocks line-by-line or word-level.',
+    categoryId: 'text',
+    icon: Diff,
+    component: TextDiffTool,
+  },
+  {
+    id: 'json-formatter',
+    name: 'JSON Formatter',
+    description: 'Validate, pretty-print, and minify JSON data.',
+    categoryId: 'text',
+    icon: Braces,
+    component: JsonFormatterTool,
+  },
+  {
     id: 'file-duplicates',
     name: 'Duplicate File Finder',
     description: 'Find duplicates by size and hash.',
@@ -368,6 +392,22 @@ export const tools: ToolDefinition[] = [
     categoryId: 'productivity',
     icon: Sparkles,
     component: DashboardTool,
+  },
+  {
+    id: 'qr-code-generator',
+    name: 'QR Code Generator',
+    description: 'Generate QR codes from text or URLs.',
+    categoryId: 'productivity',
+    icon: QrCode,
+    component: QrCodeGeneratorTool,
+  },
+  {
+    id: 'password-generator',
+    name: 'Password Generator',
+    description: 'Generate secure random passwords.',
+    categoryId: 'security',
+    icon: KeyRound,
+    component: PasswordGeneratorTool,
   },
 ]
 

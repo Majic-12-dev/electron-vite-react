@@ -1,0 +1,1 @@
+Now let me check for the critical security issue - the `open-win` handler and other problems. Let me also check if there are any issues with the `electron/preload/index.ts` file where it doesn't specify return types:

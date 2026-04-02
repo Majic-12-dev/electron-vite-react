@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
-import { PDFDocument, degrees, rgb } from 'pdf-lib'
+import { PDFDocument, degrees, rgb, StandardFonts } from 'pdf-lib'
 import { ensureDir } from '../utils/fs'
 import { validatePaths } from '../utils/pathValidation'
 
@@ -486,8 +486,139 @@ export async function repairPdf({ inputPaths, outputDir }: RepairPdfPayload) {
   return { outputDir, totalOutputs: outputs.length, outputs }
 }
 
+export type TextToPdfPayload = {
+  inputPaths: string[]
+  outputDir: string
+  outputName?: string
+  title?: string
+  fontSize?: number
+  lineHeight?: number
+  margin?: number
+  maxLineWidth?: number
+}
+
+export type ExtractPdfText = {
+  inputPath: string
+  pages?: string
+}
+
+export async function extractPdfText({ inputPath, pages }: ExtractPdfText) {
+  const bytes = await fs.readFile(inputPath)
+  const doc = await PDFDocument.load(bytes, { ignoreEncryption: true })
+  const pageCount = doc.getPageCount()
+
+  const pageNumbers = pages && pages.trim()
+    ? parsePdfPageRange(pages.trim(), pageCount)
+    : Array.from({ length: pageCount }, (_, i) => i + 1)
+
+  const results: { page: number; text: string }[] = []
+
+  for (const pageNum of pageNumbers) {
+    // pdf-lib does not currently support extracting text from content streams.
+    // It stores text in encoded streams that need a PDF parser/renderer to decode.
+    // This function returns a placeholder structure. Use pdfjs-dist for full extraction.
+    results.push({
+      page: pageNum,
+      text: '[Text extraction not supported by pdf-lib. Use pdfjs-dist or pdf-parse.]',
+    })
+  }
+
+  return { inputPath, totalCount: pageCount, results }
+}
+
+export async function textToPdf({
+  inputPaths,
+  outputDir,
+  outputName,
+  title,
+  fontSize,
+  lineHeight,
+  margin,
+  maxLineWidth,
+}: TextToPdfPayload) {
+  if (!inputPaths.length) {
+    throw new Error('No input files provided.')
+  }
+
+  await ensureDir(outputDir)
+
+  const doc = await PDFDocument.create()
+  const helvetica = await doc.embedFont(StandardFonts.Helvetica)
+
+  const fontSizeFinal = fontSize ?? 11
+  const lineHeightFinal = lineHeight ?? 14
+  const marginFinal = margin ?? 48
+  const maxLineWidthFinal = maxLineWidth ?? 480
+
+  let totalPages = 0
+
+  for (const filePath of inputPaths) {
+    const content = await fs.readFile(filePath, 'utf-8')
+    const lines = content.split(/\r?\n/)
+    const fileName = path.parse(filePath).name
+
+    const pageWidth = 595.28 // A4 width approx
+    const pageHeight = 841.89 // A4 height approx
+    let page = doc.addPage([pageWidth, pageHeight])
+    totalPages++
+
+    let x = marginFinal
+    let y = pageHeight - marginFinal
+
+    // Title
+    if (title || fileName) {
+      const displayTitle = title || fileName
+      if (y - fontSizeFinal - 10 < marginFinal) {
+        page = doc.addPage([pageWidth, pageHeight])
+        totalPages++
+        y = pageHeight - marginFinal
+      }
+      page.drawText(displayTitle, {
+        x,
+        y: y - fontSizeFinal,
+        size: fontSizeFinal + 4,
+        font: helvetica,
+        color: rgb(0.1, 0.1, 0.1),
+      })
+      y -= fontSizeFinal * 2 + 10
+    }
+
+    // Content
+    for (const line of lines) {
+      if (y - fontSizeFinal < marginFinal) {
+        page = doc.addPage([pageWidth, pageHeight])
+        totalPages++
+        y = pageHeight - marginFinal
+      }
+
+      let textToDraw = line
+      if (maxLineWidthFinal > 0 && line.length > maxLineWidthFinal) {
+        textToDraw = line.substring(0, maxLineWidthFinal) + '...'
+      }
+
+      page.drawText(textToDraw, {
+        x,
+        y: y - fontSizeFinal,
+        size: fontSizeFinal,
+        font: helvetica,
+        color: rgb(0.2, 0.2, 0.2),
+      })
+      y -= lineHeightFinal
+    }
+  }
+
+  const safeName = sanitizeFileName(outputName || 'converted.pdf')
+  const outputPath = path.join(outputDir, safeName.endsWith('.pdf') ? safeName : `${safeName}.pdf`)
+  validatePaths(inputPaths, outputPath)
+
+  const pdfBytes = await doc.save()
+  await fs.writeFile(outputPath, pdfBytes)
+
+  return { outputPath, totalPages }
+}
+
 function sanitizeFileName(name: string) {
-  return name.replace(/[<>:\"/\\\\|?*]+/g, '_').trim()
+  return name.replace(/[<>:"/\\\\|?*]+/g, '_').trim()
 }
 
 function parsePageRanges(input: string, pageCount: number) {
