@@ -334,7 +334,7 @@ export function GifCreatorTool({ tool }: GifCreatorToolProps) {
       ctx.setProgress(75)
       // Encode GIF
       const gifData = encodeGif(frameData, canvasW, canvasH, frameDelay, loop ? 0 : 1)
-      const blob = new Blob([gifData], { type: 'image/gif' })
+      const blob = new Blob([gifData as BlobPart], { type: 'image/gif' })
       const url = URL.createObjectURL(blob)
       setGifUrl(url)
       setGifSize(blob.size)

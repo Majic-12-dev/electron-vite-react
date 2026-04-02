@@ -30,6 +30,7 @@ import {
   renameImages,
   watermarkImages,
 } from './tools/image'
+import { trimAudio, compressVideo } from './tools/media'
 import { mergeTextFiles } from './tools/text'
 import { bulkRename, deleteEmptyFolders, scanLargeFiles, organizeFiles, deleteFiles, shredFiles } from './tools/file'
 import { checksumFiles, processSecurity } from './tools/security'
@@ -233,6 +234,8 @@ ipcMain.handle('image:strip-exif', async (_, payload) => stripExif(payload))
 ipcMain.handle('image:watermark', async (_, payload) => watermarkImages(payload))
 ipcMain.handle('image:filter', async (_, payload) => filterImages(payload))
 ipcMain.handle('image:rename', async (_, payload) => renameImages(payload))
+ipcMain.handle('audio:trim', async (_, payload) => trimAudio(payload))
+ipcMain.handle('video:compress', async (_, payload) => compressVideo(payload))
 
 ipcMain.handle('text:merge', async (_, payload) => mergeTextFiles(payload))
 

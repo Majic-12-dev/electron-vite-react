@@ -52,9 +52,9 @@ export function ScreenshotTool({ tool }: ScreenshotToolProps) {
     try {
       const displayMediaOptions: DisplayMediaStreamOptions = {
         video: {
-          cursor: 'always' as const,
+          cursor: 'always',
           displaySurface: selectedSource === 'tab' ? 'browser' as const : selectedSource === 'window' ? 'window' as const : 'monitor' as const,
-        },
+        } as any,
         audio: false,
       }
       const mediaStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
@@ -139,7 +139,7 @@ export function ScreenshotTool({ tool }: ScreenshotToolProps) {
   const startRecording = useCallback(async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getDisplayMedia({
-        video: { cursor: 'always' },
+        video: { cursor: 'always' } as any,
         audio: true,
       })
       

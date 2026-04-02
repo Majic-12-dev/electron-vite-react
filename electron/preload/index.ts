@@ -144,6 +144,10 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('archive:process', payload),
   renameImages: (payload: { outputDir: string; items: { sourcePath: string; targetName: string }[] }) =>
     ipcRenderer.invoke('image:rename', payload),
+  trimAudio: (payload: { inputPath: string; outputDir: string; startTime: number; duration: number }) =>
+    ipcRenderer.invoke('audio:trim', payload),
+  compressVideo: (payload: { inputPath: string; outputDir: string; crf: number }) =>
+    ipcRenderer.invoke('video:compress', payload),
   processSecurity: (payload: { mode: 'encrypt' | 'decrypt'; file: string; password: string; output: string }) =>
     ipcRenderer.invoke('security:process', payload),
   watermarkImages: (payload: {

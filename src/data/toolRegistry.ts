@@ -1304,7 +1304,7 @@ export const tools: ToolDefinition[] = [
     name: 'GIF Creator',
     description: 'Turn image sequences into animated GIFs with customizable frame delay and loop settings.',
     categoryId: 'video',
-    icon: ImageIcon,
+    icon: ImageIconIcon,
     component: GifCreatorTool,
   },
   {
@@ -1340,7 +1340,7 @@ export const tools: ToolDefinition[] = [
     name: 'Audio Trimmer',
     description: 'Trim audio files with precise start/end time selection. Preview before export.',
     categoryId: 'audio',
-    icon: Scissors,
+    icon: Trim,
     component: AudioTrimmerTool,
   },
   {
@@ -1348,7 +1348,7 @@ export const tools: ToolDefinition[] = [
     name: 'Audio Recorder',
     description: 'Record audio from microphone with real-time level monitoring and format options.',
     categoryId: 'audio',
-    icon: Mic,
+    icon: MicIcon,
     component: AudioRecorderTool,
   },
 
