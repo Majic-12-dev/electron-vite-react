@@ -83,6 +83,14 @@ interface Window {
       totalOutputs: number
       outputs: string[]
     }>
+    pdfToImages: (payload: {
+      inputPaths: string[]
+      outputDir: string
+      format: 'png' | 'jpg'
+      quality: number
+      dpi: number
+      pageRange?: string
+    }) => Promise<{ outputDir: string; totalOutputs: number; totalPages: number }>
     convertImages: (payload: {
       inputPaths: string[]
       outputDir: string

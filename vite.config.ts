@@ -38,7 +38,7 @@ export default defineConfig(({ command }) => {
               minify: isBuild,
               outDir: 'dist-electron/main',
               rollupOptions: {
-                external: Object.keys('dependencies' in pkg ? pkg.dependencies : {}),
+                external: ['@napi-rs/canvas', 'pdfjs-dist', ...Object.keys('dependencies' in pkg ? pkg.dependencies : {})],
               },
             },
           },

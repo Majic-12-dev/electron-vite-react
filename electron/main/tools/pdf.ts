@@ -412,6 +412,40 @@ export type RepairPdfPayload = {
   outputDir: string
 }
 
+export async function unlockPdf({ inputPaths, outputDir, password }: UnlockPdfPayload) {
+  if (!inputPaths.length) {
+    throw new Error('No PDF files provided.')
+  }
+
+  const outputs: string[] = []
+
+  for (const filePath of inputPaths) {
+    const bytes = await fs.readFile(filePath)
+    const doc = await PDFDocument.load(bytes, {
+      ignoreEncryption: true,
+    })
+
+    const unlockedBytes = await doc.save()
+
+    const baseName = path.parse(filePath).name
+    const outputPath = path.join(outputDir, `${sanitizeFileName(baseName)}_unlocked.pdf`)
+    await ensureDir(outputDir)
+    await fs.writeFile(outputPath, unlockedBytes)
+    outputs.push(outputPath)
+  }
+
+  return { outputDir, totalOutputs: outputs.length, outputs }
+}
+
+export type PdfToImagesPayload = {
+  inputPaths: string[]
+  outputDir: string
+  format: 'png' | 'jpg'
+  quality: number
+  dpi: number
+  pageRange?: string
+}
+
 export async function repairPdf({ inputPaths, outputDir }: RepairPdfPayload) {
   if (!inputPaths.length) {
     throw new Error('No PDF files provided.')
@@ -513,6 +547,107 @@ function getPosition(
     'bottom-right': { x: pageWidth - contentWidth - margin, y: margin },
   }
   return map[position] || map.center
+}
+
+function parsePdfPageRange(input: string, pageCount: number): number[] {
+  if (!input) return []
+  const pages = new Set<number>()
+  const parts = input.split(',')
+  for (const part of parts) {
+    const trimmed = part.trim()
+    if (!trimmed) continue
+    if (trimmed.includes('-')) {
+      const [s, e] = trimmed.split('-').map(Number)
+      const start = Math.max(1, Math.min(s || 1, pageCount))
+      const end = Math.max(1, Math.min(e || pageCount, pageCount))
+      for (let i = start; i <= end; i++) pages.add(i)
+    } else {
+      const n = Number(trimmed)
+      if (n >= 1 && n <= pageCount) pages.add(n)
+    }
+  }
+  return Array.from(pages).sort((a, b) => a - b)
+}
+
+export async function pdfToImages({
+  inputPaths,
+  outputDir,
+  format,
+  quality,
+  dpi,
+  pageRange,
+}: PdfToImagesPayload) {
+  if (!inputPaths.length) throw new Error('No PDF files provided.')
+  await ensureDir(outputDir)
+
+  const { getDocument } = await import('pdfjs-dist')
+  const { createCanvas } = await import('@napi-rs/canvas')
+
+  const outputs: string[] = []
+  let totalPages = 0
+
+  for (const filePath of inputPaths) {
+    const bytes = await fs.readFile(filePath)
+    const pdf = await getDocument({ data: new Uint8Array(bytes) }).promise
+    const pageCount = pdf.numPages
+    if (pageCount === 0) continue
+
+    const pagesToRender = pageRange && pageRange.trim()
+      ? parsePdfPageRange(pageRange.trim(), pageCount)
+      : Array.from({ length: pageCount }, (_, i) => i + 1)
+
+    if (!pagesToRender.length) continue
+
+    const baseName = path.parse(filePath).name
+    const ext = format === 'jpg' ? 'jpg' : 'png'
+    const outDir = pageCount > 1 ? path.join(outputDir, `${sanitizeFileName(baseName)}_images`) : outputDir
+    if (pageCount > 1) await ensureDir(outDir)
+
+    for (const pageNum of pagesToRender) {
+      const page = await pdf.getPage(pageNum)
+      const viewport = page.getViewport({ scale: dpi / 72 })
+
+      const canvas = createCanvas(viewport.width, viewport.height)
+      const ctx = canvas.getContext('2d') as any
+      await page.render({ canvasContext: ctx, viewport }).promise
+
+      const imageBuffer = format === 'jpg'
+        ? canvas.toBuffer('image/jpeg', quality / 100)
+        : canvas.toBuffer('image/png')
+
+      const pageLabel = `${pageNum}`.padStart(String(pageCount).length, '0')
+      const outName = pageCount > 1
+        ? `${sanitizeFileName(baseName)}_page_${pageLabel}.${ext}`
+        : `${sanitizeFileName(baseName)}.${ext}`
+
+      const outputPath = await uniqueOutPath(path.join(outDir, outName))
+      await fs.writeFile(outputPath, imageBuffer)
+      outputs.push(outputPath)
+      totalPages++
+    }
+    pdf.destroy()
+  }
+
+  return {
+    outputDir: outputs.length > 0 ? path.dirname(outputs[0]) : outputDir,
+    totalOutputs: outputs.length,
+    totalPages,
+  }
+}
+
+async function uniqueOutPath(targetPath: string) {
+  const parsed = path.parse(targetPath)
+  let attempt = 0
+  let candidate = targetPath
+  while (true) {
+    try {
+      await fs.access(candidate)
+      attempt += 1
+      candidate = path.join(parsed.dir, `${parsed.name}(${attempt})${parsed.ext}`)
+    } catch {
+      return candidate
+    }
+  }
 }
 
 function clamp(value: number, min: number, max: number) {

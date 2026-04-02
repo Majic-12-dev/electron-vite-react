@@ -37,6 +37,7 @@ import { CompressPdfTool } from '@/tools/pdf/CompressPdfTool'
 import { RepairPdfTool } from '@/tools/pdf/RepairPdfTool'
 import { PdfOcrTool } from '@/tools/pdf/PdfOcrTool'
 import { PdfPasswordTool } from '@/tools/pdf/PdfPasswordTool'
+import { PdfToImagesTool } from '@/tools/pdf/PdfToImagesTool'
 import { ArchiveZipTool } from '@/tools/archive/ArchiveZipTool'
 import { ImageConvertTool } from '@/tools/image/ImageConvertTool'
 import { ImageResizeTool } from '@/tools/image/ImageResizeTool'
@@ -199,6 +200,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'pdf',
     icon: FileSearch,
     component: RepairPdfTool,
+  },
+  {
+    id: 'pdf-to-images',
+    name: 'PDF to Images',
+    description: 'Convert PDF pages into PNG or JPG images.',
+    categoryId: 'pdf',
+    icon: FileImage,
+    component: PdfToImagesTool,
   },
   {
     id: 'image-convert',

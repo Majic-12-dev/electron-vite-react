@@ -10,10 +10,12 @@ import {
   splitPdf,
   rotatePdf,
   watermarkPdf,
+  unlockPdf,
   updateMetadata,
   compressPdf,
   encryptPdf,
   repairPdf,
+  pdfToImages,
 } from './tools/pdf'
 import {
   convertImages,
@@ -196,6 +198,8 @@ ipcMain.handle('pdf:metadata', async (_, payload) => updateMetadata(payload))
 ipcMain.handle('pdf:encrypt', async (_, payload) => encryptPdf(payload))
 ipcMain.handle('pdf:compress', async (_, payload) => compressPdf(payload))
 ipcMain.handle('pdf:repair', async (_, payload) => repairPdf(payload))
+ipcMain.handle('pdf:to-images', async (_, payload) => pdfToImages(payload))
+ipcMain.handle('pdf:unlock', async (_, payload) => unlockPdf(payload))
 
 ipcMain.handle('image:convert', async (_, payload) => convertImages(payload))
 ipcMain.handle('image:resize', async (_, payload) => resizeImages(payload))
