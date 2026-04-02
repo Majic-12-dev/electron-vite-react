@@ -52,7 +52,18 @@ import {
   ShieldCheck,
   Volume2,
   Split,
+  Ratio,
+  Crop,
+  Maximize,
+  RotateCw,
+  SearchCheck,
+  Clipboard,
 } from 'lucide-react'
+import { PdfToTextTool } from '@/tools/pdf/PdfToTextTool'
+import { ImageRotateFlipTool } from '@/tools/image/ImageRotateFlipTool'
+import { ImageCropTool } from '@/tools/image/ImageCropTool'
+import { AspectRatioTool } from '@/tools/productivity/AspectRatioTool'
+import { CsvConverterTool } from '@/tools/file/CsvConverterTool'
 import { PdfMergeTool } from '@/tools/pdf/PdfMergeTool'
 import { PdfSplitTool } from '@/tools/pdf/PdfSplitTool'
 import { PdfRotateTool } from '@/tools/pdf/PdfRotateTool'
@@ -84,7 +95,10 @@ import { BulkRenamerTool } from '@/tools/file/BulkRenamerTool'
 import { EmptyFolderTool } from '@/tools/file/EmptyFolderTool'
 import { LargeFileScoutTool } from '@/tools/file/LargeFileScoutTool'
 import { DuplicateFinderTool } from '@/tools/file/DuplicateFinderTool'
-import { CsvConverterTool } from '@/tools/file/CsvConverterTool'
+import { MimeTypeDetectorTool } from '@/tools/file/MimeTypeDetectorTool'
+import { YamlToJsonTool } from '@/tools/text/YamlToJsonTool'
+import { SnippetManagerTool } from '@/tools/text/SnippetManagerTool'
+import { PasswordAuditorTool } from '@/tools/security/PasswordAuditorTool'
 import { ChecksumTool } from '@/tools/security/ChecksumTool'
 import { MarkdownTableTool } from '@/tools/text/MarkdownTableTool'
 import { EncryptTool } from '@/tools/security/EncryptTool'
@@ -212,6 +226,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'pdf',
     icon: ScanText,
     component: PdfOcrTool,
+  },
+  {
+    id: 'pdf-to-text',
+    name: 'PDF to Text',
+    description: 'Extract text content from PDF files.',
+    categoryId: 'pdf',
+    icon: FileText,
+    component: PdfToTextTool,
   },
   {
     id: 'pdf-watermark',
@@ -356,6 +378,22 @@ export const tools: ToolDefinition[] = [
     categoryId: 'image',
     icon: PencilRuler,
     component: ImageWatermarkTool,
+  },
+  {
+    id: 'image-rotate-flip',
+    name: 'Image Rotate & Flip',
+    description: 'Rotate or flip images by 90°, 180°, 270°, or mirror horizontally/vertically.',
+    categoryId: 'image',
+    icon: RotateCw,
+    component: ImageRotateFlipTool,
+  },
+  {
+    id: 'image-crop',
+    name: 'Image Crop',
+    description: 'Crop images to standard aspect ratios or custom dimensions.',
+    categoryId: 'image',
+    icon: Crop,
+    component: ImageCropTool,
   },
   {
     id: 'text-merge',
@@ -708,6 +746,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'text',
     icon: Split,
     component: TextSplitterTool,
+  },
+  {
+    id: 'aspect-ratio',
+    name: 'Aspect Ratio Calculator',
+    description: 'Calculate aspect ratios, megapixels, and scaled dimensions with a resolution reference table.',
+    categoryId: 'productivity',
+    icon: Ratio,
+    component: AspectRatioTool,
   },
 ]
 
