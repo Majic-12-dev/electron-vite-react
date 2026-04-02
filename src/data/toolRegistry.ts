@@ -3,6 +3,7 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Archive,
   ArrowLeftRight,
+  Camera,
   BadgeCheck,
   BarChart3,
   Ban,
@@ -108,6 +109,7 @@ import { ImageRenameTool } from '@/tools/image/ImageRenameTool'
 import { ColorFilterTool } from '@/tools/image/ColorFilterTool'
 import { BackgroundRemoverTool } from '@/tools/image/BackgroundRemoverTool'
 import { ImageWatermarkTool } from '@/tools/image/ImageWatermarkTool'
+import { ImageMetadataTool } from '@/tools/image/ImageMetadataTool'
 import { BarcodeGeneratorTool } from '@/tools/productivity/BarcodeGeneratorTool'
 import { TextMergeTool } from '@/tools/text/TextMergeTool'
 import { MarkdownTool } from '@/tools/text/MarkdownTool'
