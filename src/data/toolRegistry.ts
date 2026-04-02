@@ -11,6 +11,7 @@ import {
   BookmarkPlus,
   Braces,
   CaseSensitive,
+  CheckCircle,
   CheckCircle2,
   Clipboard,
   Clock,
@@ -62,6 +63,7 @@ import {
   SearchCheck,
   Shield,
   ShieldCheck,
+  ShieldOff,
   Sliders,
   Sparkles,
   Split,
@@ -151,6 +153,8 @@ import { ImageToBase64Tool } from '@/tools/image/ImageToBase64Tool'
 import { UuidGeneratorTool } from '@/tools/productivity/UuidGeneratorTool'
 import { MarkdownPreviewTool } from '@/tools/text/MarkdownPreviewTool'
 import { HtmlEntityTool } from '@/tools/text/HtmlEntityTool'
+import { JsonSchemaValidatorTool } from '@/tools/text/JsonSchemaValidatorTool'
+import { HtmlSanitizerTool } from '@/tools/text/HtmlSanitizerTool'
 import { TextStatisticsTool } from '@/tools/text/TextStatisticsTool'
 import { CipherTool } from '@/tools/text/CipherTool'
 import { TextToSpeechTool } from '@/tools/text/TextToSpeechTool'
@@ -524,6 +528,14 @@ export const tools: ToolDefinition[] = [
     component: JsonFormatterTool,
   },
   {
+    id: 'json-schema-validator',
+    name: 'JSON Schema Validator',
+    description: 'Validate JSON data against JSON Schema with detailed error reporting.',
+    categoryId: 'text',
+    icon: CheckCircle,
+    component: JsonSchemaValidatorTool,
+  },
+  {
     id: 'file-duplicates',
     name: 'Duplicate File Finder',
     description: 'Find duplicates by size and hash.',
@@ -810,6 +822,14 @@ export const tools: ToolDefinition[] = [
     categoryId: 'text',
     icon: FileType2,
     component: HtmlEntityTool,
+  },
+  {
+    id: 'html-sanitizer',
+    name: 'HTML Sanitizer',
+    description: 'Clean, minify, and sanitize HTML by removing dangerous tags and scripts.',
+    categoryId: 'text',
+    icon: ShieldOff,
+    component: HtmlSanitizerTool,
   },
   {
     id: 'text-statistics',
