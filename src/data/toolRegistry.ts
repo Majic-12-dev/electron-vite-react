@@ -1231,6 +1231,22 @@ export const tools: ToolDefinition[] = [
     icon: ArrowLeftRight,
     component: AudioConverterTool,
   },
+  {
+    id: 'subnet-calculator',
+    name: 'Subnet Calculator',
+    description: 'Calculate IPv4 subnets, CIDR ranges, broadcast addresses, and usable host counts for network planning.',
+    categoryId: 'productivity',
+    icon: Network,
+    component: SubnetCalculatorTool,
+  },
+  {
+    id: 'css-formatter',
+    name: 'CSS Formatter & Minifier',
+    description: 'Beautify or minify CSS stylesheets with intelligent formatting and size comparison.',
+    categoryId: 'text',
+    icon: Paintbrush,
+    component: CssFormatterTool,
+  },
 ]
 
 export const toolsByCategory = tools.reduce<Record<string, ToolDefinition[]>>((acc, tool) => {
